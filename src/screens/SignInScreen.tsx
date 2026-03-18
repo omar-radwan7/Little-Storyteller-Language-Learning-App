@@ -23,8 +23,8 @@ import * as WebBrowser from 'expo-web-browser';
 
 WebBrowser.maybeCompleteAuthSession();
 
-const WEB_CLIENT_ID = '159187594133-rq933iadf03tk75fa8fs4ng23r1hdgb2.apps.googleusercontent.com';
-const PROXY_REDIRECT = 'https://auth.expo.io/@oradwan/lingua-pro-oradwan';
+const WEB_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
+const PROXY_REDIRECT = process.env.EXPO_PUBLIC_GOOGLE_PROXY_REDIRECT;
 
 const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [email, setEmail] = useState('');

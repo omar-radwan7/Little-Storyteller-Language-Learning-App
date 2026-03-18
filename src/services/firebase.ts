@@ -15,13 +15,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDYf3sASmus5rorXNT58M4k5VJvjngVuTI',
-  authDomain: 'language-learning-app-b67ea.firebaseapp.com',
-  projectId: 'language-learning-app-b67ea',
-  storageBucket: 'language-learning-app-b67ea.firebasestorage.app',
-  messagingSenderId: '159187594133',
-  appId: '1:159187594133:web:2eb199ae6d180f7c81649c',
-  measurementId: 'G-3EXT1M4WG8',
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
