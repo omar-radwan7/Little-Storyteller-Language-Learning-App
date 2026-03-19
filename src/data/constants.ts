@@ -5,13 +5,25 @@
 import { Language, Level, DailyGoalOption, Story } from '../types';
 import { Colors } from '../theme/colors';
 
-export const LANGUAGES: Language[] = [
-  { code: 'de', name: 'German', flag: '', nativeName: 'Deutsch' },
-  { code: 'es', name: 'Spanish', flag: '', nativeName: 'Español' },
-  { code: 'fr', name: 'French', flag: '', nativeName: 'Français' },
-  { code: 'it', name: 'Italian', flag: '', nativeName: 'Italiano' },
-  { code: 'pt', name: 'Portuguese', flag: '', nativeName: 'Português' },
+export const LANGUAGES = [
+  { code: 'it', name: 'Italian', flag: '🇮🇹', nativeName: 'Italiano' },
+  { code: 'de', name: 'German', flag: '🇩🇪', nativeName: 'Deutsch' },
+  { code: 'en', name: 'English', flag: '🇬🇧', nativeName: 'English' },
+  { code: 'fr', name: 'French', flag: '🇫🇷', nativeName: 'Français' },
+  { code: 'es', name: 'Spanish', flag: '🇪🇸', nativeName: 'Español' },
+  { code: 'pt', name: 'Portuguese', flag: '🇵🇹', nativeName: 'Português' },
 ];
+
+export const TOPICS = ['travel', 'food', 'culture', 'daily life', 'nature'];
+
+export const WORDS_OF_THE_DAY: Record<string, { word: string, translation: string, partOfSpeech: string }> = {
+  de: { word: 'Feierabend', translation: 'The time after work is finished', partOfSpeech: 'noun' },
+  es: { word: 'Sobremesa', translation: 'Time spent talking after a meal', partOfSpeech: 'noun' },
+  fr: { word: 'Flâner', translation: 'To wander aimlessly', partOfSpeech: 'verb' },
+  it: { word: 'Passeggiata', translation: 'A leisurely walk', partOfSpeech: 'noun' },
+  pt: { word: 'Saudade', translation: 'A deep nostalgic longing', partOfSpeech: 'noun' },
+  en: { word: 'Serendipity', translation: 'A fortunate accident', partOfSpeech: 'noun' },
+};
 
 export const LEVELS: Level[] = [
   {
@@ -35,7 +47,7 @@ export const LEVELS: Level[] = [
   {
     code: 'B2',
     name: 'Upper Intermediate',
-    description: 'Can interact with native speakers with fluency',
+    description: 'Can communicate with native speakers fluently',
     color: Colors.levelB2,
   },
   {
@@ -43,6 +55,12 @@ export const LEVELS: Level[] = [
     name: 'Advanced',
     description: 'Can express ideas fluently and spontaneously',
     color: Colors.levelC1,
+  },
+  {
+    code: 'C2',
+    name: 'Mastery',
+    description: 'Can understand almost everything heard or read',
+    color: Colors.primary,
   },
 ];
 
@@ -67,26 +85,13 @@ export const DAILY_GOALS: DailyGoalOption[] = [
   },
 ];
 
-export const TOPICS = [
-  'travel',
-  'food',
-  'culture',
-  'daily life',
-  'nature',
-  'technology',
-  'history',
-  'sports',
-];
-
-export const TOPIC_ICONS: Record<string, string> = {
-  travel: '✈️',
-  food: '🍽️',
-  culture: '🎭',
-  'daily life': '🏠',
-  nature: '🌿',
-  technology: '💻',
-  history: '📜',
-  sports: '⚽',
+export const TOPIC_IMAGES: Record<string, any> = {
+  food: require('../../assets/stories/food.png'),
+  nature: require('../../assets/stories/nature.jpg'),
+  travel: require('../../assets/stories/travel.png'),
+  culture: require('../../assets/stories/culture.png'),
+  'daily life': require('../../assets/stories/daily_life.png'),
+  technology: require('../../assets/stories/technology.png'),
 };
 
 // ==========================================
@@ -104,6 +109,7 @@ export const SAMPLE_STORIES: Story[] = [
       'Heute ist ein schöner Tag. Die Sonne scheint und der Himmel ist blau. Anna geht in den Park. Sie sieht viele Bäume und Blumen. Die Vögel singen laut. Anna setzt sich auf eine Bank und liest ein Buch. Ein kleiner Hund kommt zu ihr. Er ist sehr freundlich. Anna spielt mit dem Hund. Dann kauft sie ein Eis. Das Eis schmeckt gut. Am Abend geht Anna nach Hause. Sie ist glücklich.',
     wordCount: 68,
     estimatedReadTime: 3,
+    imageUrl: require('../../assets/stories/nature.jpg'),
     words: {
       Heute: {
         word: 'Heute',
@@ -278,6 +284,7 @@ export const SAMPLE_STORIES: Story[] = [
       'Jeden Morgen stehe ich um sieben Uhr auf. Ich gehe in die Küche und mache Frühstück. Ich trinke eine Tasse Kaffee mit Milch. Dann esse ich Brot mit Butter und Marmelade. Manchmal esse ich auch ein Ei. Das Frühstück ist wichtig. Es gibt mir Energie für den Tag. Meine Familie frühstückt zusammen am Wochenende. Wir essen Brötchen und trinken Orangensaft.',
     wordCount: 58,
     estimatedReadTime: 2,
+    imageUrl: require('../../assets/stories/food.png'),
     words: {
       Morgen: {
         word: 'Morgen',
@@ -396,6 +403,7 @@ export const SAMPLE_STORIES: Story[] = [
       'Ich fahre mit dem Zug nach Berlin. Die Fahrt dauert drei Stunden. Ich schaue aus dem Fenster. Die Landschaft ist schön. In Berlin besuche ich das Brandenburger Tor. Es ist sehr groß und beeindruckend. Dann gehe ich zum Alexanderplatz. Dort gibt es viele Geschäfte und Restaurants. Ich kaufe eine Currywurst. Sie schmeckt fantastisch. Am Abend sehe ich den Fernsehturm. Berlin ist eine tolle Stadt.',
     wordCount: 62,
     estimatedReadTime: 3,
+    imageUrl: require('../../assets/stories/travel.png'),
     words: {
       fahre: {
         word: 'fahre',
@@ -493,6 +501,7 @@ export const SAMPLE_STORIES: Story[] = [
       'Hoy es un día de verano. Hace mucho sol y calor. Voy a la playa con mis amigos. El agua del mar es azul y clara. Nadamos y jugamos en las olas. Después descansamos en la arena. Comemos fruta fresca y bebemos agua fría. El atardecer es muy bonito. Los colores del cielo son naranjas y rosas. Es un día perfecto.',
     wordCount: 57,
     estimatedReadTime: 2,
+    imageUrl: require('../../assets/stories/beach.png'),
     words: {
       día: {
         word: 'día',
@@ -590,6 +599,7 @@ export const SAMPLE_STORIES: Story[] = [
       'Je suis à Paris pour la première fois. La ville est magnifique. Je visite la Tour Eiffel. Elle est très grande et impressionnante. Ensuite, je marche sur les Champs-Élysées. Il y a beaucoup de magasins et de cafés. Je mange un croissant dans un petit café. Le croissant est délicieux. Après, je vais au Musée du Louvre. Les tableaux sont incroyables. Paris est une ville merveilleuse.',
     wordCount: 63,
     estimatedReadTime: 3,
+    imageUrl: require('../../assets/stories/paris.png'),
     words: {
       ville: {
         word: 'ville',
@@ -673,6 +683,7 @@ export const SAMPLE_STORIES: Story[] = [
       'In der kleinen Straße hinter dem Rathaus gibt es ein altes Café. Es heißt "Zum Goldenen Löffel" und existiert seit über hundert Jahren. Frau Müller, die Besitzerin, kennt jeden Stammgast beim Namen. Das Café hat eine besondere Atmosphäre. Die Wände sind mit alten Fotografien geschmückt. Jedes Bild erzählt eine Geschichte aus der Vergangenheit der Stadt. Eines Tages entdeckte ein junger Student ein verstecktes Tagebuch hinter einem der Bilder. Das Tagebuch gehörte dem Gründer des Cafés, einem Mann namens Heinrich Weber. Heinrich hatte das Café im Jahr 1920 eröffnet, kurz nach dem Ersten Weltkrieg. In seinem Tagebuch beschrieb er, wie das Café ein Treffpunkt für Künstler und Schriftsteller wurde. Berühmte Menschen saßen an diesen Tischen und diskutierten über Kunst und Philosophie. Frau Müller war gerührt, als sie das Tagebuch las. Sie beschloss, eine kleine Ausstellung im Café zu organisieren.',
     wordCount: 138,
     estimatedReadTime: 6,
+    imageUrl: require('../../assets/stories/old_cafe.png'),
     words: {
       Straße: {
         word: 'Straße',
@@ -788,4 +799,88 @@ export const SAMPLE_STORIES: Story[] = [
       },
     },
   },
+  {
+    id: 'story-it-a1-1',
+    title: 'Pizza a Napoli',
+    language: 'it',
+    level: 'A1',
+    topic: 'food',
+    content: 'Sono a Napoli. Mangio una pizza Margherita. È deliziosa. La pizza è nata qui. Napoli è una città bellissima.',
+    wordCount: 22,
+    estimatedReadTime: 1,
+    imageUrl: require('../../assets/stories/food.png'),
+    words: {}
+  },
+  {
+    id: 'story-pt-a1-1',
+    title: 'Bom dia Lisboa',
+    language: 'pt',
+    level: 'A1',
+    topic: 'travel',
+    content: 'O dia está lindo em Lisboa. Vou passear em Belém. Comerei um pastel de nata. Adoro esta cidade!',
+    wordCount: 20,
+    estimatedReadTime: 1,
+    imageUrl: require('../../assets/stories/travel.png'),
+    words: {}
+  },
+  {
+    id: 'story-es-b1-1',
+    title: 'El Mercado de San Miguel',
+    language: 'es',
+    level: 'B1',
+    topic: 'food',
+    content: 'El Mercado de San Miguel en Madrid es un templo para los amantes de la gastronomía. Aquí puedes probar de todo, desde aceitunas rellenas hasta marisco fresco de Galicia. El ambiente es vibrante y los aromas son increíbles.',
+    wordCount: 45,
+    estimatedReadTime: 2,
+    imageUrl: require('../../assets/stories/food.png'),
+    words: {}
+  },
+  {
+    id: 'story-fr-b1-1',
+    title: 'Une balade à Montmartre',
+    language: 'fr',
+    level: 'B1',
+    topic: 'culture',
+    content: 'Montmartre est le quartier le plus romantique de Paris. Ses petites rues pavées mènent à la basilique du Sacré-Cœur, d\'où la vue sur la ville est époustouflante. De nombreux artistes s\'y installent encore aujourd\'hui.',
+    wordCount: 50,
+    estimatedReadTime: 3,
+    imageUrl: require('../../assets/stories/paris.png'),
+    words: {}
+  },
+  {
+    id: 'story-de-b1-2',
+    title: 'Sonntag in Hamburg',
+    language: 'de',
+    level: 'B1',
+    topic: 'travel',
+    content: 'Hamburg ist berühmt für seinen Hafen und die Elbphilharmonie. Ein Spaziergang an der Alster am Sonntag ist eine Hamburger Tradition. Danach isst man oft ein Fischbrötchen an den Landungsbrücken.',
+    wordCount: 48,
+    estimatedReadTime: 2,
+    imageUrl: require('../../assets/stories/travel.png'),
+    words: {}
+  },
+  {
+    id: 'story-it-b1-1',
+    title: 'La Dolce Vita a Firenze',
+    language: 'it',
+    level: 'B1',
+    topic: 'culture',
+    content: 'Firenze è la culla del Rinascimento. Camminando sul Ponte Vecchio si respira la storia. L\'arte è ovunque, dai musei alle piccole piazze nascoste, dove il tempo sembra essersi fermato.',
+    wordCount: 42,
+    estimatedReadTime: 2,
+    imageUrl: require('../../assets/stories/old_cafe.png'),
+    words: {}
+  },
+  {
+    id: 'story-en-b1-1',
+    title: 'Exploring Edinburgh',
+    language: 'en',
+    level: 'B1',
+    topic: 'travel',
+    content: 'Edinburgh is a city of two halves: the historic Old Town and the elegant New Town. Climbing Arthur\'s Seat offers a breathtaking view of the Scottish capital and the Firth of Forth.',
+    wordCount: 52,
+    estimatedReadTime: 3,
+    imageUrl: require('../../assets/stories/nature.jpg'),
+    words: {}
+  }
 ];

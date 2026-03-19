@@ -1,5 +1,6 @@
 // ==========================================
-// Sign In Screen — Warm minimal editorial
+// Sign In Screen — Warm & inviting
+// Colored header section, clean form below
 // ==========================================
 
 import React, { useState, useRef } from 'react';
@@ -66,12 +67,10 @@ const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       if (result.type === 'success' && result.url) {
         let accessToken: string | null = null;
-        // Check fragment (#access_token=...)
         const fragment = result.url.split('#')[1];
         if (fragment) {
           accessToken = new URLSearchParams(fragment).get('access_token');
         }
-        // Check query string (?access_token=...)
         if (!accessToken) {
           const qs = result.url.split('?')[1]?.split('#')[0];
           if (qs) accessToken = new URLSearchParams(qs).get('access_token');
@@ -123,13 +122,17 @@ const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* Background ambient */}
-      <View style={styles.ambient1} />
-      <View style={styles.ambient2} />
+      {/* Colored top section */}
+      <View style={styles.topSection}>
+        <Text style={styles.brandEmoji}>📖</Text>
+        <Text style={styles.brandName}>Lingua</Text>
+        <Text style={styles.brandSub}>Learn through stories</Text>
+      </View>
 
+      {/* White card form */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{ flex: 1 }}
+        style={styles.formWrap}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -138,104 +141,88 @@ const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         >
           <Animated.View
             style={[
-              styles.content,
+              styles.formCard,
               { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {/* Minimal header */}
-            <View style={styles.header}>
-              <View style={styles.headerLine} />
-              <Text style={styles.welcomeSmall}>WELCOME BACK</Text>
-              <Text style={styles.title}>Sign in to{'\n'}your account</Text>
+            <Text style={styles.formTitle}>Welcome back</Text>
+
+            {/* Email */}
+            <View style={[styles.inputBox, focusedInput === 'email' && styles.inputBoxFocused]}>
+              <Ionicons name="mail-outline" size={18} color={focusedInput === 'email' ? Colors.primary : Colors.textMuted} />
+              <TextInput
+                style={styles.input}
+                placeholder="Email address"
+                placeholderTextColor={Colors.textMuted}
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                onFocus={() => setFocusedInput('email')}
+                onBlur={() => setFocusedInput(null)}
+              />
             </View>
 
-            {/* Form */}
-            <View style={styles.form}>
-              <Text style={styles.inputLabel}>EMAIL</Text>
-              <View
-                style={[
-                  styles.inputWrap,
-                  focusedInput === 'email' && styles.inputWrapFocused,
-                ]}
-              >
-                <TextInput
-                  style={styles.input}
-                  placeholder="your@email.com"
-                  placeholderTextColor={Colors.textMuted}
-                  value={email}
-                  onChangeText={setEmail}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  onFocus={() => setFocusedInput('email')}
-                  onBlur={() => setFocusedInput(null)}
+            {/* Password */}
+            <View style={[styles.inputBox, focusedInput === 'password' && styles.inputBoxFocused]}>
+              <Ionicons name="lock-closed-outline" size={18} color={focusedInput === 'password' ? Colors.primary : Colors.textMuted} />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                placeholderTextColor={Colors.textMuted}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                onFocus={() => setFocusedInput('password')}
+                onBlur={() => setFocusedInput(null)}
+              />
+              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                <Ionicons
+                  name={showPassword ? 'eye-off-outline' : 'eye-outline'}
+                  size={18}
+                  color={Colors.textMuted}
                 />
-              </View>
-
-              <Text style={styles.inputLabel}>PASSWORD</Text>
-              <View
-                style={[
-                  styles.inputWrap,
-                  focusedInput === 'password' && styles.inputWrapFocused,
-                ]}
-              >
-                <TextInput
-                  style={styles.input}
-                  placeholder="••••••••"
-                  placeholderTextColor={Colors.textMuted}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                  onFocus={() => setFocusedInput('password')}
-                  onBlur={() => setFocusedInput(null)}
-                />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                  <Ionicons
-                    name={showPassword ? 'eye-off' : 'eye'}
-                    size={18}
-                    color={Colors.textMuted}
-                  />
-                </TouchableOpacity>
-              </View>
-
-              {/* Sign In button */}
-              <TouchableOpacity
-                onPress={handleSignIn}
-                disabled={isLoading}
-                activeOpacity={0.8}
-                style={styles.signInBtn}
-              >
-                {isLoading ? (
-                  <ActivityIndicator color={Colors.textInverse} />
-                ) : (
-                  <Text style={styles.signInBtnText}>Continue</Text>
-                )}
-              </TouchableOpacity>
-
-              {/* Divider */}
-              <View style={styles.divider}>
-                <View style={styles.dividerLine} />
-                <Text style={styles.dividerText}>or</Text>
-                <View style={styles.dividerLine} />
-              </View>
-
-              {/* Google */}
-              <TouchableOpacity 
-                style={styles.googleBtn} 
-                activeOpacity={0.8}
-                onPress={handleGooglePress}
-                disabled={isGoogleLoading}
-              >
-                {isGoogleLoading ? (
-                  <ActivityIndicator color={Colors.primary} />
-                ) : (
-                  <>
-                    <Text style={styles.googleG}>G</Text>
-                    <Text style={styles.googleText}>Continue with Google</Text>
-                  </>
-                )}
               </TouchableOpacity>
             </View>
+
+            {/* Sign In button */}
+            <TouchableOpacity
+              onPress={handleSignIn}
+              disabled={isLoading}
+              activeOpacity={0.85}
+              style={styles.signInBtn}
+            >
+              {isLoading ? (
+                <ActivityIndicator color={Colors.textInverse} />
+              ) : (
+                <Text style={styles.signInBtnText}>Sign In</Text>
+              )}
+            </TouchableOpacity>
+
+            {/* Divider */}
+            <View style={styles.divider}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>or</Text>
+              <View style={styles.dividerLine} />
+            </View>
+
+            {/* Google */}
+            <TouchableOpacity
+              style={styles.googleBtn}
+              activeOpacity={0.85}
+              onPress={handleGooglePress}
+              disabled={isGoogleLoading}
+            >
+              {isGoogleLoading ? (
+                <ActivityIndicator color={Colors.textSecondary} />
+              ) : (
+                <>
+                  <Text style={styles.googleG}>G</Text>
+                  <Text style={styles.googleText}>Continue with Google</Text>
+                </>
+              )}
+            </TouchableOpacity>
 
             {/* Bottom */}
             <View style={styles.bottom}>
@@ -252,133 +239,73 @@ const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Colors.background },
-  ambient1: {
-    position: 'absolute',
-    width: 350,
-    height: 350,
-    borderRadius: 175,
-    backgroundColor: 'rgba(67, 97, 238, 0.06)',
-    top: -80,
-    left: -100,
+  container: { flex: 1, backgroundColor: Colors.primary },
+
+  // Colored top
+  topSection: {
+    alignItems: 'center', paddingTop: 60, paddingBottom: 24,
   },
-  ambient2: {
-    position: 'absolute',
-    width: 250,
-    height: 250,
-    borderRadius: 125,
-    backgroundColor: 'rgba(6, 214, 160, 0.06)',
-    bottom: 100,
-    right: -80,
+  brandEmoji: { fontSize: 36, marginBottom: 10 },
+  brandName: { fontSize: FontSizes.xxl + 4, fontWeight: '800', color: '#FFFFFF' },
+  brandSub: { fontSize: FontSizes.sm, color: 'rgba(255,255,255,0.65)', marginTop: 3 },
+
+  // White form area
+  formWrap: { flex: 1 },
+  scrollContent: { flexGrow: 1 },
+  formCard: {
+    flex: 1, backgroundColor: Colors.background,
+    borderTopLeftRadius: 24, borderTopRightRadius: 24,
+    paddingHorizontal: Spacing.xl, paddingTop: 28, paddingBottom: 36,
   },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    paddingHorizontal: Spacing.xl,
-    paddingVertical: Spacing.xxl,
+  formTitle: {
+    fontSize: FontSizes.xl, fontWeight: '700',
+    color: Colors.textPrimary, marginBottom: Spacing.lg,
   },
-  content: { flex: 1, justifyContent: 'center' },
-  header: { marginBottom: Spacing.xl + 8 },
-  headerLine: {
-    width: 40,
-    height: 3,
-    backgroundColor: Colors.primary,
-    borderRadius: 2,
-    marginBottom: Spacing.lg,
+
+  // Input boxes
+  inputBox: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    backgroundColor: Colors.surface, borderRadius: BorderRadius.sm,
+    borderWidth: 1, borderColor: Colors.border,
+    paddingHorizontal: 14, paddingVertical: 12,
+    marginBottom: 8,
   },
-  welcomeSmall: {
-    fontSize: FontSizes.xs,
-    color: Colors.primary,
-    letterSpacing: 4,
-    fontWeight: '600',
-    marginBottom: Spacing.sm,
-  },
-  title: {
-    fontSize: FontSizes.xxxl,
-    fontWeight: '300',
-    color: Colors.textPrimary,
-    lineHeight: 44,
-  },
-  form: { marginBottom: Spacing.xl },
-  inputLabel: {
-    fontSize: FontSizes.xs,
-    color: Colors.textMuted,
-    letterSpacing: 2,
-    fontWeight: '600',
-    marginBottom: Spacing.sm,
-    marginTop: Spacing.md,
-  },
-  inputWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1.5,
-    borderBottomColor: Colors.border,
-    paddingBottom: Spacing.sm + 4,
-    marginBottom: Spacing.sm,
-  },
-  inputWrapFocused: {
-    borderBottomColor: Colors.primary,
-  },
+  inputBoxFocused: { borderColor: Colors.primary },
   input: {
-    flex: 1,
-    color: Colors.textPrimary,
-    fontSize: FontSizes.lg,
-    fontWeight: '400',
+    flex: 1, color: Colors.textPrimary,
+    fontSize: FontSizes.md, fontWeight: '500',
   },
+
   signInBtn: {
-    backgroundColor: Colors.primary,
-    height: 56,
-    borderRadius: BorderRadius.md,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: Spacing.xl,
-    ...Shadows.warm,
+    backgroundColor: Colors.primary, height: 48, borderRadius: BorderRadius.sm,
+    alignItems: 'center', justifyContent: 'center', marginTop: 14,
   },
   signInBtnText: {
-    fontSize: FontSizes.lg,
-    fontWeight: '600',
-    color: Colors.textInverse,
-    letterSpacing: 0.5,
+    fontSize: FontSizes.md, fontWeight: '700', color: Colors.textInverse,
   },
+
   divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: Spacing.lg,
+    flexDirection: 'row', alignItems: 'center', marginVertical: Spacing.md,
   },
   dividerLine: { flex: 1, height: 1, backgroundColor: Colors.border },
-  dividerText: {
-    color: Colors.textMuted,
-    fontSize: FontSizes.sm,
-    marginHorizontal: Spacing.lg,
-  },
+  dividerText: { color: Colors.textMuted, fontSize: FontSizes.xs, marginHorizontal: Spacing.md },
+
   googleBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 56,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1.5,
-    borderColor: Colors.border,
-    gap: Spacing.sm,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    height: 48, borderRadius: BorderRadius.sm,
+    backgroundColor: Colors.surface,
+    borderWidth: 1, borderColor: Colors.border,
+    gap: 8,
   },
-  googleG: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#4285F4',
-  },
-  googleText: {
-    fontSize: FontSizes.md,
-    fontWeight: '500',
-    color: Colors.textSecondary,
-  },
+  googleG: { fontSize: 18, fontWeight: '700', color: '#4285F4' },
+  googleText: { fontSize: FontSizes.sm, fontWeight: '600', color: Colors.textSecondary },
+
   bottom: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: Spacing.lg,
+    flexDirection: 'row', justifyContent: 'center',
+    alignItems: 'center', marginTop: Spacing.md,
   },
-  bottomText: { color: Colors.textMuted, fontSize: FontSizes.md },
-  bottomLink: { color: Colors.primary, fontSize: FontSizes.md, fontWeight: '600' },
+  bottomText: { color: Colors.textMuted, fontSize: FontSizes.sm },
+  bottomLink: { color: Colors.primary, fontSize: FontSizes.sm, fontWeight: '700' },
 });
 
 export default SignInScreen;

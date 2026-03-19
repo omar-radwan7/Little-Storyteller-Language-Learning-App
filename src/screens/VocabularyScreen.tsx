@@ -1,5 +1,6 @@
 // ==========================================
 // Vocabulary Screen — Saved words + flashcard mode
+// Warm parchment design with moss accent
 // ==========================================
 
 import React, { useState, useRef } from 'react';
@@ -72,15 +73,14 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.ambient} />
-
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.headerSmall}>YOUR WORDS</Text>
           <Text style={styles.headerTitle}>Vocabulary</Text>
+          <Text style={styles.headerSub}>{DEMO_WORDS.length} saved words</Text>
         </View>
         <View style={styles.countBadge}>
+          <Ionicons name="bookmark" size={14} color={Colors.accent} />
           <Text style={styles.countText}>{DEMO_WORDS.length}</Text>
         </View>
       </View>
@@ -91,27 +91,28 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           onPress={() => setMode('list')}
           style={[styles.modeBtn, mode === 'list' && styles.modeBtnActive]}
         >
-          <Ionicons name="list" size={16} color={mode === 'list' ? Colors.primary : Colors.textMuted} />
+          <Ionicons name="list" size={16} color={mode === 'list' ? Colors.textInverse : Colors.textMuted} />
           <Text style={[styles.modeBtnText, mode === 'list' && styles.modeBtnTextActive]}>List</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setMode('flashcard')}
           style={[styles.modeBtn, mode === 'flashcard' && styles.modeBtnActive]}
         >
-          <Ionicons name="albums" size={16} color={mode === 'flashcard' ? Colors.primary : Colors.textMuted} />
+          <Ionicons name="albums" size={16} color={mode === 'flashcard' ? Colors.textInverse : Colors.textMuted} />
           <Text style={[styles.modeBtnText, mode === 'flashcard' && styles.modeBtnTextActive]}>Flashcards</Text>
         </TouchableOpacity>
       </View>
 
       {mode === 'list' ? (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.listContent}>
-          {DEMO_WORDS.map((word) => (
+          {DEMO_WORDS.map((word, index) => (
             <View key={word.id} style={styles.wordItem}>
               <View style={styles.wordItemLeft}>
                 <Text style={styles.wordItemWord}>{word.word}</Text>
                 <View style={styles.wordItemRow}>
-                  <Text style={styles.wordItemPos}>{word.partOfSpeech}</Text>
-                  <Text style={styles.wordItemDot}>·</Text>
+                  <View style={styles.posBadge}>
+                    <Text style={styles.posText}>{word.partOfSpeech}</Text>
+                  </View>
                   <Text style={styles.wordItemSource}>{word.sourceStory}</Text>
                 </View>
               </View>
@@ -135,9 +136,11 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                 { backfaceVisibility: 'hidden' },
               ]}
             >
-              <Text style={styles.cardLabel}>TAP TO REVEAL</Text>
+              <Text style={styles.cardHint}>TAP TO REVEAL</Text>
               <Text style={styles.cardWord}>{DEMO_WORDS[currentCard].word}</Text>
-              <Text style={styles.cardPos}>{DEMO_WORDS[currentCard].partOfSpeech}</Text>
+              <View style={styles.cardPosBadge}>
+                <Text style={styles.cardPosText}>{DEMO_WORDS[currentCard].partOfSpeech}</Text>
+              </View>
             </Animated.View>
 
             {/* Back */}
@@ -149,7 +152,7 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                 { backfaceVisibility: 'hidden' },
               ]}
             >
-              <Text style={styles.cardLabel}>TRANSLATION</Text>
+              <Text style={styles.cardHint}>TRANSLATION</Text>
               <Text style={styles.cardTranslation}>{DEMO_WORDS[currentCard].translation}</Text>
               <Text style={styles.cardSource}>from: {DEMO_WORDS[currentCard].sourceStory}</Text>
             </Animated.View>
@@ -171,76 +174,80 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
-  ambient: {
-    position: 'absolute', width: 300, height: 300, borderRadius: 150,
-    backgroundColor: 'rgba(67, 97, 238, 0.05)', top: -80, right: -80,
-  },
   header: {
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end',
-    paddingHorizontal: Spacing.xl, paddingTop: 64, paddingBottom: Spacing.md,
+    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+    paddingHorizontal: Spacing.xl, paddingTop: 52, paddingBottom: 8,
   },
-  headerSmall: {
-    fontSize: FontSizes.xs, color: Colors.accent, letterSpacing: 3,
-    fontWeight: '700', marginBottom: Spacing.xs,
-  },
-  headerTitle: { fontSize: FontSizes.xxxl, fontWeight: '300', color: Colors.textPrimary },
+  headerTitle: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary },
+  headerSub: { fontSize: FontSizes.xs, color: Colors.textMuted, marginTop: 2 },
   countBadge: {
-    backgroundColor: Colors.accent + '15', paddingHorizontal: 14, paddingVertical: 6,
-    borderRadius: BorderRadius.full,
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    backgroundColor: Colors.accentMuted, paddingHorizontal: 10, paddingVertical: 4,
+    borderRadius: BorderRadius.full, borderWidth: 1, borderColor: Colors.accent + '25',
   },
-  countText: { fontSize: FontSizes.lg, fontWeight: '700', color: Colors.accent },
+  countText: { fontSize: FontSizes.sm, fontWeight: '700', color: Colors.accent },
+
   // Mode toggle
   modeToggle: {
     flexDirection: 'row', marginHorizontal: Spacing.xl,
-    backgroundColor: Colors.surface, borderRadius: BorderRadius.md,
-    padding: 4, marginBottom: Spacing.lg, borderWidth: 1, borderColor: Colors.border,
+    backgroundColor: Colors.surfaceLight, borderRadius: BorderRadius.sm,
+    padding: 3, marginBottom: Spacing.md,
   },
   modeBtn: {
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
-    gap: 6, paddingVertical: 10, borderRadius: BorderRadius.sm,
+    gap: 5, paddingVertical: 8, borderRadius: 6,
   },
-  modeBtnActive: { backgroundColor: Colors.primaryMuted },
-  modeBtnText: { fontSize: FontSizes.sm, fontWeight: '500', color: Colors.textMuted },
-  modeBtnTextActive: { color: Colors.primary, fontWeight: '600' },
+  modeBtnActive: { backgroundColor: Colors.primary },
+  modeBtnText: { fontSize: 12, fontWeight: '600', color: Colors.textMuted },
+  modeBtnTextActive: { color: Colors.textInverse },
+
   // List
   listContent: { paddingHorizontal: Spacing.xl },
   wordItem: {
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    paddingVertical: Spacing.md + 2,
-    borderBottomWidth: 1, borderBottomColor: Colors.border,
+    paddingVertical: 12,
+    borderBottomWidth: 1, borderBottomColor: Colors.borderLight,
   },
   wordItemLeft: { flex: 1 },
-  wordItemWord: { fontSize: FontSizes.lg, fontWeight: '500', color: Colors.textPrimary, marginBottom: 4 },
+  wordItemWord: { fontSize: FontSizes.md, fontWeight: '600', color: Colors.textPrimary, marginBottom: 3 },
   wordItemRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  wordItemPos: { fontSize: FontSizes.xs, color: Colors.primary, fontWeight: '600', textTransform: 'uppercase' },
-  wordItemDot: { color: Colors.textMuted, fontSize: FontSizes.xs },
-  wordItemSource: { fontSize: FontSizes.xs, color: Colors.textMuted },
-  wordItemTranslation: { fontSize: FontSizes.md, color: Colors.textSecondary, fontStyle: 'italic' },
+  posBadge: {
+    paddingHorizontal: 6, paddingVertical: 1, borderRadius: BorderRadius.full,
+    backgroundColor: Colors.primaryMuted,
+  },
+  posText: { fontSize: 9, color: Colors.primary, fontWeight: '700', textTransform: 'uppercase' },
+  wordItemSource: { fontSize: 10, color: Colors.textMuted },
+  wordItemTranslation: { fontSize: FontSizes.xs, color: Colors.textSecondary, fontStyle: 'italic', maxWidth: 110, textAlign: 'right' },
+
   // Flashcards
-  flashcardContainer: { flex: 1, alignItems: 'center', paddingTop: Spacing.xl },
-  cardCounter: { fontSize: FontSizes.sm, color: Colors.textMuted, marginBottom: Spacing.lg, fontWeight: '600' },
-  cardWrapper: { width: width - Spacing.xxl * 2, height: 240 },
+  flashcardContainer: { flex: 1, alignItems: 'center', paddingTop: Spacing.lg },
+  cardCounter: { fontSize: 12, color: Colors.textMuted, marginBottom: Spacing.md, fontWeight: '600' },
+  cardWrapper: { width: width - 80, height: 180 },
   flashcard: {
     position: 'absolute', width: '100%', height: '100%',
     backgroundColor: Colors.surface, borderRadius: BorderRadius.lg,
     borderWidth: 1, borderColor: Colors.border,
     alignItems: 'center', justifyContent: 'center',
-    padding: Spacing.xl, ...Shadows.soft,
+    padding: Spacing.lg, ...Shadows.soft,
   },
-  flashcardBack: { backgroundColor: Colors.card },
-  cardLabel: {
-    fontSize: FontSizes.xs, color: Colors.textMuted, letterSpacing: 3,
-    fontWeight: '700', marginBottom: Spacing.md, position: 'absolute', top: 24,
+  flashcardBack: { backgroundColor: Colors.surfaceLight },
+  cardHint: {
+    fontSize: 9, color: Colors.textMuted, letterSpacing: 2,
+    fontWeight: '700', position: 'absolute', top: 18,
   },
-  cardWord: { fontSize: FontSizes.xxxl, fontWeight: '300', color: Colors.textPrimary },
-  cardPos: { fontSize: FontSizes.sm, color: Colors.primary, fontWeight: '600', marginTop: 8, textTransform: 'uppercase' },
-  cardTranslation: { fontSize: FontSizes.xxl, fontWeight: '400', color: Colors.primary },
-  cardSource: { fontSize: FontSizes.sm, color: Colors.textMuted, marginTop: Spacing.md, fontStyle: 'italic' },
+  cardWord: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary },
+  cardPosBadge: {
+    marginTop: 6, paddingHorizontal: 10, paddingVertical: 3,
+    borderRadius: BorderRadius.full, backgroundColor: Colors.primaryMuted,
+  },
+  cardPosText: { fontSize: 10, color: Colors.primary, fontWeight: '700', textTransform: 'uppercase' },
+  cardTranslation: { fontSize: FontSizes.xl, fontWeight: '600', color: Colors.primary },
+  cardSource: { fontSize: 12, color: Colors.textMuted, marginTop: Spacing.sm, fontStyle: 'italic' },
   cardNav: {
-    flexDirection: 'row', gap: Spacing.xl, marginTop: Spacing.xl,
+    flexDirection: 'row', gap: Spacing.lg, marginTop: Spacing.lg,
   },
   cardNavBtn: {
-    width: 56, height: 56, borderRadius: 28,
+    width: 48, height: 48, borderRadius: 24,
     backgroundColor: Colors.surface, borderWidth: 1, borderColor: Colors.border,
     alignItems: 'center', justifyContent: 'center',
   },

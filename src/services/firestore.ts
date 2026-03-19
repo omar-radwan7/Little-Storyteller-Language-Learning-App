@@ -16,7 +16,17 @@ import {
   limit,
 } from 'firebase/firestore';
 import { db } from './firebase';
-import { Story, SavedWord, CompletedStory } from '../types';
+import { Story, SavedWord, CompletedStory, User } from '../types';
+
+// ------------------- User Profile -------------------
+
+export const updateUserProfile = async (
+  userId: string,
+  data: Partial<User>
+): Promise<void> => {
+  const ref = doc(db, 'users', userId);
+  await setDoc(ref, data, { merge: true });
+};
 
 // ------------------- Stories -------------------
 

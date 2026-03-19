@@ -1,8 +1,11 @@
 // ==========================================
-// Home Screen — Warm editorial magazine layout
+// Home Screen  
+// Inspired by Headway: split stats bar, solid  
+// mission banner, horizontal story cards with
+// colorful gradient backgrounds & large emojis
 // ==========================================
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   View,
   Text,
@@ -12,48 +15,66 @@ import {
   Dimensions,
   Animated,
   RefreshControl,
+  LayoutAnimation,
+  Image,
 } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { useAuth } from '../hooks/useAuth';
-import { LANGUAGES, LEVELS, TOPIC_ICONS, SAMPLE_STORIES } from '../data/constants';
+import { LANGUAGES, LEVELS, TOPICS, TOPIC_IMAGES, SAMPLE_STORIES, WORDS_OF_THE_DAY } from '../data/constants';
 import { Story } from '../types';
 import { getStories } from '../services/firestore';
+import { getImageSource } from '../utils/imageHelper';
 
 const { width } = Dimensions.get('window');
+const CARD_W = width * 0.52;
+
+// Gradient-like colors for story cards
+const CARD_PALETTES = [
+  { bg: '#2B6652', text: '#FFFFFF', sub: 'rgba(255,255,255,0.7)' },
+  { bg: '#E8963E', text: '#FFFFFF', sub: 'rgba(255,255,255,0.75)' },
+  { bg: '#3AAFA9', text: '#FFFFFF', sub: 'rgba(255,255,255,0.7)' },
+  { bg: '#8E7CC3', text: '#FFFFFF', sub: 'rgba(255,255,255,0.7)' },
+  { bg: '#D96380', text: '#FFFFFF', sub: 'rgba(255,255,255,0.7)' },
+];
 
 const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const { userProfile } = useAuth();
   const [stories, setStories] = useState<Story[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedHomeTopic, setSelectedHomeTopic] = useState('daily life');
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
-      toValue: 1, duration: 600, useNativeDriver: true,
+      toValue: 1, duration: 500, useNativeDriver: true,
     }).start();
     loadStories();
-  }, []);
+  }, [userProfile?.targetLanguage, userProfile?.level]);
 
   const loadStories = async () => {
     try {
-      const fetched = await getStories(
-        userProfile?.targetLanguage || 'de',
-        userProfile?.level || 'A1'
-      );
+      const targetLang = userProfile?.targetLanguage || 'de';
+      const targetLevel = userProfile?.level || 'A1';
+
+      const fetched = await getStories(targetLang, targetLevel);
       
-      // Fallback to sample stories if Firestore is empty
       if (fetched.length === 0) {
-        const fallback = SAMPLE_STORIES.filter(
-          s => s.language === (userProfile?.targetLanguage || 'de') && s.level === (userProfile?.level || 'A1')
-        );
-        setStories(fallback.length > 0 ? fallback : SAMPLE_STORIES.slice(0, 4));
+        // Strict fallback: only same language
+        const sameLangFallback = SAMPLE_STORIES.filter(s => s.language === targetLang);
+        
+        // Filter by level if possible, else just same language
+        const levelMatch = sameLangFallback.filter(s => s.level === targetLevel);
+        setStories(levelMatch.length > 0 ? levelMatch : sameLangFallback.slice(0, 5));
       } else {
         setStories(fetched);
       }
     } catch (error) {
       console.error('Error loading stories:', error);
-      setStories(SAMPLE_STORIES.slice(0, 4)); // Emergency fallback
+      // Even in error, only show consistent language if possible
+      const errFallback = SAMPLE_STORIES.filter(s => s.language === (userProfile?.targetLanguage || 'de'));
+      setStories(errFallback.slice(0, 5));
     }
   };
 
@@ -67,137 +88,245 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const levelObj = LEVELS.find((l) => l.code === userProfile?.level) || LEVELS[0];
   const greeting = new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening';
 
-  const dailyWord = {
-    word: 'Wanderlust',
-    translation: 'A deep desire to travel and explore',
-    partOfSpeech: 'noun',
+  const { updateProfile } = useAuth();
+  const handleUpdateLanguage = () => {
+    navigation.navigate('PreferencePicker', { type: 'language' });
   };
+
+  const handleUpdateLevel = () => {
+    navigation.navigate('PreferencePicker', { type: 'level' });
+  };
+
+  const handleMissionPress = () => {
+    if (stories.length > 0) {
+      const randomStory = stories[Math.floor(Math.random() * stories.length)];
+      navigation.navigate('StoryReader' as any, { storyId: randomStory.id });
+    }
+  };
+
+  const handleCategoryPress = (topic: string) => {
+    setSelectedHomeTopic(topic);
+    // Subtle haptic when changing topic
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
+  const topicStories = useMemo(() => {
+    return SAMPLE_STORIES.filter(s => 
+      s.language === (userProfile?.targetLanguage || 'de') && 
+      s.topic === selectedHomeTopic
+    ).slice(0, 4);
+  }, [selectedHomeTopic, userProfile?.targetLanguage]);
+
+  const dailyWord = WORDS_OF_THE_DAY[userProfile?.targetLanguage || 'de'] || WORDS_OF_THE_DAY['de'];
 
   return (
     <View style={styles.container}>
-      <View style={styles.ambient} />
-
       <Animated.ScrollView
         style={{ opacity: fadeAnim }}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 100 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Colors.primary} />
         }
       >
-        {/* ---- HEADER ---- */}
+        {/* ---- HEADER with greeting ---- */}
         <View style={styles.header}>
-          <View style={styles.headerLeft}>
-            <Text style={styles.greetingText}>Good {greeting},</Text>
-            <Text style={styles.nameText}>{userProfile?.name || 'Learner'}</Text>
+          <View>
+            <Text style={styles.greeting}>Good {greeting}</Text>
+            <Text style={styles.name}>{userProfile?.name || 'Learner'} 👋</Text>
           </View>
-          <View style={styles.headerRight}>
-            <View style={styles.streakPill}>
-              <Text style={styles.streakLabel}>STREAK</Text>
-              <Text style={styles.streakNum}>{userProfile?.streak || 0}</Text>
+          <TouchableOpacity style={styles.avatarBtn}>
+            <Text style={styles.avatarLetter}>
+              {(userProfile?.name || 'L')[0].toUpperCase()}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* ---- STATS BAR (Headway split layout) ---- */}
+        <View style={styles.statsBar}>
+          {/* Left: Streak */}
+          <View style={styles.statsStreak}>
+            <Text style={styles.statsStreakLabel}>Streak</Text>
+            <View style={styles.statsStreakRow}>
+              <Text style={styles.streakFireEmoji}>🔥</Text>
+              <Text style={styles.statsStreakNum}>{userProfile?.streak || 0}</Text>
+            </View>
+            <Text style={styles.statsStreakUnit}>
+              {(userProfile?.streak || 0) === 1 ? 'day' : 'days'}
+            </Text>
+          </View>
+
+          {/* Vertical divider */}
+          <View style={styles.statsVertDivider} />
+
+          {/* Right: This week's growth */}
+          <View style={styles.statsGrowth}>
+            <Text style={styles.statsGrowthTitle}>Your growth this week</Text>
+            <View style={styles.statsMetrics}>
+              <View style={styles.metric}>
+                <Text style={[styles.metricNum, { color: Colors.primary }]}>4</Text>
+                <Text style={styles.metricLabel}>stories</Text>
+              </View>
+              <View style={styles.metric}>
+                <Text style={[styles.metricNum, { color: Colors.accent }]}>28</Text>
+                <Text style={styles.metricLabel}>words</Text>
+              </View>
+              <View style={styles.metric}>
+                <Text style={[styles.metricNum, { color: Colors.teal }]}>42</Text>
+                <Text style={styles.metricLabel}>minutes</Text>
+              </View>
             </View>
           </View>
         </View>
 
-        {/* ---- LANGUAGE / LEVEL CHIPS ---- */}
-        <View style={styles.chipRow}>
-          <View style={styles.chip}>
-            <Text style={styles.chipText}>
-              {langObj?.name || 'German'}
-            </Text>
+        {/* ---- DAILY MISSION BANNER (Headway-style solid color CTA) ---- */}
+        <TouchableOpacity 
+          style={styles.missionBanner} 
+          activeOpacity={0.85}
+          onPress={handleMissionPress}
+        >
+          <View style={styles.missionLeft}>
+            <Ionicons name="sparkles" size={18} color="#FFFFFF" />
+            <Text style={styles.missionText}>YOUR DAILY MISSION</Text>
           </View>
-          <View style={[styles.chip, { borderColor: levelObj.color + '40' }]}>
-            <View style={[styles.chipDot, { backgroundColor: levelObj.color }]} />
-            <Text style={[styles.chipText, { color: levelObj.color }]}>
-              {levelObj.code}
-            </Text>
-          </View>
-        </View>
+          <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.8)" />
+        </TouchableOpacity>
 
-        {/* ---- CONTINUE READING ---- */}
-        {stories.length > 0 && (
-          <>
-            <Text style={styles.sectionLabel}>CONTINUE READING</Text>
-            <TouchableOpacity
-              activeOpacity={0.85}
-              onPress={() => navigation.navigate('StoryReader', { storyId: stories[0].id })}
-              style={styles.continueCard}
-            >
-              <View style={styles.continueIconBox}>
-                <Ionicons name="book-outline" size={24} color={Colors.primary} />
-              </View>
-              <View style={styles.continueRight}>
-                <Text style={styles.continueTitle}>{stories[0].title}</Text>
-                <Text style={styles.continueMeta}>
-                  {stories[0].estimatedReadTime} min · {stories[0].level} · {stories[0].topic}
-                </Text>
-                <View style={styles.continueProgress}>
-                  <View style={styles.progressTrack}>
-                    <View style={[styles.progressFill, { width: '35%' }]} />
-                  </View>
-                  <Text style={styles.progressPct}>35%</Text>
-                </View>
-              </View>
-              <Ionicons name="chevron-forward" size={20} color={Colors.textMuted} />
+        {/* ---- HORIZONTAL STORY CARDS (MasterClass-inspired large visual cards) ---- */}
+        <View style={styles.sectionHeader}>
+          <View>
+            <Text style={styles.sectionTitle}>To get you started</Text>
+            <Text style={styles.sectionSub}>Stories picked for your level</Text>
+          </View>
+          <View style={styles.sectionActions}>
+            <TouchableOpacity onPress={handleUpdateLanguage} style={styles.actionBtn}>
+              <Text style={styles.actionText}>{langObj?.flag || '🌐'}</Text>
             </TouchableOpacity>
-          </>
-        )}
-
-        {/* ---- WORD OF THE DAY ---- */}
-        <Text style={styles.sectionLabel}>WORD OF THE DAY</Text>
-        <View style={styles.wordCard}>
-          <View style={styles.wordAccent} />
-          <View style={styles.wordContent}>
-            <View style={styles.wordTopRow}>
-              <Text style={styles.wordPartOfSpeech}>{dailyWord.partOfSpeech}</Text>
-            </View>
-            <Text style={styles.wordText}>{dailyWord.word}</Text>
-            <Text style={styles.wordTranslation}>{dailyWord.translation}</Text>
+            <TouchableOpacity onPress={handleUpdateLevel} style={styles.actionBtn}>
+              <Text style={styles.actionText}>{levelObj?.code}</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
-        {/* ---- STORIES FOR YOU ---- */}
-        <View style={styles.sectionRow}>
-          <Text style={styles.sectionLabel}>STORIES FOR YOU</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Library')}>
-            <Text style={styles.seeAllText}>See all →</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.cardsScroll}
+          decelerationRate="fast"
+          snapToInterval={CARD_W + 14}
+        >
+          {stories.map((story, index) => {
+            const palette = CARD_PALETTES[index % CARD_PALETTES.length];
+            return (
+              <TouchableOpacity
+                key={story.id}
+                activeOpacity={0.9}
+                onPress={() => navigation.navigate('StoryReader', { storyId: story.id })}
+                style={[styles.storyCard, { backgroundColor: palette.bg }]}
+              >
+                {/* Background Image */}
+                {(story.imageUrl || TOPIC_IMAGES[story.topic]) && (
+                  <Image
+                    source={getImageSource(story.imageUrl || TOPIC_IMAGES[story.topic])}
+                    style={StyleSheet.absoluteFill}
+                    resizeMode="cover"
+                  />
+                )}
+                {/* Overlay for text readability */}
+                <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.3)' }]} />
+
+                {/* Level badge */}
+                <View style={styles.cardBadge}>
+                  <Text style={styles.cardBadgeText}>{story.level}</Text>
+                </View>
+
+                {/* Title & meta at bottom */}
+                <View style={styles.cardBottom}>
+                  <Text style={[styles.cardTitle, { color: '#FFFFFF' }]} numberOfLines={2}>
+                    {story.title}
+                  </Text>
+                  <Text style={[styles.cardMeta, { color: 'rgba(255,255,255,0.85)' }]}>
+                    {story.estimatedReadTime} min · {story.wordCount} words
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+
+        {/* ---- WORD OF THE DAY (colored background card instead of white) ---- */}
+        <Text style={styles.sectionTitle}>Word of the Day</Text>
+        <View style={styles.wordCard}>
+          <View style={styles.wordCardLeft}>
+            <View style={styles.wordPosChip}>
+              <Text style={styles.wordPosText}>{dailyWord.partOfSpeech}</Text>
+            </View>
+            <Text style={styles.wordCardWord}>{dailyWord.word}</Text>
+            <Text style={styles.wordCardTranslation}>{dailyWord.translation}</Text>
+          </View>
+          <TouchableOpacity style={styles.wordSoundBtn}>
+            <Ionicons name="volume-medium" size={22} color={Colors.textInverse} />
           </TouchableOpacity>
         </View>
 
-        {stories.map((story, index) => (
-          <TouchableOpacity
-            key={story.id}
-            activeOpacity={0.85}
-            onPress={() => navigation.navigate('StoryReader', { storyId: story.id })}
-            style={styles.storyListItem}
-          >
-            <View style={styles.storyListLeft}>
-              <View style={[styles.storyIndex, index === 0 && { backgroundColor: Colors.primaryMuted }]}>
-                <Text style={[styles.storyIndexText, index === 0 && { color: Colors.primary }]}>
-                  {String(index + 1).padStart(2, '0')}
-                </Text>
+        {/* ---- CONTINUE LEARNING (categories with preview) ---- */}
+        <Text style={styles.sectionTitle}>Explore by topic</Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.catScroll}
+        >
+          {['travel', 'food', 'culture', 'daily life', 'nature'].map((topic) => (
+            <TouchableOpacity 
+              key={topic} 
+              style={[
+                styles.catChip, 
+                selectedHomeTopic === topic && styles.catChipActive
+              ]} 
+              activeOpacity={0.8}
+              onPress={() => handleCategoryPress(topic)}
+            >
+              <View style={styles.catImageWrap}>
+                <Image
+                  source={getImageSource(TOPIC_IMAGES[topic])}
+                  style={styles.catImage}
+                />
               </View>
-              <View style={styles.storyListInfo}>
-                <Text style={styles.storyListTitle}>{story.title}</Text>
-                <View style={styles.storyListMeta}>
-                  <Text style={styles.storyListMetaText}>
-                    {story.topic}
-                  </Text>
-                  <Text style={styles.storyListDot}>·</Text>
-                  <Text style={styles.storyListMetaText}>{story.estimatedReadTime} min</Text>
-                  <Text style={styles.storyListDot}>·</Text>
-                  <Text style={styles.storyListMetaText}>{story.wordCount} words</Text>
-                </View>
-              </View>
-            </View>
-            <View style={[styles.storyLevelPill, { backgroundColor: (LEVELS.find(l => l.code === story.level)?.color || Colors.teal) + '20' }]}>
-              <Text style={[styles.storyLevelText, { color: LEVELS.find(l => l.code === story.level)?.color || Colors.teal }]}>
-                {story.level}
+              <Text style={[
+                styles.catLabel,
+                selectedHomeTopic === topic && styles.catLabelActive
+              ]}>
+                {topic.charAt(0).toUpperCase() + topic.slice(1)}
               </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
 
-        <View style={{ height: 120 }} />
+        {/* Topic Preview List */}
+        <View style={styles.topicPreviewList}>
+          {topicStories.length > 0 ? (
+            topicStories.map((story, i) => (
+              <TouchableOpacity
+                key={story.id}
+                style={styles.topicMiniCard}
+                onPress={() => navigation.navigate('StoryReader' as any, { storyId: story.id })}
+                activeOpacity={0.8}
+              >
+                <Image source={getImageSource(story.imageUrl)} style={styles.topicMiniImg} />
+                <View style={styles.topicMiniInfo}>
+                  <Text style={styles.topicMiniTitle} numberOfLines={1}>{story.title}</Text>
+                  <Text style={styles.topicMiniLevel}>{story.level} · {story.estimatedReadTime} min read</Text>
+                </View>
+                <Ionicons name="play-circle-outline" size={24} color={Colors.primary} />
+              </TouchableOpacity>
+            ))
+          ) : (
+            <View style={styles.emptyTopic}>
+              <Text style={styles.emptyTopicText}>No stories found for this topic yet.</Text>
+            </View>
+          )}
+        </View>
+
       </Animated.ScrollView>
     </View>
   );
@@ -205,105 +334,207 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
-  ambient: {
-    position: 'absolute', width: 300, height: 300, borderRadius: 150,
-    backgroundColor: Colors.primaryMuted, top: -100, right: -80,
-  },
+
   // Header
   header: {
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end',
-    paddingHorizontal: Spacing.xl, paddingTop: 64, paddingBottom: Spacing.md,
-  },
-  headerLeft: {},
-  greetingText: { fontSize: FontSizes.md, color: Colors.textMuted, marginBottom: 2 },
-  nameText: { fontSize: FontSizes.xxl, fontWeight: '300', color: Colors.textPrimary },
-  headerRight: {},
-  streakPill: {
-    flexDirection: 'row', alignItems: 'center', gap: 4,
-    backgroundColor: Colors.surface, paddingHorizontal: 14, paddingVertical: 8,
-    borderRadius: BorderRadius.full, borderWidth: 1, borderColor: 'rgba(67, 97, 238, 0.15)',
-  },
-  streakLabel: { fontSize: 10, fontWeight: '800', color: Colors.textMuted, letterSpacing: 1 },
-  streakNum: { fontSize: FontSizes.lg, fontWeight: '700', color: Colors.primary },
-  // Chips
-  chipRow: {
-    flexDirection: 'row', paddingHorizontal: Spacing.xl, marginBottom: Spacing.lg, gap: Spacing.sm,
-  },
-  chip: {
-    flexDirection: 'row', alignItems: 'center', gap: 6,
-    backgroundColor: Colors.surface, paddingHorizontal: 14, paddingVertical: 6,
-    borderRadius: BorderRadius.full, borderWidth: 1, borderColor: Colors.border,
-  },
-  chipText: { fontSize: FontSizes.sm, fontWeight: '500', color: Colors.textSecondary },
-  chipDot: { width: 6, height: 6, borderRadius: 3 },
-  // Section
-  sectionLabel: {
-    fontSize: FontSizes.xs, color: Colors.textMuted, letterSpacing: 3,
-    fontWeight: '700', paddingHorizontal: Spacing.xl, marginBottom: Spacing.md,
-    marginTop: Spacing.lg,
-  },
-  sectionRow: {
     flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+    paddingHorizontal: Spacing.xl, paddingTop: 52, paddingBottom: 4,
+  },
+  greeting: { fontSize: FontSizes.sm, color: Colors.textMuted },
+  name: { fontSize: FontSizes.xl, fontWeight: '700', color: Colors.textPrimary, marginTop: 1 },
+  avatarBtn: {
+    width: 40, height: 40, borderRadius: 20,
+    backgroundColor: Colors.primary, alignItems: 'center', justifyContent: 'center',
+  },
+  avatarLetter: { fontSize: FontSizes.md, fontWeight: '700', color: Colors.textInverse },
+
+  // Stats bar (Headway split)
+  statsBar: {
+    flexDirection: 'row', alignItems: 'stretch',
+    marginHorizontal: Spacing.xl, marginTop: Spacing.sm,
+    backgroundColor: Colors.surface, borderRadius: BorderRadius.md,
+    borderWidth: 1, borderColor: Colors.border,
+    overflow: 'hidden', ...Shadows.soft,
+  },
+  statsStreak: {
+    width: 76, alignItems: 'center', justifyContent: 'center',
+    paddingVertical: 12,
+    backgroundColor: Colors.surfaceLight,
+  },
+  statsStreakLabel: { fontSize: 9, fontWeight: '600', color: Colors.textMuted, letterSpacing: 0.5 },
+  statsStreakRow: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 3 },
+  streakFireEmoji: { fontSize: 14 },
+  statsStreakNum: { fontSize: FontSizes.xl, fontWeight: '800', color: Colors.accent },
+  statsStreakUnit: { fontSize: 9, color: Colors.textMuted, marginTop: 1 },
+  statsVertDivider: { width: 1, backgroundColor: Colors.border },
+  statsGrowth: { flex: 1, paddingVertical: 10, paddingHorizontal: 14 },
+  statsGrowthTitle: {
+    fontSize: 10, fontWeight: '600', color: Colors.textSecondary, marginBottom: 8,
+  },
+  statsMetrics: { flexDirection: 'row', justifyContent: 'space-around' },
+  metric: { alignItems: 'center' },
+  metricNum: { fontSize: FontSizes.lg, fontWeight: '800' },
+  metricLabel: { fontSize: 9, color: Colors.textMuted, marginTop: 1 },
+
+  // Mission banner (Headway green CTA)
+  missionBanner: {
+    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+    marginHorizontal: Spacing.xl, marginTop: Spacing.sm,
+    backgroundColor: Colors.primary, borderRadius: BorderRadius.sm,
+    paddingHorizontal: 14, paddingVertical: 11,
+    ...Shadows.glow,
+  },
+  missionLeft: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  missionText: {
+    fontSize: 12, fontWeight: '800', color: '#FFFFFF',
+    letterSpacing: 0.8,
+  },
+
+  // Section
+  sectionHeader: {
+    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end',
     paddingRight: Spacing.xl,
   },
-  seeAllText: { fontSize: FontSizes.sm, color: Colors.primary, fontWeight: '600' },
-  // Continue Card
-  continueCard: {
-    marginHorizontal: Spacing.xl, flexDirection: 'row', alignItems: 'center',
-    backgroundColor: Colors.surface, borderRadius: BorderRadius.lg,
-    padding: Spacing.md + 4, borderWidth: 1, borderColor: Colors.border,
+  sectionActions: { flexDirection: 'row', gap: 6, marginBottom: Spacing.sm },
+  actionBtn: {
+    backgroundColor: Colors.surface, borderWidth: 1, borderColor: Colors.border,
+    paddingHorizontal: 8, paddingVertical: 4, borderRadius: BorderRadius.sm,
     ...Shadows.soft,
   },
-  continueIconBox: {
-    width: 56, height: 56, borderRadius: BorderRadius.md,
-    backgroundColor: Colors.primaryMuted, alignItems: 'center', justifyContent: 'center',
-    marginRight: Spacing.md,
+  actionText: { fontSize: 11, fontWeight: '700', color: Colors.textSecondary },
+  sectionTitle: {
+    fontSize: FontSizes.lg, fontWeight: '700', color: Colors.textPrimary,
+    paddingHorizontal: Spacing.xl, marginTop: Spacing.lg,
   },
-  continueRight: { flex: 1 },
-  continueTitle: { fontSize: FontSizes.lg, fontWeight: '600', color: Colors.textPrimary, marginBottom: 4 },
-  continueMeta: { fontSize: FontSizes.xs, color: Colors.textMuted, marginBottom: 8, textTransform: 'capitalize' },
-  continueProgress: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
-  progressTrack: { flex: 1, height: 3, backgroundColor: Colors.border, borderRadius: 2 },
-  progressFill: { height: '100%', backgroundColor: Colors.primary, borderRadius: 2 },
-  progressPct: { fontSize: FontSizes.xs, color: Colors.primary, fontWeight: '600' },
-  // Word Card
+  sectionSub: {
+    fontSize: FontSizes.xs, color: Colors.textMuted,
+    paddingHorizontal: Spacing.xl, marginTop: 2, marginBottom: Spacing.sm,
+  },
+
+  // Horizontal story cards (MasterClass large visual)
+  cardsScroll: { paddingHorizontal: Spacing.xl, gap: 12 },
+  storyCard: {
+    width: CARD_W, height: CARD_W * 1.2,
+    borderRadius: BorderRadius.lg,
+    padding: 14,
+    justifyContent: 'space-between',
+    overflow: 'hidden',
+    ...Shadows.medium,
+  },
+  cardBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: 'rgba(255,255,255,0.25)',
+    paddingHorizontal: 8, paddingVertical: 3,
+    borderRadius: BorderRadius.full,
+  },
+  cardBadgeText: { fontSize: 10, fontWeight: '800', color: '#FFFFFF' },
+  cardBottom: {},
+  cardTitle: { fontSize: FontSizes.md, fontWeight: '700', lineHeight: 20, textShadowColor: 'rgba(0,0,0,0.5)', textShadowOffset: { width: 0, height: 1 }, textShadowRadius: 3 },
+  cardMeta: { fontSize: 11, marginTop: 4, fontWeight: '600' },
+
+  // Word of the day (colored card)
   wordCard: {
-    marginHorizontal: Spacing.xl, backgroundColor: Colors.surface,
-    borderRadius: BorderRadius.lg, overflow: 'hidden',
-    borderWidth: 1, borderColor: Colors.border,
-    flexDirection: 'row', ...Shadows.soft,
+    flexDirection: 'row', alignItems: 'center',
+    marginHorizontal: Spacing.xl, marginTop: Spacing.sm,
+    backgroundColor: Colors.accent,
+    borderRadius: BorderRadius.md, padding: 14,
+    ...Shadows.warm,
   },
-  wordAccent: { width: 4, backgroundColor: Colors.primary },
-  wordContent: { flex: 1, padding: Spacing.lg },
-  wordTopRow: { flexDirection: 'row', marginBottom: Spacing.sm },
-  wordPartOfSpeech: {
-    fontSize: FontSizes.xs, color: Colors.primary, fontWeight: '600',
-    letterSpacing: 1, textTransform: 'uppercase',
+  wordCardLeft: { flex: 1 },
+  wordPosChip: {
+    alignSelf: 'flex-start', backgroundColor: 'rgba(255,255,255,0.25)',
+    paddingHorizontal: 8, paddingVertical: 2, borderRadius: BorderRadius.full,
+    marginBottom: 6,
   },
-  wordText: { fontSize: FontSizes.xxl, fontWeight: '300', color: Colors.textPrimary, marginBottom: 6 },
-  wordTranslation: { fontSize: FontSizes.md, color: Colors.textMuted, fontStyle: 'italic' },
-  // Story list items
-  storyListItem: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-    marginHorizontal: Spacing.xl, paddingVertical: Spacing.md + 4,
-    borderBottomWidth: 1, borderBottomColor: Colors.border,
+  wordPosText: { fontSize: 9, fontWeight: '700', color: '#FFFFFF', textTransform: 'uppercase', letterSpacing: 1 },
+  wordCardWord: { fontSize: FontSizes.xl, fontWeight: '700', color: '#FFFFFF' },
+  wordCardTranslation: { fontSize: FontSizes.sm, color: 'rgba(255,255,255,0.8)', marginTop: 4, fontStyle: 'italic' },
+  wordSoundBtn: {
+    width: 40, height: 40, borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    alignItems: 'center', justifyContent: 'center',
   },
-  storyListLeft: { flexDirection: 'row', alignItems: 'center', flex: 1 },
-  storyIndex: {
-    width: 40, height: 40, borderRadius: BorderRadius.sm,
-    backgroundColor: Colors.surface, alignItems: 'center', justifyContent: 'center',
-    marginRight: Spacing.md,
+
+  // Category chips (Headway style with emoji)
+  catScroll: { paddingHorizontal: 24, paddingVertical: 10 },
+  catChip: {
+    alignItems: 'center',
+    marginRight: 20,
+    padding: 6,
+    borderRadius: 20,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
-  storyIndexText: { fontSize: FontSizes.sm, fontWeight: '700', color: Colors.textMuted },
-  storyListInfo: { flex: 1 },
-  storyListTitle: { fontSize: FontSizes.md, fontWeight: '600', color: Colors.textPrimary, marginBottom: 4 },
-  storyListMeta: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  storyListMetaText: { fontSize: FontSizes.xs, color: Colors.textMuted, textTransform: 'capitalize' },
-  storyListDot: { color: Colors.textMuted, fontSize: FontSizes.xs },
-  storyLevelPill: {
-    paddingHorizontal: 10, paddingVertical: 4, borderRadius: BorderRadius.full,
+  catChipActive: {
+    backgroundColor: '#FFFFFF',
+    borderColor: Colors.border,
+    ...Shadows.soft,
   },
-  storyLevelText: { fontSize: FontSizes.xs, fontWeight: '700' },
+  catImageWrap: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    overflow: 'hidden',
+    backgroundColor: Colors.surface,
+    marginBottom: 8,
+    ...Shadows.soft,
+  },
+  catImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  catLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: Colors.textSecondary,
+  },
+  catLabelActive: {
+    color: Colors.primary,
+    fontWeight: '800',
+  },
+  topicPreviewList: {
+    paddingHorizontal: 24,
+    marginTop: 10,
+    marginBottom: 40,
+  },
+  topicMiniCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 12,
+    marginBottom: 12,
+    ...Shadows.soft,
+  },
+  topicMiniImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    marginRight: 16,
+  },
+  topicMiniInfo: {
+    flex: 1,
+  },
+  topicMiniTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: Colors.textPrimary,
+  },
+  topicMiniLevel: {
+    fontSize: 12,
+    color: Colors.textMuted,
+    marginTop: 2,
+  },
+  emptyTopic: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  emptyTopicText: {
+    color: Colors.textMuted,
+    fontSize: 14,
+  },
 });
 
 export default HomeScreen;

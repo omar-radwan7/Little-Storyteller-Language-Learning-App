@@ -48,6 +48,7 @@ export interface Story {
   wordCount: number;
   estimatedReadTime: number;
   words: Record<string, WordDetail>;
+  imageUrl?: any;
 }
 
 export interface Language {
@@ -78,6 +79,7 @@ export type RootStackParamList = {
   Onboarding: undefined;
   MainTabs: undefined;
   StoryReader: { storyId: string };
+  PreferencePicker: { type: 'language' | 'level' };
   Flashcards: undefined;
 };
 
@@ -87,4 +89,5 @@ export type MainTabParamList = {
   Vocabulary: undefined;
   Progress: undefined;
   Profile: undefined;
+  PreferencePicker: { type: 'language' | 'level' };
 };

@@ -1,5 +1,6 @@
 // ==========================================
 // Progress Screen — Reading stats + activity chart
+// Warm nature palette with mossy accents
 // ==========================================
 
 import React from 'react';
@@ -17,129 +18,115 @@ import { useAuth } from '../hooks/useAuth';
 const { width } = Dimensions.get('window');
 
 const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const weeklyData = [3, 5, 2, 4, 1, 6, 2]; // stories read
+const weeklyData = [3, 5, 2, 4, 1, 6, 2];
 
 const ProgressScreen: React.FC = () => {
   const { userProfile } = useAuth();
   const maxVal = Math.max(...weeklyData, 1);
+  const todayIndex = (new Date().getDay() + 6) % 7; // Mon=0
 
   return (
     <View style={styles.container}>
-      <View style={styles.ambient} />
-
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerSmall}>YOUR JOURNEY</Text>
           <Text style={styles.headerTitle}>Progress</Text>
+          <Text style={styles.headerSub}>your learning journey</Text>
         </View>
 
         {/* Streak card */}
         <View style={styles.streakCard}>
-          <View style={styles.streakCardAccent} />
-          <View style={styles.streakCardContent}>
-            <View style={styles.streakRow}>
-              <Text style={styles.streakFire}>🔥</Text>
-              <View>
-                <Text style={styles.streakLabel}>Reading Streak</Text>
-                <View style={styles.streakValues}>
-                  <View style={styles.streakCol}>
-                    <Text style={styles.streakNumber}>{userProfile?.streak || 0}</Text>
-                    <Text style={styles.streakUnit}>current</Text>
-                  </View>
-                  <View style={styles.streakDivider} />
-                  <View style={styles.streakCol}>
-                    <Text style={styles.streakNumber}>{Math.max(userProfile?.streak || 0, 3)}</Text>
-                    <Text style={styles.streakUnit}>best</Text>
-                  </View>
-                </View>
-              </View>
+          <View style={styles.streakTop}>
+            <Text style={styles.streakFire}>🔥</Text>
+            <View>
+              <Text style={styles.streakTitle}>Reading Streak</Text>
+              <Text style={styles.streakSub}>Keep it going!</Text>
+            </View>
+          </View>
+          <View style={styles.streakStats}>
+            <View style={styles.streakCol}>
+              <Text style={[styles.streakNum, { color: Colors.accent }]}>{userProfile?.streak || 0}</Text>
+              <Text style={styles.streakUnit}>current</Text>
+            </View>
+            <View style={styles.streakDivider} />
+            <View style={styles.streakCol}>
+              <Text style={[styles.streakNum, { color: Colors.primary }]}>{Math.max(userProfile?.streak || 0, 3)}</Text>
+              <Text style={styles.streakUnit}>best</Text>
             </View>
           </View>
         </View>
 
         {/* Stats grid */}
         <View style={styles.statsGrid}>
-          <View style={styles.statBox}>
-            <Ionicons name="book" size={22} color={Colors.teal} />
-            <Text style={styles.statNumber}>4</Text>
-            <Text style={styles.statLabel}>Stories Read</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Ionicons name="bookmark" size={22} color={Colors.primary} />
-            <Text style={styles.statNumber}>28</Text>
-            <Text style={styles.statLabel}>Words Saved</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Ionicons name="time" size={22} color={Colors.accent} />
-            <Text style={styles.statNumber}>42</Text>
-            <Text style={styles.statLabel}>Min. Reading</Text>
-          </View>
-          <View style={styles.statBox}>
-            <Ionicons name="ribbon" size={22} color={Colors.info} />
-            <Text style={styles.statNumber}>{userProfile?.level || 'A1'}</Text>
-            <Text style={styles.statLabel}>Current Level</Text>
-          </View>
+          {[
+            { icon: 'book' as const, num: '4', label: 'Stories Read', color: Colors.primary },
+            { icon: 'bookmark' as const, num: '28', label: 'Words Saved', color: Colors.accent },
+            { icon: 'time' as const, num: '42', label: 'Min. Reading', color: Colors.teal },
+            { icon: 'ribbon' as const, num: userProfile?.level || 'A1', label: 'Current Level', color: Colors.lavender },
+          ].map((stat, i) => (
+            <View key={i} style={styles.statBox}>
+              <View style={[styles.statIconBox, { backgroundColor: stat.color + '12' }]}>
+                <Ionicons name={stat.icon} size={20} color={stat.color} />
+              </View>
+              <Text style={[styles.statNum, { color: stat.color }]}>{stat.num}</Text>
+              <Text style={styles.statLabel}>{stat.label}</Text>
+            </View>
+          ))}
         </View>
 
         {/* Weekly activity */}
-        <View style={styles.section}>
-          <Text style={styles.sectionLabel}>WEEKLY ACTIVITY</Text>
-          <View style={styles.chartCard}>
-            <View style={styles.chartRow}>
-              {weeklyData.map((val, i) => (
-                <View key={i} style={styles.chartCol}>
-                  <View style={styles.barBg}>
-                    <View
-                      style={[
-                        styles.barFill,
-                        {
-                          height: `${(val / maxVal) * 100}%`,
-                          backgroundColor: i === new Date().getDay() - 1 ? Colors.primary : Colors.surfaceLight,
-                        },
-                      ]}
-                    />
-                  </View>
-                  <Text style={[
-                    styles.dayLabel,
-                    i === new Date().getDay() - 1 && { color: Colors.primary },
-                  ]}>
-                    {daysOfWeek[i]}
-                  </Text>
-                </View>
-              ))}
-            </View>
-          </View>
-        </View>
-
-        {/* Reading tracker heatmap-like */}
-        <View style={styles.section}>
-          <Text style={styles.sectionLabel}>READING TRACKER · 2026</Text>
-          <View style={styles.heatmapCard}>
-            <View style={styles.heatmapGrid}>
-              {Array.from({ length: 28 }, (_, i) => {
-                const active = [0, 5, 6, 12, 13, 14, 19, 20].includes(i);
-                return (
+        <Text style={styles.sectionTitle}>Weekly Activity</Text>
+        <View style={styles.chartCard}>
+          <View style={styles.chartRow}>
+            {weeklyData.map((val, i) => (
+              <View key={i} style={styles.chartCol}>
+                <View style={styles.barBg}>
                   <View
-                    key={i}
                     style={[
-                      styles.heatmapCell,
-                      active && styles.heatmapCellActive,
+                      styles.barFill,
+                      {
+                        height: `${(val / maxVal) * 100}%`,
+                        backgroundColor: i === todayIndex ? Colors.primary : Colors.primaryMuted,
+                      },
                     ]}
                   />
-                );
-              })}
-            </View>
-            <View style={styles.heatmapLegend}>
-              <Text style={styles.heatmapLegendText}>Less</Text>
-              <View style={[styles.heatmapCell, styles.heatmapCellSmall]} />
-              <View style={[styles.heatmapCell, styles.heatmapCellSmall, styles.heatmapCellActive]} />
-              <Text style={styles.heatmapLegendText}>More</Text>
-            </View>
+                </View>
+                <Text style={[
+                  styles.dayLabel,
+                  i === todayIndex && { color: Colors.primary, fontWeight: '700' },
+                ]}>
+                  {daysOfWeek[i]}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
 
-        <View style={{ height: 120 }} />
+        {/* Reading tracker heatmap */}
+        <Text style={styles.sectionTitle}>Reading Tracker · 2026</Text>
+        <View style={styles.heatmapCard}>
+          <View style={styles.heatmapGrid}>
+            {Array.from({ length: 28 }, (_, i) => {
+              const active = [0, 5, 6, 12, 13, 14, 19, 20].includes(i);
+              return (
+                <View
+                  key={i}
+                  style={[
+                    styles.heatmapCell,
+                    active && styles.heatmapCellActive,
+                  ]}
+                />
+              );
+            })}
+          </View>
+          <View style={styles.heatmapLegend}>
+            <Text style={styles.legendText}>Less</Text>
+            <View style={styles.heatmapCell} />
+            <View style={[styles.heatmapCell, styles.heatmapCellActive]} />
+            <Text style={styles.legendText}>More</Text>
+          </View>
+        </View>
+
       </ScrollView>
     </View>
   );
@@ -147,85 +134,86 @@ const ProgressScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
-  ambient: {
-    position: 'absolute', width: 300, height: 300, borderRadius: 150,
-    backgroundColor: Colors.primaryMuted, bottom: 50, left: -100,
-  },
-  header: { paddingHorizontal: Spacing.xl, paddingTop: 64, paddingBottom: Spacing.md },
-  headerSmall: {
-    fontSize: FontSizes.xs, color: Colors.teal, letterSpacing: 3,
-    fontWeight: '700', marginBottom: Spacing.xs,
-  },
-  headerTitle: { fontSize: FontSizes.xxxl, fontWeight: '300', color: Colors.textPrimary },
-  // Streak card
+  header: { paddingHorizontal: Spacing.xl, paddingTop: 52, paddingBottom: 4 },
+  headerTitle: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary },
+  headerSub: { fontSize: FontSizes.xs, color: Colors.textMuted, marginTop: 2 },
+
+  // Streak
   streakCard: {
-    marginHorizontal: Spacing.xl, marginTop: Spacing.lg, flexDirection: 'row',
-    backgroundColor: Colors.surface, borderRadius: BorderRadius.lg,
-    overflow: 'hidden', borderWidth: 1, borderColor: Colors.border, ...Shadows.soft,
+    marginHorizontal: Spacing.xl, marginTop: Spacing.md,
+    backgroundColor: Colors.surface, borderRadius: BorderRadius.md,
+    padding: 14, borderWidth: 1, borderColor: Colors.border,
   },
-  streakCardAccent: { width: 4, backgroundColor: Colors.primary },
-  streakCardContent: { flex: 1, padding: Spacing.lg },
-  streakRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.md },
-  streakFire: { fontSize: 40 },
-  streakLabel: { fontSize: FontSizes.sm, color: Colors.textMuted, fontWeight: '600', marginBottom: Spacing.sm },
-  streakValues: { flexDirection: 'row', alignItems: 'center', gap: Spacing.lg },
+  streakTop: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 12 },
+  streakFire: { fontSize: 28 },
+  streakTitle: { fontSize: FontSizes.md, fontWeight: '700', color: Colors.textPrimary },
+  streakSub: { fontSize: FontSizes.xs, color: Colors.textMuted },
+  streakStats: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around',
+    paddingTop: 12, borderTopWidth: 1, borderTopColor: Colors.borderLight,
+  },
   streakCol: { alignItems: 'center' },
-  streakNumber: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary },
-  streakUnit: { fontSize: FontSizes.xs, color: Colors.textMuted, textTransform: 'uppercase', letterSpacing: 1 },
-  streakDivider: { width: 1, height: 30, backgroundColor: Colors.border },
+  streakNum: { fontSize: FontSizes.xl, fontWeight: '800' },
+  streakUnit: { fontSize: 9, color: Colors.textMuted, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1, marginTop: 1 },
+  streakDivider: { width: 1, height: 26, backgroundColor: Colors.borderLight },
+
   // Stats grid
   statsGrid: {
     flexDirection: 'row', flexWrap: 'wrap',
-    paddingHorizontal: Spacing.xl, marginTop: Spacing.lg, gap: Spacing.sm,
+    paddingHorizontal: Spacing.xl, marginTop: Spacing.md, gap: 6,
   },
   statBox: {
-    width: (width - Spacing.xl * 2 - Spacing.sm) / 2,
+    width: (width - Spacing.xl * 2 - 6) / 2,
     backgroundColor: Colors.surface, borderRadius: BorderRadius.md,
-    padding: Spacing.lg, borderWidth: 1, borderColor: Colors.border,
-    ...Shadows.soft,
+    padding: 12, borderWidth: 1, borderColor: Colors.border,
   },
-  statNumber: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary, marginVertical: 6 },
-  statLabel: { fontSize: FontSizes.xs, color: Colors.textMuted, fontWeight: '500' },
+  statIconBox: {
+    width: 30, height: 30, borderRadius: 8,
+    alignItems: 'center', justifyContent: 'center', marginBottom: 6,
+  },
+  statNum: { fontSize: FontSizes.xl, fontWeight: '800', marginBottom: 1 },
+  statLabel: { fontSize: 10, color: Colors.textMuted, fontWeight: '500' },
+
   // Section
-  section: { marginTop: Spacing.xl },
-  sectionLabel: {
-    fontSize: FontSizes.xs, color: Colors.textMuted, letterSpacing: 3,
-    fontWeight: '700', paddingHorizontal: Spacing.xl, marginBottom: Spacing.md,
+  sectionTitle: {
+    fontSize: FontSizes.md, fontWeight: '700', color: Colors.textPrimary,
+    paddingHorizontal: Spacing.xl, marginTop: Spacing.lg, marginBottom: Spacing.sm,
   },
+
   // Chart
   chartCard: {
     marginHorizontal: Spacing.xl, backgroundColor: Colors.surface,
-    borderRadius: BorderRadius.lg, borderWidth: 1, borderColor: Colors.border,
-    padding: Spacing.lg, ...Shadows.soft,
+    borderRadius: BorderRadius.md, borderWidth: 1, borderColor: Colors.border,
+    padding: 14,
   },
-  chartRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', height: 120 },
+  chartRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', height: 90 },
   chartCol: { alignItems: 'center', flex: 1 },
   barBg: {
-    width: 20, height: 100, backgroundColor: Colors.glass,
-    borderRadius: 10, justifyContent: 'flex-end', overflow: 'hidden',
+    width: 14, height: 72, backgroundColor: Colors.surfaceLight,
+    borderRadius: 7, justifyContent: 'flex-end', overflow: 'hidden',
   },
-  barFill: { width: '100%', borderRadius: 10 },
-  dayLabel: { fontSize: FontSizes.xs, color: Colors.textMuted, marginTop: 6, fontWeight: '500' },
+  barFill: { width: '100%', borderRadius: 7 },
+  dayLabel: { fontSize: 10, color: Colors.textMuted, marginTop: 5, fontWeight: '500' },
+
   // Heatmap
   heatmapCard: {
     marginHorizontal: Spacing.xl, backgroundColor: Colors.surface,
-    borderRadius: BorderRadius.lg, borderWidth: 1, borderColor: Colors.border,
-    padding: Spacing.lg, ...Shadows.soft,
+    borderRadius: BorderRadius.md, borderWidth: 1, borderColor: Colors.border,
+    padding: 14,
   },
   heatmapGrid: {
-    flexDirection: 'row', flexWrap: 'wrap', gap: 6,
+    flexDirection: 'row', flexWrap: 'wrap', gap: 5,
   },
   heatmapCell: {
-    width: (width - Spacing.xl * 2 - Spacing.lg * 2 - 6 * 6) / 7,
-    aspectRatio: 1, borderRadius: 4, backgroundColor: Colors.glass,
+    width: (width - Spacing.xl * 2 - 14 * 2 - 5 * 6) / 7,
+    aspectRatio: 1, borderRadius: 4, backgroundColor: Colors.surfaceLight,
   },
-  heatmapCellActive: { backgroundColor: Colors.teal + '60' },
-  heatmapCellSmall: { width: 14, height: 14 },
+  heatmapCellActive: { backgroundColor: Colors.primary + '40' },
   heatmapLegend: {
     flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end',
-    gap: 6, marginTop: Spacing.md,
+    gap: 5, marginTop: Spacing.sm,
   },
-  heatmapLegendText: { fontSize: FontSizes.xs, color: Colors.textMuted },
+  legendText: { fontSize: 10, color: Colors.textMuted },
 });
 
 export default ProgressScreen;

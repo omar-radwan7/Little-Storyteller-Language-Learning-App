@@ -5,6 +5,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User as FirebaseUser } from 'firebase/auth';
 import { subscribeToAuthChanges, getUserProfile } from '../services/auth';
+import { updateUserProfile } from '../services/firestore';
 import { User } from '../types';
 
 interface AuthContextType {
@@ -15,6 +16,7 @@ interface AuthContextType {
   hasCompletedOnboarding: boolean;
   setUserProfile: (profile: User | null) => void;
   refreshProfile: () => Promise<void>;
+  updateProfile: (data: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -25,6 +27,7 @@ const AuthContext = createContext<AuthContextType>({
   hasCompletedOnboarding: false,
   setUserProfile: () => {},
   refreshProfile: async () => {},
+  updateProfile: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -42,6 +45,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (firebaseUser) {
       const profile = await getUserProfile(firebaseUser.uid);
       setUserProfile(profile);
+    }
+  };
+
+  const updateProfile = async (data: Partial<User>) => {
+    if (firebaseUser) {
+      await updateUserProfile(firebaseUser.uid, data);
+      await refreshProfile();
     }
   };
 
@@ -90,6 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         hasCompletedOnboarding,
         setUserProfile,
         refreshProfile,
+        updateProfile,
       }}
     >
       {children}

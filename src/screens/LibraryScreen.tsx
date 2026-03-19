@@ -1,8 +1,9 @@
 // ==========================================
-// Library Screen — Filterable story list
+// Library Screen — Filterable story browser
+// Clean filters + card rows with topic emojis
 // ==========================================
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,15 +14,25 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
-import { SAMPLE_STORIES, LEVELS, TOPICS, TOPIC_ICONS } from '../data/constants';
+import { SAMPLE_STORIES, LEVELS, TOPICS, TOPIC_IMAGES } from '../data/constants';
 import { useAuth } from '../hooks/useAuth';
+import { Image } from 'react-native';
+import { getImageSource } from '../utils/imageHelper';
 
 const { width } = Dimensions.get('window');
 
-const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
+const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, route }) => {
   const { userProfile } = useAuth();
   const [selectedLevel, setSelectedLevel] = useState<string>('All');
   const [selectedTopic, setSelectedTopic] = useState<string>('All');
+
+  useEffect(() => {
+    if (route.params?.initialTopic) {
+      setSelectedTopic(route.params.initialTopic);
+      // Optional: clear params after using them to avoid re-triggering on every mount if not intended
+      // navigation.setParams({ initialTopic: undefined });
+    }
+  }, [route.params?.initialTopic]);
 
   const stories = useMemo(() => {
     let filtered = SAMPLE_STORIES.filter(
@@ -41,21 +52,18 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.ambient} />
-
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerSmall}>BROWSE</Text>
-          <Text style={styles.headerTitle}>Story Library</Text>
+          <Text style={styles.headerTitle}>Library</Text>
+          <Text style={styles.headerSub}>{stories.length} stories available</Text>
         </View>
 
         {/* Level filter */}
-        <Text style={styles.filterLabel}>LEVEL</Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filterScroll}
+          contentContainerStyle={styles.filterRow}
         >
           {levelOptions.map((level) => {
             const active = selectedLevel === level;
@@ -64,11 +72,11 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               <TouchableOpacity
                 key={level}
                 onPress={() => setSelectedLevel(level)}
-                style={[styles.filterPill, active && styles.filterPillActive]}
+                style={[styles.filterChip, active && styles.filterChipActive]}
               >
                 {lvl && <View style={[styles.filterDot, { backgroundColor: lvl.color }]} />}
-                <Text style={[styles.filterPillText, active && styles.filterPillTextActive]}>
-                  {level}
+                <Text style={[styles.filterText, active && styles.filterTextActive]}>
+                  {level === 'All' ? 'All Levels' : level}
                 </Text>
               </TouchableOpacity>
             );
@@ -76,11 +84,10 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         </ScrollView>
 
         {/* Topic filter */}
-        <Text style={styles.filterLabel}>TOPIC</Text>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.filterScroll}
+          contentContainerStyle={styles.filterRow}
         >
           {topicOptions.map((topic) => {
             const active = selectedTopic === topic;
@@ -88,22 +95,26 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               <TouchableOpacity
                 key={topic}
                 onPress={() => setSelectedTopic(topic)}
-                style={[styles.filterPill, active && styles.filterPillActive]}
+                style={[styles.filterChip, active && styles.filterChipActive]}
               >
-                {topic !== 'All' && <Text style={styles.topicIcon}>{TOPIC_ICONS[topic]}</Text>}
-                <Text style={[styles.filterPillText, active && styles.filterPillTextActive, { textTransform: 'capitalize' }]}>
-                  {topic}
+                {topic !== 'All' && (
+                  <View style={styles.filterImageWrap}>
+                    <Image
+                      source={getImageSource(TOPIC_IMAGES[topic])}
+                      style={styles.filterImage}
+                    />
+                  </View>
+                )}
+                <Text style={[styles.filterText, active && styles.filterTextActive, { textTransform: 'capitalize' }]}>
+                  {topic === 'All' ? 'All Topics' : topic}
                 </Text>
               </TouchableOpacity>
             );
           })}
         </ScrollView>
 
-        {/* Results count */}
-        <Text style={styles.resultCount}>{stories.length} stories found</Text>
-
         {/* Stories */}
-        {stories.map((story, index) => {
+        {stories.map((story) => {
           const lvl = LEVELS.find((l) => l.code === story.level) || LEVELS[0];
           return (
             <TouchableOpacity
@@ -112,30 +123,27 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               onPress={() => navigation.navigate('StoryReader', { storyId: story.id })}
               style={styles.storyCard}
             >
-              <View style={styles.storyCardTop}>
-                <View style={styles.storyCardLeft}>
-                  <View style={[styles.storyIconBox, { borderColor: lvl.color + '40' }]}>
-                    <Text style={styles.storyIcon}>{TOPIC_ICONS[story.topic] || '📖'}</Text>
-                  </View>
-                </View>
-                <View style={styles.storyCardInfo}>
-                  <Text style={styles.storyCardTitle}>{story.title}</Text>
-                  <View style={styles.storyCardMeta}>
-                    <View style={[styles.levelMiniPill, { backgroundColor: lvl.color + '20' }]}>
-                      <Text style={[styles.levelMiniText, { color: lvl.color }]}>{story.level}</Text>
-                    </View>
-                    <Text style={styles.storyMetaText}>{story.estimatedReadTime} min</Text>
-                    <Text style={styles.storyMetaDot}>·</Text>
-                    <Text style={styles.storyMetaText}>{story.wordCount} words</Text>
-                  </View>
-                </View>
-                <Ionicons name="chevron-forward" size={18} color={Colors.textMuted} />
+              <View style={[styles.storyEmoji, { backgroundColor: lvl.color + '12' }]}>
+                <Image
+                  source={getImageSource(story.imageUrl || TOPIC_IMAGES[story.topic])}
+                  style={styles.storyThumbnail}
+                />
               </View>
+              <View style={styles.storyInfo}>
+                <Text style={styles.storyTitle} numberOfLines={1}>{story.title}</Text>
+                <View style={styles.storyMeta}>
+                  <View style={[styles.levelChip, { backgroundColor: lvl.color + '18' }]}>
+                    <Text style={[styles.levelChipText, { color: lvl.color }]}>{story.level}</Text>
+                  </View>
+                  <Text style={styles.metaText}>{story.estimatedReadTime} min</Text>
+                  <Text style={styles.metaDot}>·</Text>
+                  <Text style={styles.metaText}>{story.wordCount} words</Text>
+                </View>
+              </View>
+              <Ionicons name="chevron-forward" size={18} color={Colors.textMuted} />
             </TouchableOpacity>
           );
         })}
-
-        <View style={{ height: 120 }} />
       </ScrollView>
     </View>
   );
@@ -143,60 +151,45 @@ const LibraryScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: Colors.background },
-  ambient: {
-    position: 'absolute', width: 280, height: 280, borderRadius: 140,
-    backgroundColor: 'rgba(6, 214, 160, 0.05)', top: -60, left: -80,
-  },
-  header: { paddingHorizontal: Spacing.xl, paddingTop: 64, paddingBottom: Spacing.md },
-  headerSmall: {
-    fontSize: FontSizes.xs, color: Colors.primary, letterSpacing: 3,
-    fontWeight: '700', marginBottom: Spacing.xs,
-  },
-  headerTitle: { fontSize: FontSizes.xxxl, fontWeight: '300', color: Colors.textPrimary },
-  filterLabel: {
-    fontSize: FontSizes.xs, color: Colors.textMuted, letterSpacing: 2,
-    fontWeight: '700', paddingHorizontal: Spacing.xl,
-    marginTop: Spacing.lg, marginBottom: Spacing.sm,
-  },
-  filterScroll: { paddingHorizontal: Spacing.xl, gap: Spacing.sm },
-  filterPill: {
-    flexDirection: 'row', alignItems: 'center', gap: 6,
-    paddingHorizontal: 16, paddingVertical: 8,
+  header: { paddingHorizontal: Spacing.xl, paddingTop: 52, paddingBottom: 4 },
+  headerTitle: { fontSize: FontSizes.xxl, fontWeight: '700', color: Colors.textPrimary },
+  headerSub: { fontSize: FontSizes.xs, color: Colors.textMuted, marginTop: 3 },
+
+  filterRow: { paddingHorizontal: Spacing.xl, gap: 6, paddingVertical: 6 },
+  filterChip: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    paddingHorizontal: 11, paddingVertical: 6,
     borderRadius: BorderRadius.full, backgroundColor: Colors.surface,
     borderWidth: 1, borderColor: Colors.border,
   },
-  filterPillActive: {
-    backgroundColor: Colors.primaryMuted, borderColor: Colors.primary + '50',
+  filterChipActive: {
+    backgroundColor: Colors.primary, borderColor: Colors.primary,
   },
-  filterPillText: { fontSize: FontSizes.sm, fontWeight: '500', color: Colors.textMuted },
-  filterPillTextActive: { color: Colors.primary, fontWeight: '600' },
+  filterText: { fontSize: 12, fontWeight: '600', color: Colors.textSecondary },
+  filterTextActive: { color: Colors.textInverse },
   filterDot: { width: 6, height: 6, borderRadius: 3 },
-  topicIcon: { fontSize: 14 },
-  resultCount: {
-    fontSize: FontSizes.sm, color: Colors.textMuted,
-    paddingHorizontal: Spacing.xl, marginTop: Spacing.lg, marginBottom: Spacing.md,
-  },
+  filterImageWrap: { width: 14, height: 14, borderRadius: 7, overflow: 'hidden' },
+  filterImage: { width: '100%', height: '100%' },
+
   storyCard: {
-    marginHorizontal: Spacing.xl, marginBottom: Spacing.sm,
+    marginHorizontal: Spacing.xl, marginBottom: 6,
     backgroundColor: Colors.surface, borderRadius: BorderRadius.md,
     borderWidth: 1, borderColor: Colors.border,
-    padding: Spacing.md + 4,
+    padding: 12, flexDirection: 'row', alignItems: 'center',
   },
-  storyCardTop: { flexDirection: 'row', alignItems: 'center' },
-  storyCardLeft: { marginRight: Spacing.md },
-  storyIconBox: {
-    width: 48, height: 48, borderRadius: BorderRadius.sm,
-    borderWidth: 1.5, alignItems: 'center', justifyContent: 'center',
-    backgroundColor: Colors.glass,
+  storyEmoji: {
+    width: 44, height: 44, borderRadius: 8,
+    alignItems: 'center', justifyContent: 'center', marginRight: 12,
+    overflow: 'hidden',
   },
-  storyIcon: { fontSize: 24 },
-  storyCardInfo: { flex: 1 },
-  storyCardTitle: { fontSize: FontSizes.md, fontWeight: '600', color: Colors.textPrimary, marginBottom: 6 },
-  storyCardMeta: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  levelMiniPill: { paddingHorizontal: 8, paddingVertical: 2, borderRadius: BorderRadius.full },
-  levelMiniText: { fontSize: FontSizes.xs, fontWeight: '700' },
-  storyMetaText: { fontSize: FontSizes.xs, color: Colors.textMuted },
-  storyMetaDot: { color: Colors.textMuted },
+  storyThumbnail: { width: '100%', height: '100%' },
+  storyInfo: { flex: 1 },
+  storyTitle: { fontSize: FontSizes.sm, fontWeight: '600', color: Colors.textPrimary, marginBottom: 4 },
+  storyMeta: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  levelChip: { paddingHorizontal: 7, paddingVertical: 1, borderRadius: BorderRadius.full },
+  levelChipText: { fontSize: 10, fontWeight: '700' },
+  metaText: { fontSize: 10, color: Colors.textMuted },
+  metaDot: { color: Colors.textMuted, fontSize: 10 },
 });
 
 export default LibraryScreen;
