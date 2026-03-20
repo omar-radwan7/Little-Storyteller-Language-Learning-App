@@ -106,15 +106,19 @@ const SignInScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       return;
     }
     setIsLoading(true);
+    console.log('[DEBUG] Attempting sign in with:', email.trim());
     try {
-      await signIn(email.trim(), password);
+      const user = await signIn(email.trim(), password);
+      console.log('[DEBUG] Sign in successful for UUID:', user.uid);
     } catch (error: any) {
+      console.error('[DEBUG] Sign in error:', error.code, error.message);
       let message = 'An error occurred during sign in.';
       if (error.code === 'auth/user-not-found') message = 'No account found with this email.';
       else if (error.code === 'auth/wrong-password') message = 'Incorrect password.';
       else if (error.code === 'auth/invalid-email') message = 'Please enter a valid email.';
       else if (error.code === 'auth/too-many-requests') message = 'Too many attempts. Try later.';
-      Alert.alert('Sign In Failed', message);
+      else if (error.code === 'auth/invalid-credential') message = 'Invalid credentials. Check your email/password.';
+      Alert.alert('Sign In Failed', `${message} (${error.code || 'unknown'})`);
     } finally {
       setIsLoading(false);
     }

@@ -35,8 +35,9 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
   }, [route.params?.initialTopic]);
 
   const stories = useMemo(() => {
+    const targetLang = (userProfile?.targetLanguage || 'de').toLowerCase();
     let filtered = SAMPLE_STORIES.filter(
-      (s) => s.language === (userProfile?.targetLanguage || 'de')
+      (s) => s.language.toLowerCase() === targetLang
     );
     if (selectedLevel !== 'All') {
       filtered = filtered.filter((s) => s.level === selectedLevel);
@@ -44,7 +45,7 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
     if (selectedTopic !== 'All') {
       filtered = filtered.filter((s) => s.topic === selectedTopic);
     }
-    return filtered.length > 0 ? filtered : SAMPLE_STORIES;
+    return filtered;
   }, [selectedLevel, selectedTopic, userProfile?.targetLanguage]);
 
   const levelOptions = ['All', 'A1', 'A2', 'B1', 'B2', 'C1'];

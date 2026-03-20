@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, Platform, TouchableOpacity, Text, LayoutAnimation, Animated } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
@@ -100,8 +101,10 @@ const TabItem = ({ route, isFocused, descriptors, navigation, index }: any) => {
 };
 
 const CustomTabBar = ({ state, descriptors, navigation }: any) => {
+  const insets = useSafeAreaInsets();
+  
   return (
-    <View style={styles.tabBarContainer}>
+    <View style={[styles.tabBarContainer, { paddingBottom: Math.max(insets.bottom, 16) }]}>
       <View style={styles.tabBar}>
         {state.routes.map((route: any, index: number) => {
           const isFocused = state.index === index;
@@ -134,33 +137,49 @@ const MainTabs = () => (
   </Tab.Navigator>
 );
 
-const AppNavigator = () => (
-  <NavigationContainer>
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        animation: 'slide_from_right',
-        contentStyle: { backgroundColor: Colors.background },
-      }}
-    >
-      <Stack.Screen name="Splash" component={SplashScreen} />
-      <Stack.Screen name="SignIn" component={SignInScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-      <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-      <Stack.Screen name="MainTabs" component={MainTabs} />
-      <Stack.Screen
-        name="StoryReader"
-        component={StoryReaderScreen}
-        options={{ animation: 'slide_from_right' }}
-      />
-      <Stack.Screen
-        name="PreferencePicker"
-        component={PreferencePickerScreen as any}
-        options={{ animation: 'slide_from_bottom' }}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+import { useAuth } from '../hooks/useAuth';
+
+const AppNavigator = () => {
+  const { isAuthenticated, isLoading, hasCompletedOnboarding } = useAuth();
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          contentStyle: { backgroundColor: Colors.background },
+        }}
+      >
+        {isLoading ? (
+          <Stack.Screen name="Splash" component={SplashScreen} />
+        ) : !isAuthenticated ? (
+          <>
+            <Stack.Screen name="SignIn" component={SignInScreen} />
+            <Stack.Screen name="SignUp" component={SignUpScreen} />
+          </>
+        ) : (
+          <>
+            {!hasCompletedOnboarding && (
+              <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+            )}
+            <Stack.Screen name="MainTabs" component={MainTabs} />
+            <Stack.Screen
+              name="StoryReader"
+              component={StoryReaderScreen}
+              options={{ animation: 'slide_from_right' }}
+            />
+            <Stack.Screen
+              name="PreferencePicker"
+              component={PreferencePickerScreen as any}
+              options={{ animation: 'slide_from_bottom' }}
+            />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   tabBarContainer: {
@@ -169,7 +188,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'transparent',
-    paddingBottom: Platform.OS === 'ios' ? 20 : 10,
   },
   tabBar: {
     flexDirection: 'row',

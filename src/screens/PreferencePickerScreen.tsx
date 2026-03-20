@@ -15,7 +15,7 @@ import { useAuth } from '../hooks/useAuth';
 const APP_GREEN = Colors.primary;
 const APP_LIME = '#D4E157';
 
-const PreferencePickerScreen: React.FC<{ navigation: any, route: any }> = ({ navigation, route }) => {
+const PreferencePickerScreen: React.FC<any> = ({ navigation, route }) => {
   const { type } = route.params; // 'language' | 'level' | 'dailyGoal'
   const { userProfile, updateProfile } = useAuth();
 
@@ -31,7 +31,7 @@ const PreferencePickerScreen: React.FC<{ navigation: any, route: any }> = ({ nav
     return 'My current level';
   };
 
-  const handleSelect = async (val: any) => {
+  const handleSelect = async (val: any): Promise<void> => {
     if (isLanguage) await updateProfile({ targetLanguage: val });
     else if (isGoal) await updateProfile({ dailyGoal: val });
     else await updateProfile({ level: val });
