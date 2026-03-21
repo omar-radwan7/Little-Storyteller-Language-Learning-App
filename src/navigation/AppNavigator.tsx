@@ -25,6 +25,8 @@ import ProgressScreen from '../screens/ProgressScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import StoryReaderScreen from '../screens/StoryReaderScreen';
 import PreferencePickerScreen from '../screens/PreferencePickerScreen';
+import GrammarLessonScreen from '../screens/GrammarLessonScreen';
+import GrammarMapScreen from '../screens/GrammarMapScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -172,6 +174,16 @@ const AppNavigator = () => {
             <Stack.Screen
               name="PreferencePicker"
               component={PreferencePickerScreen as any}
+              options={{ animation: 'slide_from_bottom' }}
+            />
+            <Stack.Screen
+              name="GrammarLesson"
+              component={GrammarLessonScreen as any}
+              options={{ animation: 'slide_from_right' }}
+            />
+            <Stack.Screen
+              name="GrammarMap"
+              component={GrammarMapScreen as any}
               options={{ animation: 'slide_from_bottom' }}
             />
           </>

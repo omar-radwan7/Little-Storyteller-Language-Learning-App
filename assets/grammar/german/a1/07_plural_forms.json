@@ -1,0 +1,128 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_07",
+  "order": 7,
+  "title": "Nouns & Plurals",
+  "description": "One apple, two apples! Learn the patterns to make German nouns plural.",
+  "explanation": "German plurals don't just add an 's' like in English. They have a few different endings like -e, -en, or -er. Sometimes, the vowel gets two dots called an Umlaut (like a -> ä). The good news is that the plural article is ALWAYS 'die'!",
+  "tables": [
+    {
+      "title": "Common Plural Patterns",
+      "headers": ["Rule", "Singular", "Plural (die)"],
+      "rows": [
+        ["Add -en / -n", "die Frau (woman)", "die Frauen"],
+        ["Add -e", "der Tisch (table)", "die Tische"],
+        ["Add -er & Umlaut", "das Kind (child)", "die Kinder"],
+        ["Add Umlaut only", "der Apfel (apple)", "die Äpfel"],
+        ["Add -s (foreign)", "das Auto (car)", "die Autos"]
+      ],
+      "note": "Tip: Most feminine nouns (die) just add -en or -n in the plural!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "Always 'die' in plural!",
+      "text": "Remember: Once you have more than one of something, the article is always 'die'. The boy is 'der Junge', but the boys are 'die Jungen'!"
+    }
+  ],
+  "examples": [
+    {
+      "german": "Die Äpfel sind hier.",
+      "english": "The apples are here.",
+      "explanation": "Apfel -> Äpfel with an Umlaut!"
+    },
+    {
+      "german": "Das sind die Autos.",
+      "english": "Those are the cars.",
+      "explanation": "Auto is an international word, so it just gets an 's'."
+    },
+    {
+      "german": "Die Kinder sind müde.",
+      "english": "The children are tired."
+    },
+    {
+      "german": "Wir haben Frauen und Männer hier.",
+      "english": "We have women and men here."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was ist der Plural von 'die Frau'?",
+      "options": ["die Fraue", "die Frauen", "die Frauens", "die Frauer"],
+      "correctAnswer": "die Frauen",
+      "explanation": "Feminine words usually take -n or -en!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Autos sind schnell.",
+      "options": ["Die", "Der", "Das", "Den"],
+      "correctAnswer": "Die",
+      "explanation": "Plurals ALWAYS take 'die'!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich habe zwei ____.",
+      "options": ["Apfels", "Apfel", "Äpfel", "Äpfels"],
+      "correctAnswer": "Äpfel",
+      "hint": "Das Wort 'Apfel' bekommt im Plural einen Umlaut.",
+      "explanation": "der Apfel -> die Äpfel (Umlaut added)!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne Singular und Plural zu!",
+      "pairs": [
+        { "left": "die Frau", "right": "die Frauen" },
+        { "left": "das Kind", "right": "die Kinder" },
+        { "left": "das Auto", "right": "die Autos" },
+        { "left": "der Apfel", "right": "die Äpfel" }
+      ],
+      "explanation": "Awesome! You've matched the patterns correctly."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches Nomen ändert sich im Plural NICHT (außer dem Artikel)?",
+      "options": ["das Auto", "die Tisch", "der Mann", "die Mädchen"],
+      "correctAnswer": "die Mädchen",
+      "explanation": "Words ending in -chen (like Mädchen = girl) don't change at all in the plural, only the article changes (das -> die)!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Die", "Kinder", "haben", "Zeit."],
+      "correctAnswer": "Die Kinder haben Zeit.",
+      "explanation": "Kinder (plural of Kind) requires 'die' and plural verb 'haben'."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Die ____ sind glücklich.",
+      "options": ["Mannes", "Männer", "Mann", "Männern"],
+      "correctAnswer": "Männer",
+      "hint": "Der Plural von 'Mann' bekommt einen Umlaut und -er.",
+      "explanation": "der Mann -> die Männer (Umlaut + er)!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Plural ist korrekt für 'das Auto'?",
+      "options": ["die Auto", "die Autos", "die Auten", "die Auter"],
+      "correctAnswer": "die Autos",
+      "explanation": "Foreign words usually take an 's'!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Die ____ sind hier.",
+      "options": ["Tisch", "Tische", "Tischen", "Tisches"],
+      "correctAnswer": "Tische",
+      "hint": "Das ist mehr als ein Tisch.",
+      "explanation": "der Tisch -> die Tische (just an -e)!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Die", "Frauen", "sind", "müde."],
+      "correctAnswer": "Die Frauen sind müde.",
+      "explanation": "die Frauen + sind!"
+    }
+  ]
+}

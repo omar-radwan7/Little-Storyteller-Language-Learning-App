@@ -11,6 +11,13 @@ export interface User {
   dailyGoal: number;
   streak: number;
   lastActiveDate: Date | null;
+  grammarProgress?: {
+    currentLesson: string;
+    lastLessonTitle: string;
+    lastActiveDate: string;
+    firstTime: boolean;
+    completedLessons: string[];
+  };
 }
 
 export interface SavedWord {
@@ -65,6 +72,54 @@ export interface Level {
   color: string;
 }
 
+export interface GrammarTable {
+  title: string;
+  headers: string[];
+  rows: string[][];
+  note?: string;
+}
+
+export interface GrammarNote {
+  title: string;
+  text: string;
+}
+
+export interface GrammarExample {
+  german: string;
+  english: string;
+  explanation?: string;
+}
+
+export interface GrammarExercise {
+  type: 'multiple_choice' | 'fill_blank' | 'write' | 'match' | 'table_fill' | 'reorder';
+  text?: string;
+  question?: string;
+  options?: string[];
+  correctAnswer?: string | string[];
+  blankIndex?: number;
+  pairs?: { left: string; right: string }[];
+  headers?: string[];
+  rows?: string[][];
+  correctAnswers?: string[];
+  words?: string[]; // for reorder
+  hint?: string; // Hint shown before answering
+  explanation?: string; // Explanation shown in the feedback box after answering (right OR wrong)
+}
+
+export interface GrammarLessonType {
+  language: string;
+  level: string;
+  id: string;
+  order: number;
+  title: string;
+  description: string;
+  explanation: string;
+  tables: GrammarTable[];
+  deep_notes: GrammarNote[];
+  examples: GrammarExample[];
+  exercises: GrammarExercise[];
+}
+
 export interface DailyGoalOption {
   count: number;
   label: string;
@@ -79,6 +134,8 @@ export type RootStackParamList = {
   Onboarding: undefined;
   MainTabs: undefined;
   StoryReader: { storyId: string };
+  GrammarLesson: { lessonId: string };
+  GrammarMap: undefined;
   PreferencePicker: { type: 'language' | 'level' };
   Flashcards: undefined;
 };

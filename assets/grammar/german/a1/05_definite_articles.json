@@ -1,0 +1,123 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_05",
+  "order": 5,
+  "title": "Articles (der, die, das)",
+  "description": "Every noun has a gender! Learn how to use 'the' correctly for men, women, and things.",
+  "explanation": "In German, words aren't just words—they have genders! Masculine (der), Feminine (die), and Neuter (das). It sounds tricky, but there's a trick to it. Plus, when things become plural, they all use 'die'!",
+  "tables": [
+    {
+      "title": "The Big Three Articles",
+      "headers": ["Gender", "German 'The'", "Example"],
+      "rows": [
+        ["Masculine", "der", "der Mann (man)"],
+        ["Feminine", "die", "die Frau (woman)"],
+        ["Neuter", "das", "das Kind (child)"],
+        ["Plural", "die", "die Kinder (children)"]
+      ],
+      "note": "Tip: Always learn a new word WITH its article. Don't just learn 'Tisch', learn 'der Tisch'!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "The Plural Cheat Code",
+      "text": "It doesn't matter if the word was der, die, or das—once it becomes plural, the article becomes 'die'. \nExample: der Tisch -> die Tische."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Der Mann ist hier.",
+      "english": "The man is here."
+    },
+    {
+      "german": "Die Frau hat Zeit.",
+      "english": "The woman has time."
+    },
+    {
+      "german": "Das Kind hat Hunger.",
+      "english": "The child is hungry."
+    },
+    {
+      "german": "Die Tische sind schnell.",
+      "english": "The tables are fast."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "____ Mann ist hier.",
+      "options": ["die", "das", "der", "den"],
+      "correctAnswer": "der",
+      "explanation": "Mann is masculine, so we use 'der'!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Artikel ist für 'Frau'?",
+      "options": ["der", "die", "das", "ein"],
+      "correctAnswer": "die",
+      "explanation": "Frau is feminine, so it takes 'die'!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Kind ist glücklich.",
+      "options": ["der", "die", "das", "dem"],
+      "correctAnswer": "das",
+      "explanation": "Kind is neuter, so we use 'das'!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was ist der Plural von 'der Tisch'?",
+      "options": ["der Tische", "das Tische", "die Tische", "den Tische"],
+      "correctAnswer": "die Tische",
+      "explanation": "All plurals take 'die'!"
+    },
+    {
+      "type": "match",
+      "question": "Finde das Paar!",
+      "pairs": [
+        { "left": "der", "right": "Mann" },
+        { "left": "die", "right": "Frau" },
+        { "left": "das", "right": "Kind" },
+        { "left": "Plural", "right": "die" }
+      ],
+      "explanation": "Great matching!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Tasche ist weg.",
+      "options": ["Der", "Die", "Das", "Den"],
+      "correctAnswer": "Die",
+      "hint": "Das Wort 'Tasche' ist feminin.",
+      "explanation": "Tasche is feminine = die!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was ist der richtige Artikel für 'Auto'?",
+      "options": ["Der", "Die", "Das", "Den"],
+      "correctAnswer": "Das",
+      "explanation": "Auto is neuter = das!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Die", "Männer", "sind", "hier."],
+      "correctAnswer": "Die Männer sind hier.",
+      "explanation": "Even masculine words use 'die' when they become plural (Männer)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Mann hat Geld.",
+      "options": ["Die", "Der", "Das", "Den"],
+      "correctAnswer": "Der",
+      "explanation": "der Mann = The man!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches Paar ist richtig?",
+      "options": ["das Frau", "der Kind", "die Tasche", "das Mann"],
+      "correctAnswer": "die Tasche",
+      "explanation": "die Tasche is the only correct pair!"
+    }
+  ]
+}

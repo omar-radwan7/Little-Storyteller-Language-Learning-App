@@ -1,0 +1,126 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_02",
+  "order": 2,
+  "title": "The Verb 'sein' (to be)",
+  "description": "Learn how to say 'I am', 'you are', and 'we are'. Plus, some essential words for your first conversation!",
+  "explanation": "To be (sein) is the king of verbs. Even if you don't know many words yet, 'sein' lets you introduce yourself and describe everything around you. It's irregular, so we just have to memorize its forms!",
+  "tables": [
+    {
+      "title": "The 'sein' Team",
+      "headers": ["Who?", "German Form", "English"],
+      "rows": [
+        ["ich", "bin", "I am"],
+        ["du", "bist", "you are (informal)"],
+        ["er/sie/es", "ist", "he/she/it is"],
+        ["wir", "sind", "we are"],
+        ["ihr", "seid", "you all are (informal)"],
+        ["sie/Sie", "sind", "they are / You have (formal)"]
+      ],
+      "note": "Remember: 'sie' means 'they', but 'Sie' (with a capital S) is the polite 'You' for strangers!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "Handy words to use with 'sein'!",
+      "text": "Since you use 'sein' to describe things, here are 4 must-know adjectives:\n1. müde (tired)\n2. glücklich (happy)\n3. hier (here)\n4. schnell (fast)."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich bin hier.",
+      "english": "I am here."
+    },
+    {
+      "german": "Bist du glücklich?",
+      "english": "Are you happy?",
+      "explanation": "Switch order for a question: Verb (Bist) first, then person (du)!"
+    },
+    {
+      "german": "Wasser ist hier.",
+      "english": "Water is here."
+    },
+    {
+      "german": "Wir sind müde.",
+      "english": "We are tired."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ müde.",
+      "options": ["bist", "bin", "ist", "sind"],
+      "correctAnswer": "bin",
+      "explanation": "ich + bin. Always!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Er ____ schnell.",
+      "options": ["bist", "bin", "ist", "sind"],
+      "correctAnswer": "ist",
+      "explanation": "er/sie/es = ist!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wir ____ hier.",
+      "options": ["bin", "bist", "ist", "sind"],
+      "correctAnswer": "sind",
+      "explanation": "wir = sind!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Er ist ____.",
+      "options": ["Hunger", "hier", "schnell", "müde"],
+      "correctAnswer": "schnell",
+      "explanation": "He is fast (schnell)."
+    },
+    {
+      "type": "write",
+      "question": "Schreibe die 'du'-Form mit dem Wort 'sein'.",
+      "correctAnswer": "du bist",
+      "explanation": "du + bist."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir ____ hier.",
+      "options": ["bin", "bist", "sind", "ist"],
+      "correctAnswer": "sind",
+      "explanation": "wir = sind (plural)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ seid laut.",
+      "options": ["Ich", "Du", "Ihr", "Wir"],
+      "correctAnswer": "Ihr",
+      "hint": "Welches Pronomen nutzt man für eine andere Gruppe?",
+      "explanation": "ihr + seid!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Sind Sie ____?",
+      "options": ["müde", "glücklich", "schnell", "hier"],
+      "correctAnswer": "glücklich",
+      "explanation": "Are you happy (glücklich)?"
+    },
+    {
+      "type": "match",
+      "question": "Finde das richtige Paar!",
+      "pairs": [
+        { "left": "ich", "right": "bin" },
+        { "left": "du", "right": "bist" },
+        { "left": "er/sie/es", "right": "ist" },
+        { "left": "ihr", "right": "seid" },
+        { "left": "wir/sie", "right": "sind" }
+      ],
+      "explanation": "Great job finding the irregular parts of 'sein'!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne die Frage:",
+      "words": ["Bist", "du", "hier?"],
+      "correctAnswer": "Bist du hier?",
+      "explanation": "Verb first for a question!"
+    }
+  ]
+}

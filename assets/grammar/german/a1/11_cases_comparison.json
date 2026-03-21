@@ -1,0 +1,129 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_11",
+  "order": 11,
+  "title": "Cases Comparison",
+  "description": "Nominativ vs Akkusativ vs Dativ. Time to put all the puzzle pieces together and master the German case system!",
+  "explanation": "**HOOK**\nThink of the German case system like a theater play. You have the Star Actor (Nominativ) who does the actions, the Target/Receiver (Akkusativ) who catches the action, and the Bystander/Benefactor (Dativ) who gets something given to them. \n\n**CONCEPT**\nNow that you know all three cases, it's time to build full sentences that use them together! \n'Der Mann (Nom) gibt dem Hund (Dat) den Apfel (Akk).' (The man gives the dog the apple).\n\n**RULE**\nAlways ask three questions: Who is doing the action? (Nominativ). What is being acted upon? (Akkusativ). And who is receiving or benefitting? (Dativ). Remember: Dativ rewrites entirely (-m, -r, -n), Akkusativ only hits the masculine (-n), and Nominativ stays perfectly standard.",
+  "tables": [
+    {
+      "title": "The Master Case Tracker (Definite Articles)",
+      "headers": ["Case", "Masculine", "Feminine", "Neuter", "Plural"],
+      "rows": [
+        ["Nominativ (Doer)", "der", "die", "das", "die"],
+        ["Akkusativ (Receiver)", "den (-n)", "die", "das", "die"],
+        ["Dativ (Benefactor)", "dem (-m)", "der (-r)", "dem (-m)", "den...n"]
+      ],
+      "note": "Akkusativ only changes 'der' to 'den'. Dativ changes literally everything."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The hardest part is when a sentence has BOTH Akkusativ and Dativ! The classic order in German is: Dativ comes BEFORE Akkusativ. \nFor example: 'Ich gebe (Verb) dem Kind (Dativ Benefactor) den Ball (Akkusativ Object).' We give the person the object!"
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich sehe den Hund.",
+      "english": "I see the dog. (Akkusativ)"
+    },
+    {
+      "german": "Ich helfe dem Hund.",
+      "english": "I help the dog. (Dativ)"
+    },
+    {
+      "german": "Der Mann kauft das Auto.",
+      "english": "The man buys the car. (Nominativ + Akkusativ)"
+    },
+    {
+      "german": "Die Frau (Nom) gibt dem Mann (Dat) ein Buch (Akk).",
+      "english": "The woman gives the man a book."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Fall markiert das ZUGLIEGENDE/DIREKTE OBJEKT (oft bei 'haben', 'brauchen')?",
+      "options": ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
+      "correctAnswer": "Akkusativ",
+      "hint": "Who is the direct receiver of an action?",
+      "explanation": "Akkusativ is for the direct object!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich gebe ____ Mann das Buch.",
+      "options": ["der", "den", "dem", "das"],
+      "correctAnswer": "dem",
+      "hint": "To give (geben) means the man is benefitting! Benefactor = Dativ.",
+      "explanation": "Masculine in Dativ becomes 'dem' (the heavy 'm' sound)!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist grammatikalisch perfekt?",
+      "options": ["Der Mann sieht dem Hund.", "Der Mann sieht den Hund.", "Den Mann sieht der Hund.", "Dem Mann sieht das Hund."],
+      "correctAnswer": "Der Mann sieht den Hund.",
+      "hint": "sehen (see) triggers Akkusativ. Hund is masculine.",
+      "explanation": "Der Mann (Nom) sieht den Hund (Akkusativ)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir spielen mit ____ Kindern.",
+      "options": ["die", "der", "den", "dem"],
+      "correctAnswer": "den",
+      "hint": "'mit' always triggers Dativ. Kindern is plural.",
+      "explanation": "Plural Dativ gets 'den' and the word gets an 'n' (Kindern)!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Artikelarten (Maskulin) zu den Fällen:",
+      "pairs": [
+        { "left": "Nominativ", "right": "der" },
+        { "left": "Akkusativ", "right": "den" },
+        { "left": "Dativ", "right": "dem" }
+      ],
+      "hint": "Base is 'der', Akkusativ hits masculine with 'n', Dativ hits it with 'm'.",
+      "explanation": "der -> den -> dem!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz (Frau=Nom, Mann=Dat, Buch=Akk):",
+      "words": ["Die", "Frau", "gibt", "dem", "Mann", "das", "Buch."],
+      "correctAnswer": "Die Frau gibt dem Mann das Buch.",
+      "hint": "Subject + Verb + Dativ Receiver + Akkusativ Object.",
+      "explanation": "Awesome! Die Frau (Nom) + gibt + dem Mann (Dat) + das Buch (Akk)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Achtung! Fülle die Lücke: 'Das ist ____ Mann.'",
+      "options": ["der", "den", "dem", "einem"],
+      "correctAnswer": "der",
+      "hint": "Remember the 'sein' (is/are) trick from earlier? It acts like an equal sign (=).",
+      "explanation": "Because 'ist' connects them, BOTH sides are in Nominativ! (der Mann)"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich brauche ____ Tasche.",
+      "options": ["eine", "einer", "ein", "einem"],
+      "correctAnswer": "eine",
+      "hint": "Tasche is feminine. 'brauchen' needs Akkusativ. Does feminine change in Akkusativ?",
+      "explanation": "Feminine NEVER changes in Akkusativ, it stays 'eine'!"
+    },
+    {
+      "type": "write",
+      "question": "Schreibe den Nominativ -> Akkusativ -> Dativ für 'das Wasser' (Definite: das/das/?) :",
+      "correctAnswer": "das das dem",
+      "hint": "Neuter starts as 'das', stays 'das' in Akk, turns to 'dem' in Dativ.",
+      "explanation": "das -> das -> dem"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde einen Satz mit Präposition:",
+      "words": ["Er", "kommt", "mit", "der", "Mutter."],
+      "correctAnswer": "Er kommt mit der Mutter.",
+      "hint": "mit always forces Dativ (Mutter = die -> der).",
+      "explanation": "'mit' makes the feminine 'Mutter' jump to 'der' in Dativ."
+    }
+  ]
+}

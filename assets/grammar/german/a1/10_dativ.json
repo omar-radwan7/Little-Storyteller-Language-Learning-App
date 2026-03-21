@@ -1,0 +1,130 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_10",
+  "order": 10,
+  "title": "The Dative Case (Dativ)",
+  "description": "Learn how to say 'to the man', 'for the woman', or 'with the child'. Welcome to Dative!",
+  "explanation": "**HOOK**\nImagine you are passing a gift to a friend. You wouldn't just throw it at them; you hand it TO them. In German, instead of adding an extra word for 'to', the articles themselves morph their shape!\n\n**CONCEPT**\nThe dativ is just your way of saying who is BENEFITTING from something — like giving a gift TO someone, or helping someone.\n\n**RULE**\nDativ completely rewrites all the articles to act like giant neon 'Receiver' signs! Masculine and Neuter become '-m', Feminine turns masculine with '-r', and Plural gets an extra '-n'.",
+  "tables": [
+    {
+      "title": "Dativ Changes (The Indirect Object)",
+      "headers": ["Gender", "Definite (The)", "Indefinite (A/An)"],
+      "rows": [
+        ["Masculine", "dem", "einem"],
+        ["Neuter", "dem", "einem"],
+        ["Feminine", "der", "einer"],
+        ["Plural", "den (+ n)", "keinen (+ n)"]
+      ],
+      "note": "TIP: Masculine and Neuter finally team up and share 'dem/einem'. Feminine jumps to 'der'. Plural throws an 'n' party on the article AND the noun."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "This one trips up almost everyone at first — and that is completely normal! Beginners always forget that Feminine articles change to 'der' in the Dativ case. It feels incredibly wrong to say 'der Frau', but I promise, Germans are just marking her as the receiver!\nAlso, prepositions like 'mit' (with) ALWAYS force the next word into Dativ."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich helfe dem Mann.",
+      "english": "I help the man."
+    },
+    {
+      "german": "Wir spielen mit der Frau.",
+      "english": "We play with the woman."
+    },
+    {
+      "german": "Sie gibt dem Kind Wasser.",
+      "english": "She gives the child water."
+    },
+    {
+      "german": "Er spielt mit den Hunden.",
+      "english": "He is playing with the dogs."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Ich danke ____ Frau.",
+      "options": ["die", "der", "den", "dem"],
+      "correctAnswer": "der",
+      "hint": "'danken' forces Dativ! And Frau is feminine (die).",
+      "explanation": "Feminine (die) becomes 'der' in the Dative case!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was passiert mit maskulinen und neutralen Artikeln im Dativ?",
+      "options": ["Sie werden zu 'den'", "Sie werden zu 'der'", "Sie werden zu 'dem'", "Sie bleiben gleich"],
+      "correctAnswer": "Sie werden zu 'dem'",
+      "hint": "Think of the heavy 'm' sound!",
+      "explanation": "Both 'der' and 'das' change to 'dem' in Dative!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir spielen mit ____.",
+      "options": ["einem Kind", "einen Kind", "ein Kind", "einer Kind"],
+      "correctAnswer": "einem Kind",
+      "hint": "Kind is neuter. The word 'mit' always forces Dativ.",
+      "explanation": "Neuter gets the '-em' ending for Dative 'a/an': einem!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Dativ-Artikel",
+      "pairs": [
+        { "left": "Maskulin / Neutral", "right": "dem / einem" },
+        { "left": "Feminin", "right": "der / einer" },
+        { "left": "Plural", "right": "den (+n) / keinen" }
+      ],
+      "hint": "Remember: Masculine/Neuter = m, Feminine = r, Plural = n.",
+      "explanation": "Perfect matching of the Dative rules!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "ACHTUNG! Was ist die Dativ-Form von 'die Frauen' (the women - Plural)?",
+      "options": ["die Frauen", "den Frauen", "der Frauen", "dem Frauen"],
+      "correctAnswer": "den Frauen",
+      "hint": "Plurals get an extra 'n' on the article AND the word.",
+      "explanation": "Since Plural Dative adds 'den' plus an '-n' to the word (Frauen naturally ends in an n), it is 'den Frauen'."
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Ich", "spiele", "mit", "dem", "Mann."],
+      "correctAnswer": "Ich spiele mit dem Mann.",
+      "hint": "'mit' forces Dative!",
+      "explanation": "mit + dem Mann (Dativ)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich komme mit ____ Tasche.",
+      "options": ["der", "die", "den", "dem"],
+      "correctAnswer": "der",
+      "hint": "Remember how crazy feminine gets in Dativ (-r)!",
+      "explanation": "Feminine 'die' changes exactly into 'der'!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "In welchem Satz gibt es einen neutralen Dativ?",
+      "options": ["Sie helps der Mann", "Sie sieht dem Mädchen", "Sie hilft dem Mädchen (the girl)", "Dem Tisch ist hier"],
+      "correctAnswer": "Sie hilft dem Mädchen (the girl)",
+      "hint": "Look for a neuter word ('das') changing to 'dem'.",
+      "explanation": "'hilft' forces Dative. 'Mädchen' is neuter (das), so das -> dem."
+    },
+    {
+      "type": "write",
+      "question": "Schreibe (das Kind) im Dativ ('to a child'):",
+      "correctAnswer": "einem Kind",
+      "hint": "Neutral 'ein' becomes 'einem'.",
+      "explanation": "das Kind becomes einem Kind in Dative!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Er", "hilft", "einer", "Freundin."],
+      "correctAnswer": "Er hilft einer Freundin.",
+      "hint": "Freundin (female friend) is feminine.",
+      "explanation": "Freundin (female friend) is feminine, so we use 'einer'."
+    }
+  ]
+}

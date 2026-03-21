@@ -1,0 +1,131 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_09",
+  "order": 9,
+  "title": "The Accusative Case (Akkusativ)",
+  "description": "The real world doesn't just have doers; it has receivers. Learn how to say 'I see the man' properly.",
+  "explanation": "**HOOK**\nThink of a basketball game. The Nominativ case is the player throwing the ball, and the Akkusativ case is the person catching it. We need a way to show who the catcher is!\n\n**CONCEPT**\nThe Akkusativ is just your way of saying who RECEIVES the action. It is the Direct Object getting acted upon.\n\n**RULE**\nHere is the golden rule: In Akkusativ, ONLY the masculine article changes (it ends in -n). Every single other gender stays exactly the same!",
+  "tables": [
+    {
+      "title": "Akkusativ Changes (The Receiver)",
+      "headers": ["Gender", "Definite (The)", "Indefinite (A/An)"],
+      "rows": [
+        ["Masculine", "den", "einen"],
+        ["Feminine", "die", "eine"],
+        ["Neuter", "das", "ein"],
+        ["Plural", "die", "keine"]
+      ],
+      "note": "Notice the massive 'N' ending for masculine? der -> den, ein -> einen. Everything else is identical to Nominativ! Once you get this, the rest of German articles will start making sense."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Most beginners try to change neutral and feminine words too! Remember, if it is not totally masculine, DO NOT touch it.\nAlso, common action verbs like 'haben' (have), 'brauchen' (need), and 'sehen' (see) always force the Akkusativ."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich sehe den Mann.",
+      "english": "I see the man."
+    },
+    {
+      "german": "Wir brauchen eine Tasche.",
+      "english": "We need a bag."
+    },
+    {
+      "german": "Er isst einen Apfel.",
+      "english": "He eats an apple."
+    },
+    {
+      "german": "Sie trinken das Wasser.",
+      "english": "They drink the water."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Welches der Geschlechter ändert sich im Akkusativ?",
+      "options": ["Feminin", "Neutral", "Maskulin", "Plural"],
+      "correctAnswer": "Maskulin",
+      "hint": "Think about which gender turns into an N ending (der -> den).",
+      "explanation": "Only Masculine words (der/ein) change to den/einen! Everything else is the same."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich habe ____ Hund.",
+      "options": ["den", "der", "das", "die"],
+      "correctAnswer": "den",
+      "hint": "Hund ist maskulin (der). Im Akkusativ braucht es ein -n am Ende.",
+      "explanation": "Because 'der Hund' is the direct object (Akkusativ), it must change to 'den'!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist vollkommen richtig?",
+      "options": ["Ich sehe der Tisch", "Ich sehe den Tisch", "Ich sehe das Tisch", "Den Tisch sehe ich der"],
+      "correctAnswer": "Ich sehe den Tisch",
+      "hint": "Tisch ist maskulin (der), und du 'siehst' ihn.",
+      "explanation": "Since Tisch is masculine, it must change to 'den'."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir brauchen ____ Tasche.",
+      "options": ["eine", "einen", "ein", "einem"],
+      "correctAnswer": "eine",
+      "hint": "Tasche is feminine. Does feminine change in Akkusativ?",
+      "explanation": "Feminine words DO NOT change in Akkusativ! It remains 'eine'."
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Akkusativ-Artikel:",
+      "pairs": [
+        { "left": "Maskulin", "right": "den / einen" },
+        { "left": "Feminin", "right": "die / eine" },
+        { "left": "Neutral", "right": "das / ein" },
+        { "left": "Plural", "right": "die" }
+      ],
+      "hint": "Remember the golden rule: ONLY masculine changes!",
+      "explanation": "Nail down that Masculine is the only one transforming to an 'n' ending!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Er", "kauft", "einen", "Apfel."],
+      "correctAnswer": "Er kauft einen Apfel.",
+      "hint": "Subject first, then verb, then object.",
+      "explanation": "Er (Nom) + kauft (Verb) + einen Apfel (Akk)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "ACHTUNG! Fülle die Lücke: 'Der Mann sucht ____ Kind'.",
+      "options": ["den", "das", "der", "dem"],
+      "correctAnswer": "das",
+      "hint": "Kind ist NEUTRAL (das Kind). Ändert sich das im Akkusativ?",
+      "explanation": "Neuter (das) NEVER changes in Akkusativ! It stays 'das'."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Sie haben ____ Autos!",
+      "options": ["kein", "keine", "keinen", "keinem"],
+      "correctAnswer": "keine",
+      "hint": "Autos is plural. Do plurals change in Akkusativ?",
+      "explanation": "Plurals DO NOT change in Akkusativ! It remains 'keine'."
+    },
+    {
+      "type": "write",
+      "question": "Schreibe 'ein Sohn' (der Sohn) im Akkusativ:",
+      "correctAnswer": "einen Sohn",
+      "hint": "Der maskuline Artikel 'ein' braucht eine '-en' Endung.",
+      "explanation": "Since Sohn is masculine (der), 'ein' becomes 'einen' in the object position!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne die Frage:",
+      "words": ["Hast", "du", "den", "Tisch?"],
+      "correctAnswer": "Hast du den Tisch?",
+      "hint": "Questions usually start with the verb!",
+      "explanation": "Der Tisch is masculine -> den Tisch!"
+    }
+  ]
+}

@@ -44,7 +44,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [stories, setStories] = useState<Story[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedHomeTopic, setSelectedHomeTopic] = useState('daily life');
-  const [grammarState, setGrammarState] = useState<number>(2); // Mock: 1, 2, or 3
+  const [grammarState, setGrammarState] = useState<number>(2); // Mock: 1 (new), 2 (progress), 3 (finished)
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -199,32 +199,35 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         {(() => {
           const langName = langObj?.name || 'German';
           const lvlCode = userProfile?.level || 'A1';
+          const progressData = userProfile?.grammarProgress;
 
-          let title = '';
-          let subtitle = '';
-          let cta = '';
+          let title = 'Start your Journey';
+          let subtitle = 'Learn grammar basics';
+          let cta = 'Begin →';
           let progress = 0;
+          let isNew = !progressData;
 
-          if (grammarState === 1) {
-            title = `Start your ${langName} Grammar Journey`;
-            subtitle = `Learn ${langName} grammar from the basics, step by step`;
+          if (!progressData) {
+            title = `Start your ${langName} Journey`;
+            subtitle = `Learn ${langName} grammar step by step`;
             cta = 'Begin →';
-          } else if (grammarState === 2) {
-            title = 'Continue where you left off';
-            subtitle = 'Articles · der, die, das';
-            cta = 'Continue →';
-            progress = 35;
           } else {
-            title = 'Great work today!';
-            subtitle = 'You completed 2 lessons in this session';
-            cta = 'Keep going →';
+            title = 'Continue your progress';
+            subtitle = progressData.lastLessonTitle || 'Keep learning';
+            cta = 'Continue →';
+            
+            // Calculate progress % based on total lessons (25 for A1)
+            const total = 25; 
+            const completed = progressData.completedLessons?.length || 0;
+            progress = Math.round((completed / total) * 100);
+            isNew = false;
           }
 
           return (
             <TouchableOpacity 
               style={styles.grammarCard} 
               activeOpacity={0.85}
-              // onPress={() => navigation.navigate('Grammar')}
+              onPress={() => navigation.navigate('GrammarMap')}
             >
               <View style={styles.grammarCardTop}>
                 <Text style={styles.grammarLabel}>Grammar</Text>
@@ -235,7 +238,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
               <View style={styles.grammarTitleRow}>
                 <Text style={styles.grammarTitle}>{title}</Text>
-                {grammarState === 1 && (
+                {isNew && (
                   <View style={styles.grammarNewBadge}>
                     <Text style={styles.grammarNewBadgeText}>NEW</Text>
                   </View>
@@ -244,7 +247,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               <Text style={styles.grammarSubtitle}>{subtitle}</Text>
               
               <View style={styles.grammarCardBottom}>
-                {grammarState === 2 ? (
+                {!isNew ? (
                   <View style={styles.grammarProgressRail}>
                     <View style={[styles.grammarProgressFill, { width: `${progress}%` }]} />
                   </View>

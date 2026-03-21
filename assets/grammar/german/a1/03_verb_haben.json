@@ -1,0 +1,150 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_03",
+  "order": 3,
+  "title": "The Verb 'haben' (to have)",
+  "description": "The second most important verb in German! Master 'I have', 'you have', and learn how to express feelings.",
+  "explanation": "Right alongside 'sein' (to be), the verb 'haben' (to have) is an absolute must-know. Not only do you use it to talk about things you own (like a dog or a car), but Germans also use 'haben' to describe things you *feel*—like hunger, thirst, and time!",
+  "tables": [
+    {
+      "title": "The 'Haben' Team",
+      "headers": ["Who?", "German Form", "English"],
+      "rows": [
+        ["ich", "habe", "I have"],
+        ["du", "hast", "you have (informal)"],
+        ["er/sie/es", "hat", "he/she/it has"],
+        ["wir", "haben", "we have"],
+        ["ihr", "habt", "you all have (informal)"],
+        ["sie/Sie", "haben", "they have / You have (formal)"]
+      ],
+      "note": "Notice how 'du' and 'er/sie/es' drop the 'b'! It's 'hast' and 'hat', not 'habst' and 'habt'. Watch out for that trap!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "In German, you 'have' hunger!",
+      "text": "Remember in Lesson 2 when we said NOT to use 'sein' for being hungry? This is why! In German, you don't 'be' hungry, you 'have' hunger (Hunger) and you 'have' thirst (Durst). Just like you 'have' time (Zeit)."
+    },
+    {
+      "title": "A few useful words!",
+      "text": "1. Hunger (hunger)\n2. Durst (thirst)\n3. Zeit (time)\n4. Geld (money)\n5. Stress (stress)."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich habe Stress.",
+      "english": "I have stress.",
+      "explanation": "Basic feeling: Person (Ich) + verb (habe) + feeling (Stress)."
+    },
+    {
+      "german": "Wir haben Hunger.",
+      "english": "We are hungry.",
+      "explanation": "Remember the golden rule! 'Wir' (We) + 'haben' (have) + 'Hunger' (hunger)."
+    },
+    {
+      "german": "Hast du Zeit?",
+      "english": "Do you have time?",
+      "explanation": "Swap the order for a question! 'Hast' (Have) + 'du' (you) + 'Zeit' (time)."
+    },
+    {
+      "german": "Er hat Geld.",
+      "english": "He has money.",
+      "explanation": "'Er' (He) + 'hat' (has) + 'Geld' (money). Notice how 'hat' drops the 'b' from 'haben'!"
+    },
+    {
+      "german": "Haben Sie Zeit?",
+      "english": "Do you have time? (Formal)"
+    },
+    {
+      "german": "Ihr habt Durst.",
+      "english": "You all are thirsty."
+    },
+    {
+      "german": "Sie haben Wasser.",
+      "english": "They have water.",
+      "explanation": "Using 'sie' (lowercase) for a group of people ('they')."
+    },
+    {
+      "german": "Ich habe Zeit.",
+      "english": "I have time."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ Hunger.",
+      "options": ["hast", "habe", "hat", "haben"],
+      "correctAnswer": "habe",
+      "explanation": "ich + habe (ends in -e)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Er ____ Durst.",
+      "options": ["hast", "habt", "habe", "hat"],
+      "correctAnswer": "hat",
+      "explanation": "er, sie, es = hat (it drops the 'b'!)"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wir ____ Zeit.",
+      "options": ["habe", "hast", "hat", "haben"],
+      "correctAnswer": "haben",
+      "explanation": "wir = haben!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Hast ____ Geld?",
+      "options": ["ich", "er", "du", "wir"],
+      "correctAnswer": "du",
+      "explanation": "du takes the -st ending (hast)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ ihr Wasser?",
+      "options": ["Hast", "Habt", "Haben", "Hat"],
+      "correctAnswer": "Habt",
+      "explanation": "ihr (you all) = habt!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches ist falsch?",
+      "options": ["ich habe", "er hat", "du hast", "er habt"],
+      "correctAnswer": "er habt",
+      "hint": "Bei welchem Pronomen fällt das 'b' komplett weg?",
+      "explanation": "'er' = hat. So 'er habt' is wrong!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Wir", "haben", "Hunger."],
+      "correctAnswer": "Wir haben Hunger.",
+      "explanation": "The verb is placed second!"
+    },
+    {
+      "type": "match",
+      "question": "Finde das Paar!",
+      "pairs": [
+        { "left": "ich", "right": "habe" },
+        { "left": "du", "right": "hast" },
+        { "left": "er/sie/es", "right": "hat" },
+        { "left": "wir/sie", "right": "haben" }
+      ],
+      "explanation": "Perfect matching!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Sie ____ Zeit.",
+      "options": ["hat", "habe", "hast", "haben"],
+      "correctAnswer": "haben",
+      "explanation": "They / polite You = haben!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde eine Frage an einen Freund:",
+      "words": ["Hast", "Zeit?", "du"],
+      "correctAnswer": "Hast du Zeit?",
+      "explanation": "Verb first for questions!"
+    }
+  ]
+}

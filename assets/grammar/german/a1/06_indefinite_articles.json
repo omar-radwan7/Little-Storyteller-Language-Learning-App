@@ -1,0 +1,138 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_06",
+  "order": 6,
+  "title": "Indefinite Articles (ein, eine) & Negation (kein)",
+  "description": "Learn how to say 'a/an' and the most common German trick for saying 'none' or 'not a'.",
+  "explanation": "You already know 'the' (der/die/das). But what if you just want 'a' table or 'a' bag? In German, 'a/an' is 'ein' for masculine and neuter, and 'eine' for feminine. Plurals don't get an article for 'a' (just like English: you can't say 'a cars').\n\nThe beautiful part? To say 'no' or 'none', just put a 'k' in front of it! ein -> kein, eine -> keine.",
+  "tables": [
+    {
+      "title": "A/An (Indefinite)",
+      "headers": ["Gender", "Indefinite Article", "Example"],
+      "rows": [
+        ["Masculine (der)", "ein", "ein Mann (a man)"],
+        ["Neuter (das)", "ein", "ein Kind (a child)"],
+        ["Feminine (die)", "eine", "eine Frau (a woman)"],
+        ["Plural (die)", "-", "Frauen (women)"]
+      ],
+      "note": "Notice how Masculine and Neuter share 'ein'!"
+    },
+    {
+      "title": "None/Not a (Negation)",
+      "headers": ["Gender", "Negation", "Example"],
+      "rows": [
+        ["Masculine (der)", "kein", "kein Mann (no man)"],
+        ["Neuter (das)", "kein", "kein Kind (no child)"],
+        ["Feminine (die)", "keine", "keine Frau (no woman)"],
+        ["Plural (die)", "keine", "keine Frauen (no women)"]
+      ],
+      "note": "Plurals DO get 'keine' (no women)!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "Nicht vs. Kein",
+      "text": "This is a trap many learners fall into! Use 'kein' to negate A NOUN (a person, place, or thing). Use 'nicht' (not) for everything else (verbs, adjectives). \nCorrect: Ich habe keine Zeit. (I have no time.)\nWrong: Ich habe nicht Zeit."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Das ist ein Tisch.",
+      "english": "That is a table.",
+      "explanation": "Table is 'der Tisch' (Masculine), so it gets 'ein'."
+    },
+    {
+      "german": "Das ist keine Tasche.",
+      "english": "That is not a bag.",
+      "explanation": "Bag is 'die Tasche' (Feminine), so we negate it with 'keine'."
+    },
+    {
+      "german": "Wir haben Kinder.",
+      "english": "We have children.",
+      "explanation": "Plural! No article translates to just having them."
+    },
+    {
+      "german": "Wir haben keine Kinder.",
+      "english": "We don’t have children. (We have no children.)",
+      "explanation": "Plurals use 'keine'."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Hier ist ____ Auto.",
+      "options": ["eine", "ein", "keine", "einen"],
+      "correctAnswer": "ein",
+      "explanation": "das Auto (neuter) -> ein Auto!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist richtig für 'This is a woman'?",
+      "options": ["Das ist ein Frau", "Das ist eine Frau", "Das ist keine Frau", "Das ist der Frau"],
+      "correctAnswer": "Das ist eine Frau",
+      "explanation": "Frau is feminine (die), so it uses 'eine'."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Das ist ____ Wasser.",
+      "options": ["keine", "nicht", "kein", "keins"],
+      "correctAnswer": "kein",
+      "hint": "Wasser ist ein Nomen (das Wasser). Nutzt du 'nicht' oder 'kein'?",
+      "explanation": "You use 'kein' to negate nouns (das Wasser -> kein Wasser)."
+    },
+    {
+      "type": "match",
+      "question": "Finde das Paar!",
+      "pairs": [
+        { "left": "ein (Maskulin)", "right": "Mann" },
+        { "left": "eine (Feminin)", "right": "Frau" },
+        { "left": "ein (Neutral)", "right": "Auto" },
+        { "left": "keine (Plural)", "right": "Männer" }
+      ],
+      "explanation": "You nailed the gender associations!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "ACHTUNG! Wie übersetzt man 'I have NO sister' (die Schwester)?",
+      "options": ["Ich habe nicht Schwester", "Ich habe kein Schwester", "Ich habe keine Schwester", "Ich habe eine Schwester nicht"],
+      "correctAnswer": "Ich habe keine Schwester",
+      "explanation": "Since Schwester is feminine (die), you use 'keine' instead of 'nicht'."
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Wir", "haben", "keine", "Zeit."],
+      "correctAnswer": "Wir haben keine Zeit.",
+      "explanation": "die Zeit (time) uses keine."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich bin ____ Maschine!",
+      "options": ["keine", "nicht", "kein", "ein"],
+      "correctAnswer": "keine",
+      "hint": "Maschine ist ein feminines Nomen -> die Maschine.",
+      "explanation": "die Maschine uses keine!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wo passt 'ein' NICHT?",
+      "options": ["der Mann", "das Kind", "die Frau", "das Wasser"],
+      "correctAnswer": "die Frau",
+      "explanation": "Feminine nouns need the extra 'e': eine!"
+    },
+    {
+      "type": "write",
+      "question": "Übersetze: 'a table' (der Tisch)",
+      "correctAnswer": "ein Tisch",
+      "explanation": "der Tisch becomes ein Tisch."
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne:",
+      "words": ["Das", "ist", "ein", "Kind."],
+      "correctAnswer": "Das ist ein Kind.",
+      "explanation": "das Kind becomes ein Kind."
+    }
+  ]
+}

@@ -166,6 +166,7 @@ export const getUserProfile = async (uid: string): Promise<User | null> => {
       dailyGoal: data.dailyGoal || 1,
       streak: data.streak || 0,
       lastActiveDate: data.lastActiveDate?.toDate() || null,
+      grammarProgress: data.grammarProgress,
     };
   }
 

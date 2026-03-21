@@ -1,0 +1,128 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_01",
+  "order": 1,
+  "title": "Personal Pronouns",
+  "description": "How to say me, you, him, and her in German! Plus, some useful first words.",
+  "explanation": "Personal pronouns are the blocks of any sentence. Before you can say 'I drink' or 'I want', you need to know how to say 'I'! Here are the 1st, 2nd, and 3rd person building blocks.",
+  "tables": [
+    {
+      "title": "German Personal Pronouns",
+      "headers": ["Person(s)", "German Word", "Meaning"],
+      "rows": [
+        ["I", "ich", "me!"],
+        ["We", "wir", "me and friends"],
+        ["You", "du", "one friend"],
+        ["You all", "ihr", "group of friends"],
+        ["He/She/It", "er / sie / es", "him/her/it"],
+        ["They", "sie", "them"],
+        ["You (Formal)", "Sie", "Boss / Stranger"]
+      ],
+      "note": "Notice 'sie' can mean 'she' AND 'they'—just look at the context!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "A few useful words!",
+      "text": "1. trinke (drink)\n2. esse (eat)\n3. komme (come)\n4. lerne (learn)."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich trinke Wasser.",
+      "english": "I drink water.",
+      "explanation": "'Ich' (I) + 'trinke' (drink) + 'Wasser' (water)."
+    },
+    {
+      "german": "Wir essen Brot.",
+      "english": "We eat bread.",
+      "explanation": "We = 'wir'."
+    },
+    {
+      "german": "Lernst du Deutsch?",
+      "english": "Are you learning German?",
+      "explanation": "For a question, put the verb 'lernst' first!"
+    },
+    {
+      "german": "Sie kommen aus Berlin.",
+      "english": "They come from Berlin."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "____ trinke Wasser.",
+      "options": ["er", "du", "ich", "wir"],
+      "correctAnswer": "ich",
+      "explanation": "ich uses the -e ending (trinke)!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches Pronomen nutzt man für sich selbst?",
+      "options": ["ich", "du", "er", "wir"],
+      "correctAnswer": "ich",
+      "explanation": "ich = I!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ lernt Deutsch.",
+      "options": ["Er", "sie", "Es", "wir"],
+      "correctAnswer": "sie",
+      "explanation": "sie = she!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wir ____ Käse.",
+      "options": ["esse", "essen", "trinken", "lernen"],
+      "correctAnswer": "essen",
+      "explanation": "wir uses the -en ending (essen)!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wie spricht man eine fremde Person höflich an?",
+      "options": ["du", "ihr", "Sie", "sie"],
+      "correctAnswer": "Sie",
+      "hint": "Achte auf die Großschreibung!",
+      "explanation": "Polite 'You' is always capitalized Sie!"
+    },
+    {
+      "type": "write",
+      "question": "Welches Pronomen benutzt man für eine Gruppe (inklusive sich selbst)?",
+      "correctAnswer": "wir",
+      "explanation": "wir = we!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ aus Berlin.",
+      "options": ["komme", "kommen", "kommt", "komst"],
+      "correctAnswer": "komme",
+      "explanation": "ich + -e ending = komme!"
+    },
+    {
+      "type": "match",
+      "question": "Finde das Paar!",
+      "pairs": [
+        { "left": "ich", "right": "Person selbst" },
+        { "left": "wir", "right": "eigene Gruppe" },
+        { "left": "ihr", "right": "andere Gruppe" },
+        { "left": "er", "right": "ein Mann" }
+      ],
+      "explanation": "Great matching!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Ich ____ Deutsch.",
+      "options": ["lerne", "lernen", "esse", "trinke"],
+      "correctAnswer": "lerne",
+      "explanation": "ich + lerne. Always the -e!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne die Frage:",
+      "words": ["Kommen", "Sie?"],
+      "correctAnswer": "Kommen Sie?",
+      "explanation": "Verb first for questions!"
+    }
+  ]
+}

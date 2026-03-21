@@ -1,0 +1,130 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_08",
+  "order": 8,
+  "title": "The Nominative Case (Nominativ)",
+  "description": "What is a 'Case'? Start here by learning how German marks the 'Doer' (the Subject) of a sentence.",
+  "explanation": "**HOOK**\nIn English, you say 'I am' instead of 'Me am'. German works exactly the same way but goes a little bit further—it uses 'nametags' called Cases!\n\n**CONCEPT**\nThe Nominativ case is just your way of showing who the DOER is. It points out the main star of the sentence—the person or thing taking action.\n\n**RULE**\nThis is the base form, so you just use the standard dictionary words you already know! Absolutely nothing changes.",
+  "tables": [
+    {
+      "title": "Nominativ Default Articles",
+      "headers": ["Gender", "Definite (The)", "Indefinite (A/An)"],
+      "rows": [
+        ["Masculine", "der", "ein"],
+        ["Feminine", "die", "eine"],
+        ["Neuter", "das", "ein"],
+        ["Plural", "die", "keine"]
+      ],
+      "note": "Look closely: They are perfectly untouched. Treat 'Nominativ' as your home base."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Most beginners forget that the verb 'sein' (to be) acts like an equal sign (=). Because it links two things together (like 'He is a man'), BOTH sides stay in the Nominativ case!\nThis one trips up almost everyone at first — and that is completely normal."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Der Mann ist schnell.",
+      "english": "The man is fast."
+    },
+    {
+      "german": "Die Frau kommt heute.",
+      "english": "The woman comes today."
+    },
+    {
+      "german": "Das Kind lernt Deutsch.",
+      "english": "The child is learning German."
+    },
+    {
+      "german": "Er ist ein Lehrer.",
+      "english": "He is a teacher."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Welche Aufgabe hat der 'Nominativ'?",
+      "options": ["Er zeigt das Objekt", "Er zeigt Besitz", "Er zeigt das Subjekt (den Täter)", "Er zeigt die Zeit"],
+      "correctAnswer": "Er zeigt das Subjekt (den Täter)",
+      "hint": "Who is the star or DOER of the sentence?",
+      "explanation": "The Nominativ case is simply the base form used for the star of the sentence—the Subject!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Hund schläft.",
+      "options": ["Die", "Der", "Das", "Den"],
+      "correctAnswer": "Der",
+      "hint": "The dog is doing the action. Hund is masculine.",
+      "explanation": "The dog is doing the sleeping, so it stays in the base Nominativ (der)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Achtung! Warum steht 'Tisch' im Satz 'Das ist DER TISCH' im Nominativ?",
+      "options": ["Weil Tisch neutral ist", "Weil es ein indirektes Objekt ist", "Weil 'ist' (sein) wie ein Gleichheitszeichen (=) wirkt", "Es ist falsch, es muss 'den Tisch' heißen"],
+      "correctAnswer": "Weil 'ist' (sein) wie ein Gleichheitszeichen (=) wirkt",
+      "hint": "Was stand in der Theorie über 'ist/sein'?",
+      "explanation": "Verbs like 'sein' connect two subjects. So 'der Tisch' stays Nominativ!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die bestimmten und unbestimmten Artikel zu:",
+      "pairs": [
+        { "left": "Maskulin (der)", "right": "ein" },
+        { "left": "Neutral (das)", "right": "ein" },
+        { "left": "Feminin (die)", "right": "eine" },
+        { "left": "Plural (die)", "right": "keine" }
+      ],
+      "explanation": "Awesome mapping."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ist das ____ Auto?",
+      "options": ["eine", "ein", "einen", "einem"],
+      "correctAnswer": "ein",
+      "hint": "Since 'ist' connects both sides, 'das' just uses its normal Nominativ word 'ein'.",
+      "explanation": "Again, the verb 'ist' means both sides are Nominativ! So 'das' stays 'ein'."
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Die", "Frau", "ist", "Lehrerin."],
+      "correctAnswer": "Die Frau ist Lehrerin.",
+      "hint": "Start with the subject (Die Frau).",
+      "explanation": "Die Frau (Nominativ Subject) ist (Verb)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "In welchem Satz gibt es ZWEI Nominative (Gleichheitszeichen)?",
+      "options": ["Ich habe einen Hund", "Der Mann ist ein Arzt", "Die Frau sieht das Haus", "Er kommt aus Berlin"],
+      "correctAnswer": "Der Mann ist ein Arzt",
+      "hint": "Look for the verb 'ist' (to be) which links two things.",
+      "explanation": "Because of 'ist', both 'Der Mann' and 'Arzt' (doctor) are Nominativ!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Ein", "Mann", "kommt."],
+      "correctAnswer": "Ein Mann kommt.",
+      "hint": "Start with the subject action-doer (Ein Mann).",
+      "explanation": "Ein Mann is the subject."
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ Frauen lernen schnell.",
+      "options": ["Die", "Der", "Das", "Denen"],
+      "correctAnswer": "Die",
+      "hint": "This is plural! Plural always takes the same base article.",
+      "explanation": "Plural base Nominative article is ALWAYS 'die'!"
+    },
+    {
+      "type": "write",
+      "question": "Schreibe: 'das Wasser'",
+      "correctAnswer": "das Wasser",
+      "hint": "Just write the base Nominativ form for (das) water.",
+      "explanation": "Base Nominative form!"
+    }
+  ]
+}

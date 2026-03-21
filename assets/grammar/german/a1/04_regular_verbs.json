@@ -1,0 +1,126 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_04",
+  "order": 4,
+  "title": "Making Verbs Work",
+  "description": "Learn the most important rule in German: How to conjugate regular verbs so you can actually do things!",
+  "explanation": "You've seen 'sein' (to be) and 'haben' (to have). These are tricky. But most German verbs are incredibly easy and follow one perfect pattern: take the basic verb, chop off the -en at the end, and add the ending for the person. Here's how to master 'machen' (to do/make), 'kommen' (to come), and 'lernen' (to learn)!",
+  "tables": [
+    {
+      "title": "The Regular Verb Endings",
+      "headers": ["Person", "Ending Rule", "Example: lernen"],
+      "rows": [
+        ["ich", "-e", "ich lerne (I learn)"],
+        ["du", "-st", "du lernst (you learn)"],
+        ["er/sie/es", "-t", "er lernt (he learns)"],
+        ["wir", "-en", "wir lernen (we learn)"],
+        ["ihr", "-t", "ihr lernt (you all learn)"],
+        ["sie/Sie", "-en", "sie lernen (they learn)"]
+      ],
+      "note": "Tip: Remember 'e, st, t, en, t, en' to quickly recite the endings!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "The Stem Rule",
+      "text": "The basic verb is called the Infinitive. For 'machen', you first remove '-en' to find the 'stem', which is just 'mach'. Then, just plug the stem onto the endings: \nmach + -e = mache. \nmach + -st = machst. \nmach + -t = macht. Easy process!"
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich lerne Deutsch.",
+      "english": "I am learning German.",
+      "explanation": "Lernen (learn) -> i add -e -> ich lerne."
+    },
+    {
+      "german": "Was machst du?",
+      "english": "What are you doing?",
+      "explanation": "Mach (do) + -st (du) -> machst."
+    },
+    {
+      "german": "Wir kommen aus Berlin.",
+      "english": "We come from Berlin."
+    },
+    {
+      "german": "Sie lernen sehr schnell.",
+      "english": "They learn very fast."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ Kaffee.",
+      "options": ["mache", "machst", "macht", "machen"],
+      "correctAnswer": "mache",
+      "explanation": "ich + mach + e = mache!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welche Verbform passt zu 'du'?",
+      "options": ["lernen", "lernst", "lernt", "lerne"],
+      "correctAnswer": "lernst",
+      "explanation": "du takes the -st ending!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Der Mann ____ (kommen).",
+      "options": ["komme", "kommst", "kommt", "kommen"],
+      "correctAnswer": "kommt",
+      "explanation": "Der Mann (he/er) takes the -t ending: kommt!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Verben zu!",
+      "pairs": [
+        { "left": "ich", "right": "mache" },
+        { "left": "du", "right": "machst" },
+        { "left": "er/sie", "right": "macht" },
+        { "left": "wir", "right": "machen" }
+      ],
+      "explanation": "Awesome mapping!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist richtig?",
+      "options": ["Wir lernt Deutsch", "Wir lerne Deutsch", "Wir lernen Deutsch", "Wir lernst Deutsch"],
+      "correctAnswer": "Wir lernen Deutsch",
+      "explanation": "wir takes the original infinitive word ending in -en!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne den Satz:",
+      "words": ["Sie", "kommen", "aus", "München."],
+      "correctAnswer": "Sie kommen aus München.",
+      "explanation": "Subject (Sie) + infinitive verb (kommen)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ihr ____ gar nichts!",
+      "options": ["mache", "machst", "macht", "machen"],
+      "correctAnswer": "macht",
+      "explanation": "ihr (you all) takes the -t ending: macht!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welche Formen sind genau gleich?",
+      "options": ["ich & du", "er & wir", "wir & sie", "ihr & ich"],
+      "correctAnswer": "wir & sie",
+      "explanation": "Both wir and sie/Sie use the base infinitive verb with -en."
+    },
+    {
+      "type": "write",
+      "question": "Schreibe die 'ich'-Form von 'kommen'.",
+      "correctAnswer": "ich komme",
+      "hint": "Drop the -en, add an -e.",
+      "explanation": "ich + komm + e = ich komme!"
+    },
+    {
+      "type": "reorder",
+      "question": "Ordne die Frage:",
+      "words": ["Lernst", "du", "heute?"],
+      "correctAnswer": "Lernst du heute?",
+      "explanation": "Questions always push the verb to the front!"
+    }
+  ]
+}
