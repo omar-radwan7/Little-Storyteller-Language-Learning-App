@@ -22,7 +22,7 @@ import * as Haptics from 'expo-haptics';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { useAuth } from '../hooks/useAuth';
-import { LANGUAGES, LEVELS, TOPICS, TOPIC_IMAGES, SAMPLE_STORIES, WORDS_OF_THE_DAY } from '../data/constants';
+import { LANGUAGES, LEVELS, TOPICS, TOPIC_IMAGES, SAMPLE_STORIES } from '../data/constants';
 import { Story } from '../types';
 import { getStories } from '../services/firestore';
 import { getImageSource } from '../utils/imageHelper';
@@ -44,6 +44,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [stories, setStories] = useState<Story[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedHomeTopic, setSelectedHomeTopic] = useState('daily life');
+  const [grammarState, setGrammarState] = useState<number>(2); // Mock: 1, 2, or 3
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -56,24 +57,33 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const loadStories = async () => {
     try {
       const targetLang = userProfile?.targetLanguage || 'de';
-      const targetLevel = userProfile?.level || 'A1';
+      const currentLevel = userProfile?.level || 'A1';
 
-      const fetched = await getStories(targetLang, targetLevel);
+      const levelMapping: Record<string, string[]> = {
+        'A1': ['A1', 'A2'],
+        'A2': ['A2', 'B1'],
+        'B1': ['B1', 'B2'],
+        'B2': ['B2'],
+      };
+      const allowedLevels = levelMapping[currentLevel] || ['A1'];
+
+      const fetched = await getStories(targetLang, allowedLevels);
       
       if (fetched.length === 0) {
-        // Strict fallback: only same language
-        const sameLangFallback = SAMPLE_STORIES.filter(s => s.language === targetLang);
-        
-        // Filter by level if possible, else just same language
-        const levelMatch = sameLangFallback.filter(s => s.level === targetLevel);
-        setStories(levelMatch.length > 0 ? levelMatch : sameLangFallback.slice(0, 5));
+        // Fallback to sample data following the same rules
+        const fallback = SAMPLE_STORIES.filter(
+          s => s.language === targetLang && allowedLevels.includes(s.level)
+        );
+        setStories(fallback.slice(0, 5));
       } else {
         setStories(fetched);
       }
     } catch (error) {
       console.error('Error loading stories:', error);
-      // Even in error, only show consistent language if possible
-      const errFallback = SAMPLE_STORIES.filter(s => s.language === (userProfile?.targetLanguage || 'de'));
+      const errFallback = SAMPLE_STORIES.filter(s => 
+        s.language === (userProfile?.targetLanguage || 'de') && 
+        (userProfile?.level ? s.level === userProfile.level : s.level === 'A1')
+      );
       setStories(errFallback.slice(0, 5));
     }
   };
@@ -93,10 +103,6 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('PreferencePicker', { type: 'language' });
   };
 
-  const handleUpdateLevel = () => {
-    navigation.navigate('PreferencePicker', { type: 'level' });
-  };
-
   const handleMissionPress = () => {
     if (stories.length > 0) {
       const randomStory = stories[Math.floor(Math.random() * stories.length)];
@@ -111,13 +117,10 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   const topicStories = useMemo(() => {
-    return SAMPLE_STORIES.filter(s => 
-      s.language === (userProfile?.targetLanguage || 'de') && 
-      s.topic === selectedHomeTopic
-    ).slice(0, 4);
-  }, [selectedHomeTopic, userProfile?.targetLanguage]);
+    return stories.filter(s => s.topic === selectedHomeTopic).slice(0, 4);
+  }, [stories, selectedHomeTopic]);
 
-  const dailyWord = WORDS_OF_THE_DAY[userProfile?.targetLanguage || 'de'] || WORDS_OF_THE_DAY['de'];
+  const dailyWord: any = null;
 
   return (
     <View style={styles.container}>
@@ -159,21 +162,21 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           {/* Vertical divider */}
           <View style={styles.statsVertDivider} />
 
-          {/* Right: This week's growth */}
+          {/* Right: Quick Stats */}
           <View style={styles.statsGrowth}>
-            <Text style={styles.statsGrowthTitle}>Your growth this week</Text>
+            <Text style={styles.statsGrowthTitle}>Your Progress</Text>
             <View style={styles.statsMetrics}>
               <View style={styles.metric}>
-                <Text style={[styles.metricNum, { color: Colors.primary }]}>4</Text>
-                <Text style={styles.metricLabel}>stories</Text>
+                <Text style={[styles.metricNum, { color: Colors.primary }]}>{stories.length}</Text>
+                <Text style={styles.metricLabel}>available</Text>
               </View>
               <View style={styles.metric}>
-                <Text style={[styles.metricNum, { color: Colors.accent }]}>28</Text>
-                <Text style={styles.metricLabel}>words</Text>
+                <Text style={[styles.metricNum, { color: Colors.accent }]}>{userProfile?.streak || 0}</Text>
+                <Text style={styles.metricLabel}>streak</Text>
               </View>
               <View style={styles.metric}>
-                <Text style={[styles.metricNum, { color: Colors.teal }]}>42</Text>
-                <Text style={styles.metricLabel}>minutes</Text>
+                <Text style={[styles.metricNum, { color: Colors.teal }]}>{userProfile?.level || 'A1'}</Text>
+                <Text style={styles.metricLabel}>level</Text>
               </View>
             </View>
           </View>
@@ -192,6 +195,68 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.8)" />
         </TouchableOpacity>
 
+        {/* ---- GRAMMAR CARD ---- */}
+        {(() => {
+          const langName = langObj?.name || 'German';
+          const lvlCode = userProfile?.level || 'A1';
+
+          let title = '';
+          let subtitle = '';
+          let cta = '';
+          let progress = 0;
+
+          if (grammarState === 1) {
+            title = `Start your ${langName} Grammar Journey`;
+            subtitle = `Learn ${langName} grammar from the basics, step by step`;
+            cta = 'Begin →';
+          } else if (grammarState === 2) {
+            title = 'Continue where you left off';
+            subtitle = 'Articles · der, die, das';
+            cta = 'Continue →';
+            progress = 35;
+          } else {
+            title = 'Great work today!';
+            subtitle = 'You completed 2 lessons in this session';
+            cta = 'Keep going →';
+          }
+
+          return (
+            <TouchableOpacity 
+              style={styles.grammarCard} 
+              activeOpacity={0.85}
+              // onPress={() => navigation.navigate('Grammar')}
+            >
+              <View style={styles.grammarCardTop}>
+                <Text style={styles.grammarLabel}>Grammar</Text>
+                <View style={styles.grammarBadge}>
+                  <Text style={styles.grammarBadgeText}>{lvlCode} · {langName}</Text>
+                </View>
+              </View>
+
+              <View style={styles.grammarTitleRow}>
+                <Text style={styles.grammarTitle}>{title}</Text>
+                {grammarState === 1 && (
+                  <View style={styles.grammarNewBadge}>
+                    <Text style={styles.grammarNewBadgeText}>NEW</Text>
+                  </View>
+                )}
+              </View>
+              <Text style={styles.grammarSubtitle}>{subtitle}</Text>
+              
+              <View style={styles.grammarCardBottom}>
+                {grammarState === 2 ? (
+                  <View style={styles.grammarProgressRail}>
+                    <View style={[styles.grammarProgressFill, { width: `${progress}%` }]} />
+                  </View>
+                ) : (
+                  <View style={{ flex: 1 }} />
+                )}
+                <Text style={styles.grammarCta}>{cta}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        })()}
+
         {/* ---- HORIZONTAL STORY CARDS (MasterClass-inspired large visual cards) ---- */}
         <View style={styles.sectionHeader}>
           <View>
@@ -201,9 +266,6 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <View style={styles.sectionActions}>
             <TouchableOpacity onPress={handleUpdateLanguage} style={styles.actionBtn}>
               <Text style={styles.actionText}>{langObj?.flag || '🌐'}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleUpdateLevel} style={styles.actionBtn}>
-              <Text style={styles.actionText}>{levelObj?.code}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -254,20 +316,24 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           })}
         </ScrollView>
 
-        {/* ---- WORD OF THE DAY (colored background card instead of white) ---- */}
-        <Text style={styles.sectionTitle}>Word of the Day</Text>
-        <View style={styles.wordCard}>
-          <View style={styles.wordCardLeft}>
-            <View style={styles.wordPosChip}>
-              <Text style={styles.wordPosText}>{dailyWord.partOfSpeech}</Text>
+        {/* ---- WORD OF THE DAY ---- */}
+        {dailyWord && (
+          <>
+            <Text style={styles.sectionTitle}>Word of the Day</Text>
+            <View style={styles.wordCard}>
+              <View style={styles.wordCardLeft}>
+                <View style={styles.wordPosChip}>
+                  <Text style={styles.wordPosText}>{dailyWord.partOfSpeech}</Text>
+                </View>
+                <Text style={styles.wordCardWord}>{dailyWord.word}</Text>
+                <Text style={styles.wordCardTranslation}>{dailyWord.translation}</Text>
+              </View>
+              <TouchableOpacity style={styles.wordSoundBtn}>
+                <Ionicons name="volume-medium" size={22} color={Colors.textInverse} />
+              </TouchableOpacity>
             </View>
-            <Text style={styles.wordCardWord}>{dailyWord.word}</Text>
-            <Text style={styles.wordCardTranslation}>{dailyWord.translation}</Text>
-          </View>
-          <TouchableOpacity style={styles.wordSoundBtn}>
-            <Ionicons name="volume-medium" size={22} color={Colors.textInverse} />
-          </TouchableOpacity>
-        </View>
+          </>
+        )}
 
         {/* ---- CONTINUE LEARNING (categories with preview) ---- */}
         <Text style={styles.sectionTitle}>Explore by topic</Text>
@@ -388,6 +454,92 @@ const styles = StyleSheet.create({
   missionText: {
     fontSize: 12, fontWeight: '800', color: '#FFFFFF',
     letterSpacing: 0.8,
+  },
+
+  // Grammar Card
+  grammarCard: {
+    marginHorizontal: Spacing.xl,
+    marginTop: Spacing.lg,
+    backgroundColor: '#FFFFFF',
+    borderRadius: BorderRadius.md,
+    padding: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: '#E8963E', // Amber color
+    ...Shadows.soft,
+  },
+  grammarCardTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  grammarLabel: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: Colors.textMuted,
+  },
+  grammarBadge: {
+    backgroundColor: 'rgba(232, 150, 62, 0.12)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: BorderRadius.full,
+  },
+  grammarBadgeText: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: '#E8963E',
+  },
+  grammarTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+    gap: 8,
+    flexWrap: 'wrap',
+  },
+  grammarTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: Colors.textPrimary,
+  },
+  grammarNewBadge: {
+    backgroundColor: '#E8963E',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+  grammarNewBadgeText: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: '#FFFFFF',
+    textTransform: 'uppercase',
+  },
+  grammarSubtitle: {
+    fontSize: 13,
+    color: Colors.textSecondary,
+    marginBottom: 16,
+    lineHeight: 18,
+  },
+  grammarCardBottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  grammarProgressRail: {
+    flex: 1,
+    height: 6,
+    backgroundColor: Colors.border,
+    borderRadius: 3,
+    marginRight: 16,
+  },
+  grammarProgressFill: {
+    height: '100%',
+    backgroundColor: '#E8963E',
+    borderRadius: 3,
+  },
+  grammarCta: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#E8963E',
   },
 
   // Section

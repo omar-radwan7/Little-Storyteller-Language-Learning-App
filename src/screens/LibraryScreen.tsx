@@ -14,7 +14,9 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
-import { SAMPLE_STORIES, LEVELS, TOPICS, TOPIC_IMAGES } from '../data/constants';
+import { LEVELS, TOPICS, TOPIC_IMAGES, SAMPLE_STORIES } from '../data/constants';
+import { Story } from '../types';
+import { getStories } from '../services/firestore';
 import { useAuth } from '../hooks/useAuth';
 import { Image } from 'react-native';
 import { getImageSource } from '../utils/imageHelper';
@@ -34,11 +36,56 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
     }
   }, [route.params?.initialTopic]);
 
-  const stories = useMemo(() => {
-    const targetLang = (userProfile?.targetLanguage || 'de').toLowerCase();
-    let filtered = SAMPLE_STORIES.filter(
-      (s) => s.language.toLowerCase() === targetLang
-    );
+  const levelMapping: Record<string, string[]> = {
+    'A1': ['A1', 'A2'],
+    'A2': ['A2', 'B1'],
+    'B1': ['B1', 'B2'],
+    'B2': ['B2'],
+  };
+
+  const allowedLevels = useMemo(() => {
+    const currentLevel = userProfile?.level || 'A1';
+    return levelMapping[currentLevel] || ['A1'];
+  }, [userProfile?.level]);
+
+  useEffect(() => {
+    if (selectedLevel !== 'All' && !allowedLevels.includes(selectedLevel)) {
+      setSelectedLevel('All');
+    }
+  }, [allowedLevels]);
+
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadLibraryStories = async () => {
+      setLoading(true);
+      try {
+        const targetLang = userProfile?.targetLanguage || 'de';
+        const fetched = await getStories(targetLang, allowedLevels);
+        if (fetched.length === 0) {
+          const fallback = SAMPLE_STORIES.filter(
+            (s) => s.language === targetLang && allowedLevels.includes(s.level)
+          );
+          setStories(fallback);
+        } else {
+          setStories(fetched);
+        }
+      } catch (error) {
+        console.error('Error loading library stories:', error);
+        const errFallback = SAMPLE_STORIES.filter(
+          (s) => s.language === (userProfile?.targetLanguage || 'de') && allowedLevels.includes(s.level)
+        );
+        setStories(errFallback);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadLibraryStories();
+  }, [userProfile?.targetLanguage, allowedLevels]);
+
+  const filteredStories = useMemo(() => {
+    let filtered = [...stories];
     if (selectedLevel !== 'All') {
       filtered = filtered.filter((s) => s.level === selectedLevel);
     }
@@ -46,9 +93,9 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
       filtered = filtered.filter((s) => s.topic === selectedTopic);
     }
     return filtered;
-  }, [selectedLevel, selectedTopic, userProfile?.targetLanguage]);
+  }, [stories, selectedLevel, selectedTopic]);
 
-  const levelOptions = ['All', 'A1', 'A2', 'B1', 'B2', 'C1'];
+  const levelOptions = useMemo(() => ['All', ...allowedLevels], [allowedLevels]);
   const topicOptions = ['All', ...TOPICS];
 
   return (
@@ -57,7 +104,7 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Library</Text>
-          <Text style={styles.headerSub}>{stories.length} stories available</Text>
+          <Text style={styles.headerSub}>{filteredStories.length} stories available</Text>
         </View>
 
         {/* Level filter */}
@@ -115,7 +162,7 @@ const LibraryScreen: React.FC<{ navigation: any; route: any }> = ({ navigation, 
         </ScrollView>
 
         {/* Stories */}
-        {stories.map((story) => {
+        {filteredStories.map((story) => {
           const lvl = LEVELS.find((l) => l.code === story.level) || LEVELS[0];
           return (
             <TouchableOpacity

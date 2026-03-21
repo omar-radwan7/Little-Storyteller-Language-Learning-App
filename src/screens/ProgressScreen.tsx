@@ -3,7 +3,7 @@
 // Warm nature palette with mossy accents
 // ==========================================
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -14,15 +14,37 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { useAuth } from '../hooks/useAuth';
+import { getSavedWords, getCompletedStories } from '../services/firestore';
 
 const { width } = Dimensions.get('window');
 
 const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const weeklyData = [3, 5, 2, 4, 1, 6, 2];
 
 const ProgressScreen: React.FC = () => {
-  const { userProfile } = useAuth();
-  const maxVal = Math.max(...weeklyData, 1);
+  const { userProfile, firebaseUser } = useAuth();
+  const [stats, setStats] = useState({ stories: 0, words: 0 });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      if (!firebaseUser) return;
+      try {
+        const [words, stories] = await Promise.all([
+          getSavedWords(firebaseUser.uid),
+          getCompletedStories(firebaseUser.uid)
+        ]);
+        setStats({ stories: stories.length, words: words.length });
+      } catch (err) {
+        console.error('Error fetching progress stats:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStats();
+  }, [firebaseUser]);
+
+  const weeklyData = [0, 0, 0, 0, 0, 0, 0];
+  const maxVal = 1;
   const todayIndex = (new Date().getDay() + 6) % 7; // Mon=0
 
   return (
@@ -50,7 +72,7 @@ const ProgressScreen: React.FC = () => {
             </View>
             <View style={styles.streakDivider} />
             <View style={styles.streakCol}>
-              <Text style={[styles.streakNum, { color: Colors.primary }]}>{Math.max(userProfile?.streak || 0, 3)}</Text>
+              <Text style={[styles.streakNum, { color: Colors.primary }]}>{userProfile?.streak || 0}</Text>
               <Text style={styles.streakUnit}>best</Text>
             </View>
           </View>
@@ -59,9 +81,9 @@ const ProgressScreen: React.FC = () => {
         {/* Stats grid */}
         <View style={styles.statsGrid}>
           {[
-            { icon: 'book' as const, num: '4', label: 'Stories Read', color: Colors.primary },
-            { icon: 'bookmark' as const, num: '28', label: 'Words Saved', color: Colors.accent },
-            { icon: 'time' as const, num: '42', label: 'Min. Reading', color: Colors.teal },
+            { icon: 'book' as const, num: stats.stories.toString(), label: 'Stories Read', color: Colors.primary },
+            { icon: 'bookmark' as const, num: stats.words.toString(), label: 'Words Saved', color: Colors.accent },
+            { icon: 'time' as const, num: '0', label: 'Min. Reading', color: Colors.teal },
             { icon: 'ribbon' as const, num: userProfile?.level || 'A1', label: 'Current Level', color: Colors.lavender },
           ].map((stat, i) => (
             <View key={i} style={styles.statBox}>
@@ -74,32 +96,12 @@ const ProgressScreen: React.FC = () => {
           ))}
         </View>
 
-        {/* Weekly activity */}
+        {/* Weekly activity (Simplified for now) */}
         <Text style={styles.sectionTitle}>Weekly Activity</Text>
         <View style={styles.chartCard}>
-          <View style={styles.chartRow}>
-            {weeklyData.map((val, i) => (
-              <View key={i} style={styles.chartCol}>
-                <View style={styles.barBg}>
-                  <View
-                    style={[
-                      styles.barFill,
-                      {
-                        height: `${(val / maxVal) * 100}%`,
-                        backgroundColor: i === todayIndex ? Colors.primary : Colors.primaryMuted,
-                      },
-                    ]}
-                  />
-                </View>
-                <Text style={[
-                  styles.dayLabel,
-                  i === todayIndex && { color: Colors.primary, fontWeight: '700' },
-                ]}>
-                  {daysOfWeek[i]}
-                </Text>
-              </View>
-            ))}
-          </View>
+           <View style={{ height: 90, alignItems: 'center', justifyContent: 'center' }}>
+             <Text style={{ color: Colors.textMuted, fontSize: 12 }}>Activity tracking coming soon!</Text>
+           </View>
         </View>
 
         {/* Reading tracker heatmap */}
@@ -107,14 +109,10 @@ const ProgressScreen: React.FC = () => {
         <View style={styles.heatmapCard}>
           <View style={styles.heatmapGrid}>
             {Array.from({ length: 28 }, (_, i) => {
-              const active = [0, 5, 6, 12, 13, 14, 19, 20].includes(i);
               return (
                 <View
                   key={i}
-                  style={[
-                    styles.heatmapCell,
-                    active && styles.heatmapCellActive,
-                  ]}
+                  style={styles.heatmapCell}
                 />
               );
             })}
@@ -122,7 +120,7 @@ const ProgressScreen: React.FC = () => {
           <View style={styles.heatmapLegend}>
             <Text style={styles.legendText}>Less</Text>
             <View style={styles.heatmapCell} />
-            <View style={[styles.heatmapCell, styles.heatmapCellActive]} />
+            <View style={[styles.heatmapCell, { backgroundColor: Colors.primary + '40' }]} />
             <Text style={styles.legendText}>More</Text>
           </View>
         </View>

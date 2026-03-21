@@ -19,37 +19,8 @@ import * as Haptics from 'expo-haptics';
 
 const { width } = Dimensions.get('window');
 
-// Offline fallback dictionary for common phrases
-const OFFLINE_DICT: Record<string, Record<string, string>> = {
-  'hello': { en: 'Hello', es: '¡Hola!', de: 'Hallo', fr: 'Bonjour', it: 'Ciao', pt: 'Olá' },
-  'good morning': { en: 'Good morning', es: '¡Buenos días!', de: 'Guten Morgen', fr: 'Bonjour', it: 'Buongiorno', pt: 'Bom dia' },
-  'good night': { en: 'Good night', es: 'Buenas noches', de: 'Gute Nacht', fr: 'Bonne nuit', it: 'Buonanotte', pt: 'Boa noite' },
-  'thank you': { en: 'Thank you', es: 'Gracias', de: 'Danke', fr: 'Merci', it: 'Grazie', pt: 'Obrigado' },
-  'please': { en: 'Please', es: 'Por favor', de: 'Bitte', fr: 'S\'il vous plaît', it: 'Per favore', pt: 'Por favor' },
-  'i love you': { en: 'I love you', es: 'Te amo', de: 'Ich liebe dich', fr: 'Je t\'aime', it: 'Ti amo', pt: 'Eu te amo' },
-  'goodbye': { en: 'Goodbye', es: 'Adiós', de: 'Auf Wiedersehen', fr: 'Au revoir', it: 'Arrivederci', pt: 'Adeus' },
-  'yes': { en: 'Yes', es: 'Sí', de: 'Ja', fr: 'Oui', it: 'Sì', pt: 'Sim' },
-  'no': { en: 'No', es: 'No', de: 'Nein', fr: 'Non', it: 'No', pt: 'Não' },
-  'how are you': { en: 'How are you?', es: '¿Cómo estás?', de: 'Wie geht es dir?', fr: 'Comment allez-vous ?', it: 'Come stai?', pt: 'Como vai?' },
-  'water': { en: 'Water', es: 'Agua', de: 'Wasser', fr: 'Eau', it: 'Acqua', pt: 'Água' },
-  'food': { en: 'Food', es: 'Comida', de: 'Essen', fr: 'Nourriture', it: 'Cibo', pt: 'Comida' },
-  'house': { en: 'House', es: 'Casa', de: 'Haus', fr: 'Maison', it: 'Casa', pt: 'Casa' },
-  'book': { en: 'Book', es: 'Libro', de: 'Buch', fr: 'Livre', it: 'Libro', pt: 'Livro' },
-  'friend': { en: 'Friend', es: 'Amigo', de: 'Freund', fr: 'Ami', it: 'Amico', pt: 'Amigo' },
-  'family': { en: 'Family', es: 'Familia', de: 'Familie', fr: 'Famille', it: 'Famiglia', pt: 'Família' },
-  'school': { en: 'School', es: 'Escuela', de: 'Schule', fr: 'École', it: 'Scuola', pt: 'Escola' },
-  'travel': { en: 'Travel', es: 'Viajar', de: 'Reisen', fr: 'Voyager', it: 'Viaggiare', pt: 'Viajar' },
-  'love': { en: 'Love', es: 'Amor', de: 'Liebe', fr: 'Amour', it: 'Amore', pt: 'Amor' },
-  'cat': { en: 'Cat', es: 'Gato', de: 'Katze', fr: 'Chat', it: 'Gatto', pt: 'Gato' },
-  'dog': { en: 'Dog', es: 'Perro', de: 'Hund', fr: 'Chien', it: 'Cane', pt: 'Cão' },
-};
-
 // Pure JS translation using free MyMemory API (no API key needed, 5000 chars/day free)
 const translateText = async (text: string, from: string, to: string): Promise<string> => {
-  // Try offline dictionary first for instant results
-  const offlineResult = OFFLINE_DICT[text.toLowerCase().trim()]?.[to];
-  if (offlineResult) return offlineResult;
-
   // Use MyMemory free translation API — no key, no signup, works everywhere
   try {
     const langPair = `${from}|${to}`;
@@ -71,19 +42,15 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [mode, setMode] = useState<'translator' | 'list'>('translator');
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
+  const [lastInputText, setLastInputText] = useState(''); // Store last input for saving after clear
   const [isTranslating, setIsTranslating] = useState(false);
   const [fromLang, setFromLang] = useState({ name: 'English', code: 'en', flag: '🇺🇸' });
   const [toLang, setToLang] = useState({ name: 'Spanish', code: 'es', flag: '🇪🇸' });
   
-  const [savedWords, setSavedWords] = useState<any[]>([
-    { id: '1', word: 'Wanderlust', translation: 'desire to travel', from: 'German', to: 'English' },
-    { id: '2', word: 'Frühstück', translation: 'breakfast', from: 'German', to: 'English' },
-    { id: '3', word: 'Passeggiata', translation: 'leisurely walk', from: 'Italian', to: 'English' },
-  ]);
+  const [savedWords, setSavedWords] = useState<any[]>([]);
   
   const [isPickerVisible, setIsPickerVisible] = useState(false);
   const [pickerType, setPickerType] = useState<'from' | 'to'>('from');
-  const [isOffline, setIsOffline] = useState(false);
 
   const switchMode = (newMode: 'translator' | 'list') => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -91,17 +58,21 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   const handleTranslate = async () => {
-    if (!inputText) return;
+    if (!inputText.trim()) return;
     setIsTranslating(true);
     
     try {
       const sourceCode = fromLang.code === 'detect' ? 'en' : fromLang.code;
-      const result = await translateText(inputText, sourceCode, toLang.code);
+      const result = await translateText(inputText.trim(), sourceCode, toLang.code);
       setTranslatedText(result);
+      setLastInputText(inputText.trim()); // Save for future bookmarking
+      setInputText(''); // Auto-clear input after translation
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (error) {
       console.warn('Translation error:', error);
       setTranslatedText(`${inputText} → [${toLang.code.toUpperCase()}]`);
+      setLastInputText(inputText);
+      setInputText('');
     } finally {
       setIsTranslating(false);
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -109,11 +80,11 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
 
   const handleSaveWord = () => {
-    if (!inputText || !translatedText) return;
-    if (savedWords.some(w => w.word === inputText)) return;
+    if (!lastInputText || !translatedText) return;
+    if (savedWords.some(w => w.word === lastInputText)) return;
     const newWord = {
       id: Date.now().toString(),
-      word: inputText,
+      word: lastInputText,
       translation: translatedText,
       from: fromLang.name,
       to: toLang.name,
@@ -176,20 +147,30 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 
             {/* Input Card */}
             <View style={styles.inputCard}>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Enter text to translate..."
-                placeholderTextColor={Colors.textMuted}
-                multiline
-                value={inputText}
-                onChangeText={setInputText}
-              />
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Enter text to translate..."
+                  placeholderTextColor={Colors.textMuted}
+                  multiline
+                  value={inputText}
+                  onChangeText={setInputText}
+                />
+                {inputText.length > 0 && (
+                  <TouchableOpacity 
+                    style={styles.clearInputBtn} 
+                    onPress={() => setInputText('')}
+                  >
+                    <Ionicons name="close-circle" size={20} color={Colors.textMuted} />
+                  </TouchableOpacity>
+                )}
+              </View>
               <View style={styles.inputActionRow}>
                 <View style={styles.inputLeftActions}>
                   <TouchableOpacity style={styles.iconCircle}><Ionicons name="mic-outline" size={20} color={Colors.textSecondary} /></TouchableOpacity>
                   <TouchableOpacity style={styles.iconCircle}><Ionicons name="volume-medium-outline" size={20} color={Colors.textSecondary} /></TouchableOpacity>
                 </View>
-                <TouchableOpacity style={[styles.translateBtn, !inputText && styles.translateBtnDisabled]} onPress={handleTranslate} disabled={!inputText || isTranslating}>
+                <TouchableOpacity style={[styles.translateBtn, !inputText.trim() && styles.translateBtnDisabled]} onPress={handleTranslate} disabled={!inputText.trim() || isTranslating}>
                   <Text style={styles.translateBtnText}>{isTranslating ? '...' : 'Translate'}</Text>
                 </TouchableOpacity>
               </View>
@@ -203,7 +184,7 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                 <View style={styles.bottomActions}>
                   <TouchableOpacity style={styles.actionIcon}><Ionicons name="share-outline" size={20} color={Colors.textMuted} /></TouchableOpacity>
                   <TouchableOpacity style={styles.actionIcon} onPress={handleSaveWord}>
-                    <Ionicons name={savedWords.some(w => w.word === inputText) ? "bookmark" : "bookmark-outline"} size={20} color={savedWords.some(w => w.word === inputText) ? Colors.accent : Colors.textMuted} />
+                    <Ionicons name={savedWords.some(w => w.word === lastInputText) ? "bookmark" : "bookmark-outline"} size={20} color={savedWords.some(w => w.word === lastInputText) ? Colors.accent : Colors.textMuted} />
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.actionIcon}><Ionicons name="copy-outline" size={20} color={Colors.textMuted} /></TouchableOpacity>
                 </View>
@@ -297,7 +278,9 @@ const styles = StyleSheet.create({
   swapBtn: { width: 40, alignItems: 'center' },
 
   inputCard: { backgroundColor: '#FFFFFF', borderRadius: 20, padding: 20, ...Shadows.medium, minHeight: 180 },
-  textInput: { fontSize: 18, color: Colors.textPrimary, minHeight: 80, textAlignVertical: 'top' },
+  inputContainer: { flexDirection: 'row', alignItems: 'flex-start' },
+  textInput: { flex: 1, fontSize: 18, color: Colors.textPrimary, minHeight: 80, textAlignVertical: 'top' },
+  clearInputBtn: { padding: 4, marginLeft: 8 },
   inputActionRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 12 },
   inputLeftActions: { flexDirection: 'row', gap: 16 },
   iconCircle: { width: 40, height: 40, borderRadius: 20, backgroundColor: Colors.surface, alignItems: 'center', justifyContent: 'center' },

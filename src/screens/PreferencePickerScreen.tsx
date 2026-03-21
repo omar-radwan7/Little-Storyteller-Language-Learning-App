@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Spacing, BorderRadius } from '../theme/colors';
+import { Colors, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { LANGUAGES, LEVELS, DAILY_GOALS } from '../data/constants';
 import { useAuth } from '../hooks/useAuth';
 
@@ -18,6 +19,9 @@ const APP_LIME = '#D4E157';
 const PreferencePickerScreen: React.FC<any> = ({ navigation, route }) => {
   const { type } = route.params; // 'language' | 'level' | 'dailyGoal'
   const { userProfile, updateProfile } = useAuth();
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [pendingVal, setPendingVal] = React.useState<any>(null);
+  const [isUpdating, setIsUpdating] = React.useState(false);
 
   const isLanguage = type === 'language';
   const isGoal = type === 'dailyGoal';
@@ -32,10 +36,36 @@ const PreferencePickerScreen: React.FC<any> = ({ navigation, route }) => {
   };
 
   const handleSelect = async (val: any): Promise<void> => {
-    if (isLanguage) await updateProfile({ targetLanguage: val });
-    else if (isGoal) await updateProfile({ dailyGoal: val });
-    else await updateProfile({ level: val });
+    if (isLanguage) {
+      await updateProfile({ targetLanguage: val });
+    } else if (isGoal) {
+      await updateProfile({ dailyGoal: val });
+    } else {
+      // Level change - show warning
+      if (val === userProfile?.level) {
+        navigation.goBack();
+        return;
+      }
+
+      setPendingVal(val);
+      setModalVisible(true);
+      return;
+    }
     navigation.goBack();
+  };
+
+  const confirmLevelChange = async () => {
+    if (!pendingVal) return;
+    setIsUpdating(true);
+    try {
+      await updateProfile({ level: pendingVal });
+      setModalVisible(false);
+      navigation.goBack();
+    } catch {
+      Alert.alert('Error', 'Failed to update level.');
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   return (
@@ -92,6 +122,40 @@ const PreferencePickerScreen: React.FC<any> = ({ navigation, route }) => {
           </View>
         </ScrollView>
       </SafeAreaView>
+
+      {/* Custom Confirmation Modal */}
+      {modalVisible && (
+        <View style={StyleSheet.absoluteFill}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalIconWrap}>
+                 <Ionicons name="alert-circle" size={40} color={Colors.warning} />
+              </View>
+              <Text style={styles.modalTitle}>Change Level?</Text>
+              <Text style={styles.modalDesc}>
+                You haven't finished your current level yet. Are you sure you want to move on?
+              </Text>
+              <View style={styles.modalButtons}>
+                <TouchableOpacity 
+                  style={styles.modalCancel} 
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={styles.modalCancelText}>Go Back</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={styles.modalConfirm} 
+                  onPress={confirmLevelChange}
+                  disabled={isUpdating}
+                >
+                  <Text style={styles.modalConfirmText}>
+                    {isUpdating ? 'Updating...' : 'Yes, Change'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   );
 };
@@ -138,6 +202,79 @@ const styles = StyleSheet.create({
   textGroup: { flex: 1 },
   name: { fontSize: 18, fontWeight: '700', color: '#FFFFFF' },
   desc: { fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 2 },
+
+  // Custom Modal Styles
+  modalOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 30,
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: Colors.background,
+    borderRadius: 24,
+    padding: 24,
+    width: '100%',
+    alignItems: 'center',
+    ...Shadows.medium,
+  },
+  modalIconWrap: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: Colors.accentMuted,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: '800',
+    color: Colors.textPrimary,
+    marginBottom: 12,
+  },
+  modalDesc: {
+    fontSize: 15,
+    color: Colors.textSecondary,
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 24,
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  modalCancel: {
+    flex: 1,
+    height: 52,
+    borderRadius: 26,
+    borderWidth: 1,
+    borderColor: Colors.border,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.surface,
+  },
+  modalCancelText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: Colors.textSecondary,
+  },
+  modalConfirm: {
+    flex: 2,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: Colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...Shadows.glow,
+  },
+  modalConfirmText: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#FFFFFF',
+  },
 });
 
 export default PreferencePickerScreen;

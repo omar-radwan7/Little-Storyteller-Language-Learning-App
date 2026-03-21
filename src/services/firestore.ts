@@ -32,12 +32,12 @@ export const updateUserProfile = async (
 
 export const getStories = async (
   language: string,
-  level: string
+  levels: string[]
 ): Promise<Story[]> => {
   const q = query(
     collection(db, 'stories'),
     where('language', '==', language),
-    where('level', '==', level)
+    where('level', 'in', levels)
   );
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => ({
@@ -58,13 +58,13 @@ export const getStoryById = async (storyId: string): Promise<Story | null> => {
 
 export const getStoriesByTopic = async (
   language: string,
-  level: string,
+  levels: string[],
   topic: string
 ): Promise<Story[]> => {
   const q = query(
     collection(db, 'stories'),
     where('language', '==', language),
-    where('level', '==', level),
+    where('level', 'in', levels),
     where('topic', '==', topic)
   );
   const snapshot = await getDocs(q);
