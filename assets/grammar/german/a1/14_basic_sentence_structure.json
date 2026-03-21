@@ -1,0 +1,131 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_14",
+  "order": 14,
+  "title": "Basic Sentence Structure",
+  "description": "Welcome to the ultimate rule of German: 'Verb is King'. Learn how to easily piece together beautiful, full sentences!",
+  "explanation": "**HOOK**\nIn English, we strictly follow the order: Who, Verb, What, When. 'I drink water today'. If you scramble it up, it sounds completely wrong! But German sentences are like Lego pieces—you can snap them on however you want, as long as you obey ONE absolute golden rule.\n\n**CONCEPT**\nWe are learning how to piece together basic sentences smoothly—adding Time (when), Places (where), and People without sounding instantly like a robot.\n\n**RULE**\nVerb is King in Position 2! You can put almost ANYTHING at the very start of the sentence (time, place, the object), but the conjugated verb MUST hopelessly lock into the 2nd slot. If you put 'Today' in Position 1, the Subject ('I') has to jump firmly into Position 3 to make room for the Verb!",
+  "tables": [
+    {
+      "title": "The 'Verb is King' Map",
+      "headers": ["Position 1", "Position 2 (VERB)", "Position 3", "Position 4"],
+      "rows": [
+        ["Ich (Subj)", "trinke", "heute (Time)", "Kaffee."],
+        ["Heute (Time)", "trinke", "ich (Subj)", "Kaffee."],
+        ["Kaffee (Obj)", "trinke", "ich", "heute."]
+      ],
+      "note": "Look at Position 2! The verb 'trinke' is glued there no matter what you move around to the front. The subject almost always hugs right next to the verb."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The absolute biggest mistake beginners make is word order for Time and Place. English throws time at the very end: 'I play soccer today.' \nGerman hates that! German likes Time as early as possible. You should say 'Ich spiele heute Fußball' (I play today soccer). Time always comes BEFORE Place!"
+    }
+  ],
+  "examples": [
+    {
+      "german": "Er lernt jeden Tag Deutsch.",
+      "english": "He learns German every day. (Time right after Verb!)"
+    },
+    {
+      "german": "Morgen spiele ich Fußball.",
+      "english": "Tomorrow I play soccer. (Time first, Verb second, Subject third)"
+    },
+    {
+      "german": "Wir gehen jetzt nach Hause.",
+      "english": "We are going home now. (Time 'jetzt' before Place 'Hause')"
+    },
+    {
+      "german": "Heute ist das Wetter schön.",
+      "english": "Today the weather is beautiful."
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Welches Wort MUSS auf Position 2 in einem normalen Aussagesatz stehen?",
+      "options": ["Das Verb (konjugiert)", "Das Subjekt", "Die Zeit", "Der Ort"],
+      "correctAnswer": "Das Verb (konjugiert)",
+      "hint": "Verb is King!",
+      "explanation": "The conjugated verb must always sit rigidly in Position 2."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Heute ____ ich Kaffee.",
+      "options": ["trinkt", "trinken", "trinke", "ich"],
+      "correctAnswer": "trinke",
+      "hint": "What is the 'ich' conjugation for trinken? Because 'Heute' is Pos 1, Verb is Pos 2.",
+      "explanation": "trinken -> trinke. Verb is in Position 2!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (Tomorrow I play soccer):",
+      "words": ["Morgen", "spiele", "ich", "Fußball."],
+      "correctAnswer": "Morgen spiele ich Fußball.",
+      "hint": "Morgen (Time) goes first. The verb stays second. Subject third.",
+      "explanation": "Morgen (1) + spiele (Verb is King) + ich (Subj pushes to 3) + Fußball (4)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wie ist die Regel für Zeit (Time) und Ort (Place) im Deutschen?",
+      "options": ["Place before Time", "Time before Place", "Time always last", "Place at position 2"],
+      "correctAnswer": "Time before Place",
+      "hint": "German hates dealing with Time late.",
+      "explanation": "German always puts Time before Place (e.g. Ich spiele HEUTE im Park)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir lernen ____ Deutsch.",
+      "options": ["hier jetzt", "jetzt hier", "Deutsch jetzt", "hier morgens"],
+      "correctAnswer": "jetzt hier",
+      "hint": "'jetzt' = now (Time). 'hier' = here (Place). Time before Place!",
+      "explanation": "'jetzt' (time) comes before 'hier' (place)."
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (He comes home today):",
+      "words": ["Er", "kommt", "heute", "nach", "Hause."],
+      "correctAnswer": "Er kommt heute nach Hause.",
+      "hint": "Subject + Verb(2) + Time + Place(Home).",
+      "explanation": "Er + kommt (Pos 2) + heute (Time) + nach Hause (Place)."
+    },
+    {
+      "type": "match",
+      "question": "Match the position for the sentence 'Morgen trinke ich Kaffee':",
+      "pairs": [
+        { "left": "Position 1", "right": "Morgen" },
+        { "left": "Position 2", "right": "trinke" },
+        { "left": "Position 3", "right": "ich" },
+        { "left": "Position 4", "right": "Kaffee" }
+      ],
+      "hint": "Verb is strictly Position 2.",
+      "explanation": "Morgen(1) trinke(2) ich(3) Kaffee(4)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Jeden Tag ____ sie (she) ein Buch.",
+      "options": ["lesen", "lest", "liest", "lies"],
+      "correctAnswer": "liest",
+      "hint": "Jeden Tag is Position 1. Now we need the 'sie' (she) version of the verb in Pos 2. (irregular!)",
+      "explanation": "lesen is irregular -> liest."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist KORREKT?",
+      "options": ["Ich esse jeden Tag Pizza.", "Ich esse Pizza jeden Tag.", "Jeden Tag ich esse Pizza.", "Pizza esse jeden Tag ich."],
+      "correctAnswer": "Ich esse jeden Tag Pizza.",
+      "hint": "Time (jeden Tag) should be pulled up early right after the verb. And don't push the Verb out of Position 2!",
+      "explanation": "Verb in Pos 2 ('esse'). Time pulled up right after the Verb. (Never put time at the end like English!)"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (Today the weather is nice):",
+      "words": ["Heute", "ist", "das", "Wetter", "schön."],
+      "correctAnswer": "Heute ist das Wetter schön.",
+      "hint": "Time first. Verb (ist) second. Subject (das Wetter) third.",
+      "explanation": "Heute (Pos 1) + ist (Verb 2) + das Wetter (Subj 3) + schön."
+    }
+  ]
+}

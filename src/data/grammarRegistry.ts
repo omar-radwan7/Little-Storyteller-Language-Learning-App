@@ -11,6 +11,10 @@ export const GRAMMAR_REGISTRY: Record<string, any> = {
   'de_a1_08': require('../../assets/grammar/german/a1/08_nominativ.json'),
   'de_a1_09': require('../../assets/grammar/german/a1/09_akkusativ.json'),
   'de_a1_10': require('../../assets/grammar/german/a1/10_dativ.json'),
+  'de_a1_11': require('../../assets/grammar/german/a1/11_cases_comparison.json'),
+  'de_a1_12': require('../../assets/grammar/german/a1/12_possessive_articles.json'),
+  'de_a1_13': require('../../assets/grammar/german/a1/13_object_pronouns.json'),
+  'de_a1_14': require('../../assets/grammar/german/a1/14_basic_sentence_structure.json'),
 };
 
 export const getLessonById = (id: string): GrammarLessonType | null => {

@@ -1,0 +1,148 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_12",
+  "order": 12,
+  "title": "Possessive Articles",
+  "description": "Learn how to say my, your, his, and her—and how they change disguises depending on the Case!",
+  "explanation": "**HOOK**\nIn English, you just say 'my dog' or 'my cat'. Nice and easy. But in German, your 'my' actually puts on a disguise to perfectly match the gender AND the case of whatever you own!\n\n**CONCEPT**\nPossessive articles show ownership: my (mein), your (dein), his (sein), her (ihr). The magical part? They behave EXACTLY like the word 'ein' (a/an).\n\n**RULE**\nStart with the base owner word (like 'mein' for 'my'). Then simply glue on the exact same endings you've already learned for 'ein', 'einen', and 'einem'. It is literally just copy-pasting the endings!",
+  "tables": [
+    {
+      "title": "The Base Owners (Who owns it?)",
+      "headers": ["Person", "German Base", "English"],
+      "rows": [
+        ["ich", "mein-", "my"],
+        ["du", "dein-", "your (informal)"],
+        ["er / es", "sein-", "his / its"],
+        ["sie", "ihr-", "her"],
+        ["wir", "unser-", "our"],
+        ["ihr", "euer-", "your (plural)"],
+        ["Sie / sie", "Ihr- / ihr-", "your (formal) / their"]
+      ],
+      "note": "These are the base stems. To use them, you just stick the case endings onto them!"
+    },
+    {
+      "title": "How 'mein' changes by Case",
+      "headers": ["Case", "Masculine", "Feminine", "Neuter", "Plural"],
+      "rows": [
+        ["Nominativ", "mein Vater", "meine Mutter", "mein Kind", "meine Freunde"],
+        ["Akkusativ", "meinen Vater", "meine Mutter", "mein Kind", "meine Freunde"],
+        ["Dativ", "meinem Vater", "meiner Mutter", "meinem Kind", "meinen Freunden (+n)"]
+      ],
+      "note": "Look at Akkusativ masculine (meinEN Vater). Look at Dativ masculine (meinEM Vater). This pattern works perfectly for dein, sein, ihr, etc.!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The word 'ihr' is the ultimate shapeshifter. Beginners panic because 'ihr' can mean 'her', 'their', OR 'you (plural form)'. And 'Ihr' (capitalized) means 'Your (formal)'.\nUsually, context makes it obvious! 'Das ist ihr Hund' = That is her/their dog."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Das ist mein Hund.",
+      "english": "That is my dog. (Nominativ)"
+    },
+    {
+      "german": "Ich liebe meinen Hund.",
+      "english": "I love my dog. (Akkusativ)"
+    },
+    {
+      "german": "Wir spielen mit meinem Hund.",
+      "english": "We play with my dog. (Dativ)"
+    },
+    {
+      "german": "Das ist deine Katze.",
+      "english": "That is your cat. (Nominativ)"
+    },
+    {
+      "german": "Er hilft seiner Mutter.",
+      "english": "He helps his mother. (Dativ)"
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was bedeutet 'mein' auf Englisch?",
+      "options": ["your", "his", "her", "my"],
+      "correctAnswer": "my",
+      "hint": "It belongs to 'ich' (I).",
+      "explanation": "mein = my!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich brauche ____ Stift (m).",
+      "options": ["meine", "mein", "meinem", "meinen"],
+      "correctAnswer": "meinen",
+      "hint": "Stift is masculine. 'brauchen' forces Akkusativ. What is the Akkusativ ending for masculine (den/einen)?",
+      "explanation": "Akkusativ masculine takes the '-n' ending, so 'mein' becomes 'meinen'!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches Wort bedeutet 'seine'?",
+      "options": ["her", "his", "my", "your"],
+      "correctAnswer": "his",
+      "hint": "er -> sein.",
+      "explanation": "'sein' means his or its!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Besitzer (Nom) zu:",
+      "pairs": [
+        { "left": "ich", "right": "mein" },
+        { "left": "du", "right": "dein" },
+        { "left": "sie (she)", "right": "ihr" },
+        { "left": "wir", "right": "unser" }
+      ],
+      "hint": "Match the person to their starting possessive word.",
+      "explanation": "Great job matching the base possessive articles!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir spielen mit ____ Hund (m).",
+      "options": ["unser", "unseren", "unserem", "unsere"],
+      "correctAnswer": "unserem",
+      "hint": "Hund is masculine. 'mit' forces Dativ. What is the Dativ masculine ending (dem/einem)?",
+      "explanation": "mit + masculine Dativ = '-m' ending. unser -> unserem!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (I see her brother):",
+      "words": ["Ich", "sehe", "ihren", "Bruder."],
+      "correctAnswer": "Ich sehe ihren Bruder.",
+      "hint": "Bruder = brother (m). sehen forces Akkusativ, so ihr -> ihren.",
+      "explanation": "Ich (Nom) sehe + ihren Bruder (Akkusativ)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Fülle die Lücke: 'Das ist ____ Buch (n). (your - informal)'",
+      "options": ["deine", "dein", "deinen", "deinem"],
+      "correctAnswer": "dein",
+      "hint": "Buch is neuter. 'ist' (=) keeps it Nominativ.",
+      "explanation": "Neuter Nominativ takes no extra ending! Just 'dein'."
+    },
+    {
+      "type": "write",
+      "question": "Schreibe das englische Wort für 'ihr' (she/her):",
+      "correctAnswer": "her",
+      "hint": "When 'sie' owns it...",
+      "explanation": "ihr = her (or their)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Sie hilft ____ Kindern.",
+      "options": ["ihre", "ihren", "ihrem", "ihr"],
+      "correctAnswer": "ihren",
+      "hint": "Kindern is plural Dativ (helfen triggers Dativ). Plural Dativ gets the 'n' party!",
+      "explanation": "Plural Dativ always gets an '-n' ending! ihr -> ihren."
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (That is my bag):",
+      "words": ["Das", "ist", "meine", "Tasche."],
+      "correctAnswer": "Das ist meine Tasche.",
+      "hint": "Tasche is feminine, so 'mein' gets 'e' -> 'meine'.",
+      "explanation": "Feminine words get the '-e' ending in Nominativ."
+    }
+  ]
+}

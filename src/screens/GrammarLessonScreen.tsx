@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, TextInput, Alert, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { GrammarLessonType, GrammarExercise } from '../types';
@@ -181,22 +182,37 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
       {/* Tables segment */}
       {lessonData.tables.map((table, tIdx) => (
         <View key={tIdx} style={styles.tableCard}>
-          <Text style={styles.tableTitle}>{table.title}</Text>
-          <View style={styles.tableBox}>
-            <View style={[styles.tableRow, styles.tableHeaderRow]}>
-              {table.headers.map((h, i) => (
-                <Text key={i} style={[styles.tableCell, styles.tableHeaderCell]}>{h}</Text>
-              ))}
-            </View>
-            {table.rows.map((row, rIdx) => (
-              <View key={rIdx} style={[styles.tableRow, rIdx % 2 !== 0 && styles.tableRowAlt]}>
-                {row.map((cell, cIdx) => (
-                  <Text key={cIdx} style={styles.tableCell}>{cell}</Text>
+          <View style={styles.tableTitleRow}>
+            <Text style={styles.tableTitle}>{table.title}</Text>
+            {table.headers.length > 3 && (
+              <View style={styles.swipeHintBadge}>
+                <Ionicons name="swap-horizontal" size={14} color={Colors.textMuted} style={{ marginRight: 4 }} />
+                <Text style={styles.swipeHintText}>Swipe</Text>
+              </View>
+            )}
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={{ paddingBottom: 8 }}>
+            <View style={styles.tableBox}>
+              <View style={[styles.tableRow, styles.tableHeaderRow]}>
+                {table.headers.map((h, i) => (
+                  <Text key={i} style={[styles.tableCell, styles.tableHeaderCell, i < table.headers.length - 1 && styles.tableCellBorder, i === 0 && styles.tableCellBold]}>{h}</Text>
                 ))}
               </View>
-            ))}
-          </View>
-          {table.note && <Text style={styles.tableNote}>{table.note}</Text>}
+              {table.rows.map((row, rIdx) => (
+                <View key={rIdx} style={[styles.tableRow, rIdx % 2 !== 0 && styles.tableRowAlt]}>
+                  {row.map((cell, cIdx) => (
+                    <Text key={cIdx} style={[styles.tableCell, cIdx < row.length - 1 && styles.tableCellBorder, cIdx === 0 && styles.tableCellBold]}>{cell}</Text>
+                  ))}
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+          {table.note && (
+            <View style={styles.tableNoteBox}>
+              <Ionicons name="bulb" size={18} color={Colors.accent} style={{ marginTop: 1, marginRight: 8 }} />
+              <Text style={styles.tableNoteText}>{table.note}</Text>
+            </View>
+          )}
         </View>
       ))}
 
@@ -558,15 +574,21 @@ const styles = StyleSheet.create({
   explanationText: { fontSize: 16, color: Colors.textPrimary, lineHeight: 24, marginBottom: 30 },
 
   // Table styles
-  tableCard: { backgroundColor: Colors.surface, borderRadius: BorderRadius.md, borderWidth: 1, borderColor: Colors.border, overflow: 'hidden', padding: 16, marginBottom: 30, ...Shadows.soft },
-  tableTitle: { fontSize: 14, fontWeight: '700', color: Colors.primary, marginBottom: 12 },
-  tableBox: { borderRadius: 8, overflow: 'hidden', borderWidth: 1, borderColor: Colors.border },
-  tableRow: { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: Colors.surfaceLight },
-  tableRowAlt: { backgroundColor: Colors.surfaceLight },
-  tableHeaderRow: { backgroundColor: '#F0F5F3' },
-  tableCell: { flex: 1, padding: 12, fontSize: 14, color: Colors.textPrimary },
-  tableHeaderCell: { fontWeight: '700', color: Colors.primaryDark },
-  tableNote: { fontSize: 13, color: Colors.textMuted, fontStyle: 'italic', marginTop: 12, lineHeight: 18 },
+  tableCard: { backgroundColor: '#FFFFFF', borderRadius: 16, borderWidth: 1, borderColor: '#E2E8F0', overflow: 'hidden', padding: 20, marginBottom: 30, ...Shadows.medium },
+  tableTitleRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 },
+  tableTitle: { fontSize: 18, fontWeight: '800', color: Colors.textPrimary, flex: 1 },
+  swipeHintBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8FAFC', paddingHorizontal: 10, paddingVertical: 6, borderRadius: 12, borderWidth: 1, borderColor: '#E2E8F0' },
+  swipeHintText: { fontSize: 12, color: Colors.textMuted, fontWeight: '800', textTransform: 'uppercase' },
+  tableBox: { minWidth: '100%', borderRadius: 12, overflow: 'hidden', borderWidth: 1, borderColor: '#E2E8F0' },
+  tableRow: { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: '#E2E8F0' },
+  tableRowAlt: { backgroundColor: '#F8FAFC' },
+  tableHeaderRow: { backgroundColor: '#EFFFF9' },
+  tableCell: { flexGrow: 1, minWidth: 85, padding: 14, fontSize: 13, color: Colors.textSecondary, textAlign: 'center' },
+  tableCellBorder: { borderRightWidth: 1, borderRightColor: '#E2E8F0' },
+  tableCellBold: { fontWeight: '700', color: Colors.textPrimary, textAlign: 'left', minWidth: 105, flexGrow: 1.2 },
+  tableHeaderCell: { fontWeight: '800', color: Colors.primaryDark, textAlign: 'center' },
+  tableNoteBox: { flexDirection: 'row', backgroundColor: '#FFF0DE', padding: 12, borderRadius: 12, marginTop: 8 },
+  tableNoteText: { fontSize: 14, color: Colors.textSecondary, flex: 1, fontStyle: 'italic', lineHeight: 20 },
 
   // Deep Notes
   deepNotesSection: { marginBottom: 30 },

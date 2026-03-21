@@ -1,0 +1,138 @@
+{
+  "language": "german",
+  "level": "A1",
+  "id": "de_a1_13",
+  "order": 13,
+  "title": "Object Pronouns",
+  "description": "Learn how to say 'me' and 'you' instead of just 'I' and 'you'!",
+  "explanation": "**HOOK**\nIn English, you would never say 'He sees I'. You say 'He sees ME'. Just like English, German changes its personal pronouns when they become the receivers of an action!\n\n**CONCEPT**\nObject Pronouns are simply words like me, you, him, and us. In German, you have to choose whether you use the Akkusativ 'me' (direct receiver) or the Dativ 'to me' (benefactor).\n\n**RULE**\nThe easiest trick: Look at 'uns' (us) and 'euch' (you all). They are incredibly lazy—they stay EXACTLY the same in both Akkusativ and Dativ! For the masculine 'er', just add the standard case ending: 'ihn' (Akk) and 'ihm' (Dat).",
+  "tables": [
+    {
+      "title": "Personal Pronouns by Case",
+      "headers": ["Person", "Nominativ", "Akkusativ", "Dativ"],
+      "rows": [
+        ["I / me", "ich", "mich", "mir"],
+        ["You", "du", "dich", "dir"],
+        ["He / him", "er", "ihn", "ihm"],
+        ["She / her", "sie", "sie", "ihr"],
+        ["It", "es", "es", "ihm"],
+        ["We / us", "wir", "uns", "uns"],
+        ["You (Plural)", "ihr", "euch", "euch"],
+        ["They / Formal", "sie / Sie", "sie / Sie", "ihnen / Ihnen"]
+      ],
+      "note": "Look at the columns: mich/dich flip to mir/dir. Wir and ihr default to uns/euch for both object cases!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The most common beginner mistake is using 'mich' (me) instead of 'mir' (to me). Remember that certain verbs ALWAYS force the Dativ 'mir'. \nYou say 'Hilf MIR!' (Help me!) because 'helfen' is a Dative verb, but you say 'Liebst du MICH?' (Do you love me?) because loving directly hits the object."
+    }
+  ],
+  "examples": [
+    {
+      "german": "Ich liebe dich.",
+      "english": "I love you. (Akkusativ)"
+    },
+    {
+      "german": "Er hilft mir.",
+      "english": "He helps me. (Dativ)"
+    },
+    {
+      "german": "Wir sehen euch.",
+      "english": "We see you all. (Akkusativ)"
+    },
+    {
+      "german": "Das Buch gehört uns.",
+      "english": "The book belongs to us. (Dativ)"
+    },
+    {
+      "german": "Sie ruft ihn an.",
+      "english": "She calls him. (Akkusativ)"
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was ist das Akkusativ-Wort für 'ich' (me)?",
+      "options": ["mir", "mich", "mein", "uns"],
+      "correctAnswer": "mich",
+      "hint": "Direct receiver (me). Example: Can you hear 'mich'?",
+      "explanation": "ich -> mich (Akkusativ)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Er hilft ____ (to me).",
+      "options": ["mich", "mein", "ir", "mir"],
+      "correctAnswer": "mir",
+      "hint": "helfen is a Dativ verb. I need the Dativ 'to me'.",
+      "explanation": "ich -> mir (Dativ)! helfen always triggers Dativ."
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Akkusativ-Pronomen zu:",
+      "pairs": [
+        { "left": "ich ->", "right": "mich" },
+        { "left": "du ->", "right": "dich" },
+        { "left": "er ->", "right": "ihn" }
+      ],
+      "hint": "Match the base to the Akkusativ version.",
+      "explanation": "ich->mich, du->dich, er->ihn."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welches Pronomen bleibt im Akkusativ UND Dativ gleich?",
+      "options": ["mich", "ihn", "ihm", "uns"],
+      "correctAnswer": "uns",
+      "hint": "What is the word for 'us'?",
+      "explanation": "Both 'uns' and 'euch' are identical in Akkusativ and Dativ!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich liebe ____ (you).",
+      "options": ["dir", "dein", "dich", "du"],
+      "correctAnswer": "dich",
+      "hint": "lieben is direct! Uses Akkusativ 'you'.",
+      "explanation": "du -> dich!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (He sees us):",
+      "words": ["Er", "sieht", "uns."],
+      "correctAnswer": "Er sieht uns.",
+      "hint": "Subject + Verb + Object Pronoun.",
+      "explanation": "Er (He) + sieht (sees) + uns (us)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Wir danken ____ (you all - dative).",
+      "options": ["ihr", "euch", "uns", "dir"],
+      "correctAnswer": "euch",
+      "hint": "danken (thank) triggers Dativ. What is the word for 'you all' (plural)?",
+      "explanation": "ihr -> euch!"
+    },
+    {
+      "type": "write",
+      "question": "Schreibe das Dativ-Pronomen für 'du' (to you):",
+      "correctAnswer": "dir",
+      "hint": "Rhymes with mir. mich -> mir, dich -> ?",
+      "explanation": "du -> dir (Dativ)"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was ist das Akkusativ-Wort für 'er' (him)?",
+      "options": ["ihm", "ihn", "sein", "es"],
+      "correctAnswer": "ihn",
+      "hint": "Masculine in Akkusativ gets the '-n' ending (der -> den). er -> ?",
+      "explanation": "er -> ihn!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz (The book belongs to him):",
+      "words": ["Das", "Buch", "gehört", "ihm."],
+      "correctAnswer": "Das Buch gehört ihm.",
+      "hint": "gehören (belongs) takes Dativ. him = ihm (because Dativ masculine ends in -m).",
+      "explanation": "'gehören' forces him into Dativ (ihm)."
+    }
+  ]
+}

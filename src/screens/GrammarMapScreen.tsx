@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Dimensions, Animated, Easing, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Animated, Easing, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Path } from 'react-native-svg';
@@ -21,21 +22,21 @@ const LESSONS = [
   { id: 'de_a1_08', level: 'A1', title: 'Nominativ', isMock: false },
   { id: 'de_a1_09', level: 'A1', title: 'Akkusativ', isMock: false },
   { id: 'de_a1_10', level: 'A1', title: 'Dativ', isMock: false },
-  { id: 'de_a1_11', level: 'A1', title: 'Cases Comparison', isMock: true },
-  { id: 'de_a1_12', level: 'A1', title: 'Basic Sentence Structure', isMock: true },
-  { id: 'de_a1_13', level: 'A1', title: 'Negation', isMock: true },
-  { id: 'de_a1_14', level: 'A1', title: 'Question Formation', isMock: true },
-  { id: 'de_a1_15', level: 'A1', title: 'Modal Verbs', isMock: true },
-  { id: 'de_a1_16', level: 'A1', title: 'Separable Verbs', isMock: true },
-  { id: 'de_a1_17', level: 'A1', title: 'Irregular Verbs', isMock: true },
-  { id: 'de_a1_18', level: 'A1', title: 'Basic Adjectives', isMock: true },
-  { id: 'de_a1_19', level: 'A1', title: 'Adjective Endings', isMock: true },
-  { id: 'de_a1_20', level: 'A1', title: 'Accusative Prepositions', isMock: true },
-  { id: 'de_a1_21', level: 'A1', title: 'Dative Prepositions', isMock: true },
-  { id: 'de_a1_22', level: 'A1', title: 'Numbers & Time', isMock: true },
-  { id: 'de_a1_23', level: 'A1', title: 'Telling Time', isMock: true },
-  { id: 'de_a1_24', level: 'A1', title: 'Greetings', isMock: true },
-  { id: 'de_a1_25', level: 'A1', title: 'Practical Language', isMock: true },
+  { id: 'de_a1_11', level: 'A1', title: 'Cases Comparison', isMock: false },
+  { id: 'de_a1_12', level: 'A1', title: 'Possessive Articles', isMock: false },
+  { id: 'de_a1_13', level: 'A1', title: 'Object Pronouns', isMock: false },
+  { id: 'de_a1_14', level: 'A1', title: 'Basic Sentence Structure', isMock: false },
+  { id: 'de_a1_15', level: 'A1', title: 'Negation', isMock: true },
+  { id: 'de_a1_16', level: 'A1', title: 'Question Formation', isMock: true },
+  { id: 'de_a1_17', level: 'A1', title: 'Modal Verbs', isMock: true },
+  { id: 'de_a1_18', level: 'A1', title: 'Separable Verbs', isMock: true },
+  { id: 'de_a1_19', level: 'A1', title: 'Irregular Verbs', isMock: true },
+  { id: 'de_a1_20', level: 'A1', title: 'Basic Adjectives', isMock: true },
+  { id: 'de_a1_21', level: 'A1', title: 'Adjective Endings', isMock: true },
+  { id: 'de_a1_22', level: 'A1', title: 'Accusative Prepositions', isMock: true },
+  { id: 'de_a1_23', level: 'A1', title: 'Dative Prepositions', isMock: true },
+  { id: 'de_a1_24', level: 'A1', title: 'Numbers & Time', isMock: true },
+  { id: 'de_a1_25', level: 'A1', title: 'Greetings', isMock: true },
 ];
 
 const HILLS = [
