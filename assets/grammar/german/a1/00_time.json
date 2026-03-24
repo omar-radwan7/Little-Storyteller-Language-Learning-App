@@ -1,0 +1,76 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_time",
+  "order": 12,
+  "title": "Telling Time",
+  "description": "Is it 'half past four' or 'half before five'? Learn how to read the clock in German!",
+  "explanation": "**HOOK**\nIf you ask a German the time and they say 'It is half five', don't show up at 5:30! They actually mean 4:30. Germans think about time as 'halfway to the next hour'. It's like they are always looking forward to the future!\n\n**CONCEPT**\nWe are learning the daily schedule—how to say 'o'clock', 'half', and 'quarter'. In Germany, people are very punctual, so getting the time right is a superpower!\n\n**RULE**\nFor 'half' hours, always say 'halb' + THE NEXT HOUR. \nExample: 8:30 is 'halb neun' (half nine).",
+  "tables": [
+    {
+      "title": "The Simple Clock",
+      "headers": ["Time", "German", "English"],
+      "rows": [
+        ["8:00", "Acht Uhr", "8 o'clock"],
+        ["8:05", "Fünf nach acht", "Five past eight"],
+        ["8:15", "Viertel nach acht", "Quarter past eight"],
+        ["8:30", "Halb neun", "Half nine (8:30)"],
+        ["8:45", "Viertel vor neun", "Quarter to nine"],
+        ["8:55", "Fünf vor neun", "Five to nine"]
+      ],
+      "note": "TIP: Most people use the 24-hour clock (military time) for schedules, like '14:00' for 2 PM."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The 24-hour clock is common! If a friend says 'Let's meet at 18:00', they mean 6:00 PM. Just subtract 12 to get the PM time. \n18 - 12 = 6 PM!"
+    }
+  ],
+  "examples": [
+    { "german": "Wie spät ist es?", "english": "What time is it?" },
+    { "german": "Es ist neun Uhr.", "english": "It is nine o'clock." },
+    { "german": "Der Zug kommt um halb zehn.", "english": "The train comes at 9:30." },
+    { "german": "Es ist Viertel vor eins.", "english": "It is quarter to one (12:45)." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wie spät ist '8:30'?",
+      "options": ["Halb acht", "Halb neun", "Acht Uhr dreißig", "Viertel vor neun"],
+      "correctAnswer": "Halb neun",
+      "hint": "Remember: half-way to the NEXT hour.",
+      "explanation": "Perfect! Halb neun = 8:30."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Es ist ____ nach zehn (10:15).",
+      "options": ["halb", "vor", "Viertel", "zehn"],
+      "correctAnswer": "Viertel",
+      "hint": "A quarter of an hour...",
+      "explanation": "Viertel nach zehn is 10:15."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Du möchtest wissen, wie viel Uhr es ist. Was fragst du?",
+      "options": ["Wie geht es dir?", "Wie spät ist es?", "Wer bist du?", "Wo wohnst du?"],
+      "correctAnswer": "Wie spät ist es?",
+      "hint": "Ask about the time!",
+      "explanation": "This is the classic way to ask for the current time."
+    },
+    {
+      "type": "write",
+      "question": "Morgens auf der Uhr: 09:00. Du sagst: Es ist ____ ____.",
+      "correctAnswer": "neun Uhr",
+      "hint": "Number 9 + clock-word.",
+      "explanation": "neun Uhr is exactly 9:00."
+    },
+    {
+       "type": "reorder",
+       "words": ["Es", "ist", "fünf", "vor", "zwölf."],
+       "correctAnswer": "Es ist fünf vor zwölf.",
+       "hint": "It is 5 to 12.",
+       "explanation": "Five to twelve!"
+    }
+  ]
+}

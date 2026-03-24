@@ -77,9 +77,9 @@
     },
     {
       "type": "write",
-      "question": "Schreibe die 'du'-Form mit dem Wort 'sein'.",
-      "correctAnswer": "du bist",
-      "explanation": "du + bist."
+      "question": "Ich bin müde. Aber wie geht es dir? ____ ____ müde?",
+      "correctAnswer": "bist du",
+      "explanation": "Verb first for question: bist du!"
     },
     {
       "type": "fill_blank",

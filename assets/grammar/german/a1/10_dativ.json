@@ -113,10 +113,10 @@
     },
     {
       "type": "write",
-      "question": "Schreibe (das Kind) im Dativ ('to a child'):",
+      "question": "Ich schenke etwas. Wem? Dem Mann oder ____? (das Kind -> ein Kind)",
       "correctAnswer": "einem Kind",
-      "hint": "Neutral 'ein' becomes 'einem'.",
-      "explanation": "das Kind becomes einem Kind in Dative!"
+      "hint": "Neutral 'ein' becomes 'einem' in Dativ.",
+      "explanation": "das/ein Kind becomes in Dative 'dem/einem' Kind!"
     },
     {
       "type": "reorder",

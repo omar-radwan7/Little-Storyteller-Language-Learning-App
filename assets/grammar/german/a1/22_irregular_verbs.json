@@ -1,0 +1,78 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_irregular_verbs",
+  "order": 22,
+  "title": "Irregular Verbs",
+  "description": "Learn the 'rebel verbs' that change their core spelling when talk to someone directly!",
+  "explanation": "**HOOK**\nRegular verbs (like drink) are predictable and follow the rules. But Irregular Verbs are like rebels! Just when you think you've learned the 'ich/du/er' patterns, they change their heart. They don't just change their endings—they change the VOWEL inside their very core!\n\n**CONCEPT**\nWe are learning 'Stem-Changing' verbs. These are super common verbs like: essen (eat), fahren (drive), and lesen (read). They only rebel when they meet 'du' (you) and 'er/sie/es' (he/she/it).\n\n**RULE**\nIrregular changes ONLY happen for 'du' and 'er/sie/es'. All other forms (ich, wir, sie-Plural) stay perfectly regular!",
+  "tables": [
+    {
+      "title": "The Root Changers",
+      "headers": ["Verb", "ich", "du", "er / sie / es"],
+      "rows": [
+        ["essen (to eat)", "esse", "isST", "iSST"],
+        ["fahren (to drive)", "fahre", "fäHRST", "fäHRT"],
+        ["lesen (to read)", "lese", "liEST", "liEST"],
+        ["sprechen (speak)", "spreche", "spriCHST", "spriCHT"]
+      ],
+      "note": "TIP: E often changes to I (or IE). A often changes to Ä (and gets double dots)!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Don't overthink it! These changes are only for DU and ER. 'Ich esse', but 'Du isst'. Once you get to 'Wir', they always go back to being normal: 'Wir essen'. This pattern happens with almost every irregular verb in A1."
+    }
+  ],
+  "examples": [
+    { "german": "Du isst eine Pizza.", "english": "You are eating a pizza. (Rebel vowel!)" },
+    { "german": "Er fährt nach Berlin.", "english": "He is driving to Berlin." },
+    { "german": "Sprichst du Deutsch?", "english": "Do you speak German?" },
+    { "german": "Sie liest ein Buch.", "english": "She is reading a book." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was passiert bei 'fahren' in der du-Form?",
+      "options": ["du fahrst", "du fährst", "du fahrt", "du fahrhst"],
+      "correctAnswer": "du fährst",
+      "hint": "Add the double dots (Umlaut)!",
+      "explanation": "A -> Ä! du fährst."
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ du gern Pizza?",
+      "options": ["Esst", "Isst", "Eiße", "Esse"],
+      "correctAnswer": "Isst",
+      "hint": "eat (du-form).",
+      "explanation": "E -> I! Isst du?"
+    },
+    {
+       "type": "match",
+       "question": "Ordne die Formen zu 'sprechen' zu:",
+       "pairs": [
+         { "left": "ich", "right": "spreche" },
+         { "left": "du", "right": "sprichst" },
+         { "left": "er", "right": "spricht" }
+       ],
+       "hint": "E -> I for rebels.",
+       "explanation": "Excellent! Rebel forms matched."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welche Personen sind irregular?",
+      "options": ["alle", "ich und du", "du und er", "wir und sie"],
+      "correctAnswer": "du und er",
+      "hint": "Only the 2nd and 3rd person singular.",
+      "explanation": "Only 'du' and 'er/sie/es' change vowels."
+    },
+    {
+      "type": "write",
+      "question": "Er liebt Bücher. Jeden Abend ____ er ein Buch (lesen).",
+      "correctAnswer": "liest",
+      "hint": "E changes to IE for 'er' (he).",
+      "explanation": "er/sie/es liest!"
+    }
+  ]
+}

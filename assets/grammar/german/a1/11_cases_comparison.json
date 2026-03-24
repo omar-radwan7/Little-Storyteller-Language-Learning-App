@@ -112,9 +112,9 @@
     },
     {
       "type": "write",
-      "question": "Schreibe den Nominativ -> Akkusativ -> Dativ für 'das Wasser' (Definite: das/das/?) :",
-      "correctAnswer": "das das dem",
-      "hint": "Neuter starts as 'das', stays 'das' in Akk, turns to 'dem' in Dativ.",
+      "question": "Das Wasser (Nom) -> Ich sehe das Wasser (Akk) -> Ich wasche mich mit ____ Wasser! (Dat)",
+      "correctAnswer": "dem",
+      "hint": "Neuter stays 'das' in Akk, turns to 'dem' in Dativ.",
       "explanation": "das -> das -> dem"
     },
     {

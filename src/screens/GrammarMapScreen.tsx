@@ -12,31 +12,37 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 const { width } = Dimensions.get('window');
 
 const LESSONS = [
-  { id: 'de_a1_01', level: 'A1', title: 'Personal Pronouns', isMock: false },
-  { id: 'de_a1_02', level: 'A1', title: 'The Verb "sein"', isMock: false },
-  { id: 'de_a1_03', level: 'A1', title: 'The Verb "haben"', isMock: false },
-  { id: 'de_a1_04', level: 'A1', title: 'Regular Verb Conjugation', isMock: false },
-  { id: 'de_a1_05', level: 'A1', title: 'Definite Articles', isMock: false },
-  { id: 'de_a1_06', level: 'A1', title: 'Indefinite Articles', isMock: false },
-  { id: 'de_a1_07', level: 'A1', title: 'Plural Forms', isMock: false },
-  { id: 'de_a1_08', level: 'A1', title: 'Nominativ', isMock: false },
-  { id: 'de_a1_09', level: 'A1', title: 'Akkusativ', isMock: false },
-  { id: 'de_a1_10', level: 'A1', title: 'Dativ', isMock: false },
-  { id: 'de_a1_11', level: 'A1', title: 'Cases Comparison', isMock: false },
-  { id: 'de_a1_12', level: 'A1', title: 'Possessive Articles', isMock: false },
-  { id: 'de_a1_13', level: 'A1', title: 'Object Pronouns', isMock: false },
-  { id: 'de_a1_14', level: 'A1', title: 'Basic Sentence Structure', isMock: false },
-  { id: 'de_a1_15', level: 'A1', title: 'Negation', isMock: true },
-  { id: 'de_a1_16', level: 'A1', title: 'Question Formation', isMock: true },
-  { id: 'de_a1_17', level: 'A1', title: 'Modal Verbs', isMock: true },
-  { id: 'de_a1_18', level: 'A1', title: 'Separable Verbs', isMock: true },
-  { id: 'de_a1_19', level: 'A1', title: 'Irregular Verbs', isMock: true },
-  { id: 'de_a1_20', level: 'A1', title: 'Basic Adjectives', isMock: true },
-  { id: 'de_a1_21', level: 'A1', title: 'Adjective Endings', isMock: true },
-  { id: 'de_a1_22', level: 'A1', title: 'Accusative Prepositions', isMock: true },
-  { id: 'de_a1_23', level: 'A1', title: 'Dative Prepositions', isMock: true },
-  { id: 'de_a1_24', level: 'A1', title: 'Numbers & Time', isMock: true },
-  { id: 'de_a1_25', level: 'A1', title: 'Greetings', isMock: true },
+  // A1.1 - The Foundation
+  { id: 'de_a1_01', level: 'A1.1', title: 'The German Alphabet', isMock: false },
+  { id: 'de_a1_02', level: 'A1.1', title: 'Vowel Sounds', isMock: false },
+  { id: 'de_a1_03', level: 'A1.1', title: 'Silent Letters', isMock: false },
+  { id: 'de_a1_04', level: 'A1.1', title: 'German Umlauts', isMock: false },
+  { id: 'de_a1_05', level: 'A1.1', title: 'Personal Pronouns', isMock: false },
+  { id: 'de_a1_06', level: 'A1.1', title: 'The verb sein', isMock: false },
+  { id: 'de_a1_07', level: 'A1.1', title: 'The verb haben', isMock: false },
+  { id: 'de_a1_08', level: 'A1.1', title: 'Regular verb conjugation', isMock: false },
+  { id: 'de_a1_09', level: 'A1.1', title: 'Definite articles', isMock: false },
+  { id: 'de_a1_10', level: 'A1.1', title: 'Indefinite articles', isMock: false },
+  { id: 'de_a1_11', level: 'A1.1', title: 'Plural forms', isMock: false },
+  { id: 'de_a1_12', level: 'A1.1', title: 'Nominativ case', isMock: false },
+  { id: 'de_a1_13', level: 'A1.1', title: 'Akkusativ case', isMock: false },
+  { id: 'de_a1_14', level: 'A1.1', title: 'Dativ case', isMock: false },
+
+  // A1.2 - Intermediate Basics
+  { id: 'de_a1_15', level: 'A1.2', title: 'Cases Comparison', isMock: false },
+  { id: 'de_a1_16', level: 'A1.2', title: 'Sentence Structure', isMock: false },
+  { id: 'de_a1_17', level: 'A1.2', title: 'Negation', isMock: false },
+  { id: 'de_a1_18', level: 'A1.2', title: 'Question formation', isMock: false },
+  { id: 'de_a1_19', level: 'A1.2', title: 'Modal verbs', isMock: false },
+  { id: 'de_a1_20', level: 'A1.2', title: 'Separable verbs', isMock: false },
+  { id: 'de_a1_21', level: 'A1.2', title: 'Irregular verbs', isMock: false },
+  { id: 'de_a1_22', level: 'A1.2', title: 'Basic adjectives', isMock: false },
+  { id: 'de_a1_23', level: 'A1.2', title: 'Adjective endings', isMock: false },
+  { id: 'de_a1_24', level: 'A1.2', title: 'Accusative prepositions', isMock: false },
+  { id: 'de_a1_25', level: 'A1.2', title: 'Dative prepositions', isMock: false },
+  { id: 'de_a1_26', level: 'A1.2', title: 'Numbers and time', isMock: false },
+  { id: 'de_a1_27', level: 'A1.2', title: 'Greetings and basics', isMock: false },
+  { id: 'de_a1_28', level: 'A1.2', title: 'Everyday phrases', isMock: false },
 ];
 
 const HILLS = [
@@ -188,6 +194,9 @@ const GrammarMapScreen = () => {
 
           {reversedLessons.map((lesson, index) => {
               const realIdx = totalLessonsCount - 1 - index;
+              const nextLesson = reversedLessons[index + 1];
+              const showLevelHeader = !nextLesson || nextLesson.level !== lesson.level;
+              
               let status: 'completed' | 'current' | 'locked' = 'locked';
               if (progress.completedLessons.includes(lesson.id)) status = 'completed';
               else if (lesson.id === progress.currentLesson) status = 'current';
@@ -206,81 +215,93 @@ const GrammarMapScreen = () => {
               const pathLen = (hOffset + wOffset + chord) / 2;
 
               return (
-                <View key={lesson.id} style={styles.nodeRow}>
-                  {realIdx > 0 && (
-                    <View style={{ position: 'absolute', top: 70, left: 0, width: width, height: 140, zIndex: 1 }}>
-                      <Svg width="100%" height="100%">
-                        <Path 
-                          d={`M ${prevX} 140 C ${prevX} 70, ${currentX} 70, ${currentX} 0`}
-                          fill="none"
-                          stroke={status === 'completed' ? '#81C965' : '#C3EBAF'}
-                          strokeWidth={16}
-                          strokeLinecap="round"
-                        />
-                        {isPathToFinished && (
-                          <AnimatedPath
+                <React.Fragment key={lesson.id}>
+                  <View style={styles.nodeRow}>
+                    {realIdx > 0 && (
+                      <View style={{ position: 'absolute', top: 70, left: 0, width: width, height: 140, zIndex: 1 }}>
+                        <Svg width="100%" height="100%">
+                          <Path 
                             d={`M ${prevX} 140 C ${prevX} 70, ${currentX} 70, ${currentX} 0`}
                             fill="none"
-                            stroke="#F4B76B"
+                            stroke={status === 'completed' ? '#81C965' : '#C3EBAF'}
                             strokeWidth={16}
                             strokeLinecap="round"
-                            strokeDasharray={pathLen}
-                            strokeDashoffset={pathAnim.interpolate({
-                              inputRange: [0, 1],
-                              outputRange: [pathLen, 0]
-                            })}
                           />
-                        )}
-                      </Svg>
-                    </View>
-                  )}
-
-                 <Text style={[styles.natureEmoji, { top: 10, [isLeft ? 'right' : 'left']: width * 0.1 }]}>
-                   {['🌲', '🌳', '🍄', '🌿', '🌲', '🪴'][realIdx % 6]}
-                 </Text>
-                 <Text style={[styles.natureEmoji, { bottom: -10, [isLeft ? 'left' : 'right']: width * 0.05, opacity: 0.9 }]}>
-                   {['🍄', '🌲', '🌳', '🌿', '🌳', '🪴'][realIdx % 6]}
-                 </Text>
-
-                 <View style={[styles.nodeWrapper, isLeft ? styles.nodeLeft : styles.nodeRight]}>
-                    {status === 'current' && (
-                      <View style={styles.currentLabelBubble}>
-                        <Text style={styles.currentLabelText}>Start here 🚀</Text>
-                        <View style={styles.currentLabelTail} />
+                          {isPathToFinished && (
+                            <AnimatedPath
+                              d={`M ${prevX} 140 C ${prevX} 70, ${currentX} 70, ${currentX} 0`}
+                              fill="none"
+                              stroke="#F4B76B"
+                              strokeWidth={16}
+                              strokeLinecap="round"
+                              strokeDasharray={pathLen}
+                              strokeDashoffset={pathAnim.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [pathLen, 0]
+                              })}
+                            />
+                          )}
+                        </Svg>
                       </View>
                     )}
 
-                    {status === 'current' && (
-                      <Animated.View style={[styles.pulseRing, { transform: [{ scale: pulseAnim }] }]} />
-                    )}
+                    <Text style={[styles.natureEmoji, { top: 10, [isLeft ? 'right' : 'left']: width * 0.1 }]}>
+                      {['🌲', '🌳', '🍄', '🌿', '🌲', '🪴'][realIdx % 6]}
+                    </Text>
+                    <Text style={[styles.natureEmoji, { bottom: -10, [isLeft ? 'left' : 'right']: width * 0.05, opacity: 0.9 }]}>
+                      {['🍄', '🌲', '🌳', '🌿', '🌳', '🪴'][realIdx % 6]}
+                    </Text>
 
-                    <TouchableOpacity 
-                      activeOpacity={0.8}
-                      onPress={() => handleNodePress(lesson, status)}
-                      style={[
-                        styles.nodeCircle,
-                        status === 'completed' && styles.nodeCompleted,
-                        status === 'current' && styles.nodeCurrent,
-                        status === 'locked' && styles.nodeLocked,
-                        status === 'current' ? { transform: [{ scale: 1.1 }] } : {}
-                      ]}
-                    >
-                      {status === 'completed' && <Ionicons name="checkmark-sharp" size={32} color="#FFF" />}
-                      {status === 'current' && <Ionicons name="star" size={30} color="#FFF" />}
-                      {status === 'locked' && <Ionicons name="lock-closed" size={24} color={Colors.textMuted} />}
-                    </TouchableOpacity>
+                    <View style={[styles.nodeWrapper, isLeft ? styles.nodeLeft : styles.nodeRight]}>
+                        {status === 'current' && (
+                          <View style={styles.currentLabelBubble}>
+                            <Text style={styles.currentLabelText}>Start here 🚀</Text>
+                            <View style={styles.currentLabelTail} />
+                          </View>
+                        )}
 
-                    <View style={styles.nodeTextWrap}>
-                      <Text style={[
-                        styles.nodeLevelLabel,
-                        status === 'current' && { color: Colors.accent }
-                      ]}>Unit {realIdx + 1}</Text>
-                      <Text style={[styles.nodeTitle, status === 'locked' && { color: Colors.textMuted }]}>
-                        {lesson.title}
-                      </Text>
+                        {status === 'current' && (
+                          <Animated.View style={[styles.pulseRing, { transform: [{ scale: pulseAnim }] }]} />
+                        )}
+
+                        <TouchableOpacity 
+                          activeOpacity={0.8}
+                          onPress={() => handleNodePress(lesson, status)}
+                          style={[
+                            styles.nodeCircle,
+                            status === 'completed' && styles.nodeCompleted,
+                            status === 'current' && styles.nodeCurrent,
+                            status === 'locked' && styles.nodeLocked,
+                            status === 'current' ? { transform: [{ scale: 1.1 }] } : {}
+                          ]}
+                        >
+                          {status === 'completed' && <Ionicons name="checkmark-sharp" size={32} color="#FFF" />}
+                          {status === 'current' && <Ionicons name="star" size={30} color="#FFF" />}
+                          {status === 'locked' && <Ionicons name="lock-closed" size={24} color={Colors.textMuted} />}
+                        </TouchableOpacity>
+
+                        <View style={styles.nodeTextWrap}>
+                          <Text style={[
+                            styles.nodeLevelLabel,
+                            status === 'current' && { color: Colors.accent }
+                          ]}>Unit {realIdx + 1}</Text>
+                          <Text style={[styles.nodeTitle, status === 'locked' && { color: Colors.textMuted }]}>
+                            {lesson.title}
+                          </Text>
+                        </View>
                     </View>
-                 </View>
-                </View>
+                  </View>
+
+                  {showLevelHeader && lesson.level === 'A1.2' && (
+                    <View style={styles.levelMarkerContainer}>
+                      <View style={styles.levelMarkerLine} />
+                      <View style={styles.levelMarkerBadge}>
+                        <Text style={styles.levelMarkerText}>LEVEL {lesson.level} — INTERMEDIATE</Text>
+                      </View>
+                      <View style={styles.levelMarkerLine} />
+                    </View>
+                  )}
+                </React.Fragment>
               )
           })}
           
@@ -326,7 +347,37 @@ const styles = StyleSheet.create({
   currentLabelText: { fontSize: 13, fontWeight: '800', color: Colors.primary },
   currentLabelTail: { position: 'absolute', bottom: -6, left: '50%', marginLeft: -6, width: 0, height: 0, borderLeftWidth: 6, borderRightWidth: 6, borderTopWidth: 6, borderStyle: 'solid', backgroundColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', borderTopColor: '#FFFFFF' },
   startBase: { marginTop: 40, width: 60, height: 60, borderRadius: 30, backgroundColor: '#8DBE74', alignItems: 'center', justifyContent: 'center', borderWidth: 4, borderColor: '#FFFFFF', ...Shadows.medium },
-  natureEmoji: { position: 'absolute', fontSize: 32, zIndex: 0, textShadowColor: 'rgba(0,0,0,0.1)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 2 }
+  natureEmoji: { position: 'absolute', fontSize: 32, zIndex: 0, textShadowColor: 'rgba(0,0,0,0.1)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 2 },
+  levelMarkerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 40,
+    paddingHorizontal: 20,
+    width: '100%',
+  },
+  levelMarkerLine: {
+    flex: 1,
+    height: 3,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    borderRadius: 2,
+  },
+  levelMarkerBadge: {
+    backgroundColor: '#FFF0DE',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    marginHorizontal: 15,
+    borderWidth: 2,
+    borderColor: '#F4B76B',
+    ...Shadows.soft,
+  },
+  levelMarkerText: {
+    fontSize: 14,
+    fontWeight: '900',
+    color: '#E65100',
+    letterSpacing: 1.5,
+  },
 });
 
 export default GrammarMapScreen;

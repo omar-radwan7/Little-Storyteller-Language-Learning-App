@@ -1,0 +1,77 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_dat_prepositions",
+  "order": 24,
+  "title": "Dative Prepositions",
+  "description": "Learn words like 'with', 'from', and 'to'—and how they force the Dative case!",
+  "explanation": "**HOOK**\nYou just learned the 5 Akkusativ bosses. Now, meet the even bigger and bossier group: The Dativ Bosses! These words are super common—you can't say 'I sit WITH my friend' without them. They reach out and force every word after them to put on a Dativ nametag.\n\n**CONCEPT**\nWe are learning 'Dativ-Prepositions'. These words: aus (from, out of), bei (at, by), mit (with), nach (after, to), and von (from) are special because they ALWAYS trigger the Dativ case.\n\n**RULE**\nJust remember: 'mit', 'aus', 'nach', 'von', 'bei', 'zu'... these are Dativ's best friends. If you see them, use 'dem', 'der', 'ihm', or 'mir' immediately after!",
+  "tables": [
+    {
+      "title": "The Big 6 (Dativ Bosses)",
+      "headers": ["German", "English", "Example"],
+      "rows": [
+        ["mit", "with", "Ich komme MIT DIR."],
+        ["aus", "from (origin)", "Ich komme AUS BERLIN."],
+        ["bei", "at / with", "Ich bin BEI DER Arbeit."],
+        ["nach", "after / to", "NACH DER Schule..."],
+        ["von", "from", "Ein Geschenk VON MIR."],
+        ["zu", "to", "Wir gehen ZU DEM (ZUM) Arzt."]
+      ],
+      "note": "TIP: These prepositions change der/das to dem, and die to der!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Remember: The articles in Dativ change spelling! Masculine/Neuter become '-m' (dem), and Feminine (die) jumps to 'der'. It's weird to say 'bei DER Mutter', but that's the Dativ boss at work!"
+    }
+  ],
+  "examples": [
+    { "german": "Ich spiele mit dem Hund.", "english": "I play with the dog. (Dativ!)" },
+    { "german": "Das Geschenk ist von mir.", "english": "The gift is from me." },
+    { "german": "Wir kommen aus der Stadt.", "english": "We come from the city." },
+    { "german": "Nach dem Essen schlafen wir.", "english": "After eating, we sleep." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Du gehst nicht alleine ins Kino. Du gehst ____ einem Freund.",
+      "options": ["aus", "von", "mit", "bei"],
+      "correctAnswer": "mit",
+      "hint": "Together (with).",
+      "explanation": "mit = with. 'mit' forces Dativ (einem Freund)."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Er (He) hat auch ein Ticket! Das heißt: Ich komme mit ____.",
+      "options": ["er", "ihn", "ihm", "seinem"],
+      "correctAnswer": "ihm",
+      "hint": "mit forces Dativ him.",
+      "explanation": "er -> ihm (Dativ) nach 'mit'!"
+    },
+    {
+       "type": "reorder",
+       "question": "Du schreibst eine Karte zu einem Geschenk. Wer hat das Geschenk gegeben? Das Geschenk ist...",
+       "words": ["Von", "mir."],
+       "correctAnswer": "Von mir.",
+       "hint": "'From me'.",
+       "explanation": "von + Dativ (me) = Von mir."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was passiert bei 'aus der Stadt'?",
+      "options": ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
+      "correctAnswer": "Dativ",
+      "hint": "die Stadt becomes 'der' Stadt.",
+      "explanation": "aus is a Dativ-only preposition."
+    },
+    {
+      "type": "write",
+      "question": "Wenn du über dein Heimatland sprichst: 'Ich komme ____ Deutschland.'",
+      "correctAnswer": "aus",
+      "hint": "Origin (from / out of).",
+      "explanation": "'aus' wird für Länder und Städte (origin) genutzt!"
+    }
+  ]
+}

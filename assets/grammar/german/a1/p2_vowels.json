@@ -1,0 +1,88 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_02",
+  "order": 2,
+  "title": "Vowel Sounds & Combinations",
+  "description": "Learn how combined vowels like EI and IE change sounds—and the 3 golden memory tricks.",
+  "explanation": "**HOOK**\nIn English, a 'cow' is not a 'cow' depending on where you're from. But in German, pronunciation is as consistent as a clock! Once you learn these vowel combinations, you can pronounce almost any new German word without ever hearing it first.\n\n**CONCEPT**\nWe are focusing on 'Diphthongs'—two vowels that join to make one new sound. \n\n**RULE**\nEI vs. IE is the biggest trap: Always pronounce the **SECOND** letter! \n1. **EI** -> sounds like English 'I' (Second letter is I).\n2. **IE** -> sounds like English 'E' (Second letter is E).",
+  "tables": [
+    {
+      "title": "Vowel Combinations (Diphthongs)",
+      "headers": ["Combination", "Sound", "English Comparison", "Examples"],
+      "rows": [
+        ["EI", "'eye'", "like 'I'", "ein, mein, nein, Stein"],
+        ["IE", "'ee'", "like 'see'", "die, Sie, liebe, vier"],
+        ["EU", "'oy'", "like 'boy'", "neu, heute, Leute"],
+        ["ÄU", "'oy'", "like 'boy'", "Häuser, Träume"],
+        ["AU", "'ow'", "like 'cow'", "auch, Haus, blau, auf"],
+        ["SCH", "'sh'", "like 'ship'", "Schule, schön, schwarz"],
+        ["SP", "'shp'", "'shp' sound", "Sprache, spielen"],
+        ["ST", "'sht'", "'sht' sound", "Straße, Student"],
+        ["CH", "'kh'", "guttural", "auch, machen, Buch"],
+        ["CK", "'k'", "like 'k'", "Brücke, Stück, Glück"],
+        ["QU", "'kv'", "'kv' sound", "Quelle, quer"],
+        ["PH", "'f'", "like 'f'", "Philosophie"]
+      ],
+      "note": "TIP: SCH is always 'sh' (like ship), never 'sk' like English school!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "THE EI/IE RULE",
+      "text": "This confuses almost every beginner! Use the memory trick: Pronounce the SECOND letter as it is in English.\n- **EI** (I is second) -> 'I'\n- **IE** (E is second) -> 'E' (ee sound)"
+    }
+  ],
+  "examples": [
+    { "german": "Mein Name ist...", "english": "My name is... (EI sounds like 'eye')" },
+    { "german": "Sie liebe ihn.", "english": "She loves him. (IE sounds like 'ee')" },
+    { "german": "Das Haus ist neu.", "english": "The house is new. (EU sounds like 'oy')" },
+    { "german": "Wir spielen.", "english": "We are playing. (SP sounds like 'shp')" }
+  ],
+  "exercises": [
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen to the word. Does it contain EI or IE?",
+      "audio_text": "nein",
+      "options": ["EI", "IE", "AU", "EU"],
+      "correctAnswer": "EI",
+      "hint": "Ends in English 'I' sound.",
+      "explanation": "Nein contains EI!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen and select the word you hear:",
+      "audio_text": "vier",
+      "options": ["vier", "feir", "vor", "ver"],
+      "correctAnswer": "vier",
+      "hint": "Long 'ee' sound.",
+      "explanation": "Vier (4) contains IE."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which sound do you hear: SP or ST?",
+      "audio_text": "Straße",
+      "options": ["SP", "ST", "S", "SCH"],
+      "correctAnswer": "ST",
+      "hint": "Starts with 'Sht'.",
+      "explanation": "Straße starts with ST (Sht)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "What is the memory trick for EI and IE?",
+      "options": ["Always say 'I'", "Always say 'E'", "Always pronounce the SECOND letter", "Always pronounce the FIRST letter"],
+      "correctAnswer": "Always pronounce the SECOND letter",
+      "hint": "EI (I second) -> eye.",
+      "explanation": "The second letter tells you the sound!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the combo you hear in this word: 'Häuser'",
+      "audio_text": "Häuser",
+      "options": ["AU", "EU", "ÄU", "EI"],
+      "correctAnswer": "ÄU",
+      "hint": "Sounds like 'oy' in boy.",
+      "explanation": "Häuser contains ÄU!"
+    }
+  ]
+}

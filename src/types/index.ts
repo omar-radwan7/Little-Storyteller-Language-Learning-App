@@ -91,9 +91,10 @@ export interface GrammarExample {
 }
 
 export interface GrammarExercise {
-  type: 'multiple_choice' | 'fill_blank' | 'write' | 'match' | 'table_fill' | 'reorder';
+  type: 'multiple_choice' | 'fill_blank' | 'write' | 'match' | 'table_fill' | 'reorder' | 'listen_and_answer';
   text?: string;
   question?: string;
+  audio_text?: string; // Content to play in TTS for listen_and_answer
   options?: string[];
   correctAnswer?: string | string[];
   blankIndex?: number;

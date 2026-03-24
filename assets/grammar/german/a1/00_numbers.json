@@ -1,0 +1,92 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_numbers",
+  "order": 6,
+  "title": "Numbers & Days",
+  "description": "From counting your coffee to naming the days of the week, let's master the basics!",
+  "explanation": "**HOOK**\nCounting in German is easy at first, then it gets weird around twenty! Imagine someone saying 'One-and-Twenty' instead of 'Twenty-One'—that's exactly how Germans think. It's like a little math puzzle every time you say a number!\n\n**CONCEPT**\nWe are building your 'survival kit'. You need numbers for the bill at a restaurant and days to make plans with new friends.\n\n**RULE**\nFor numbers 21-99, always say the SMALL number first, then 'und' (and), then the BIG number. \nExample: 24 = vierundzwanzig (four-and-twenty).",
+  "tables": [
+    {
+      "title": "Numbers 0 - 12 (The Basics)",
+      "headers": ["Number", "German", "Number", "German"],
+      "rows": [
+        ["0", "null", "7", "sieben"],
+        ["1", "eins", "8", "acht"],
+        ["2", "zwei", "9", "neun"],
+        ["3", "drei", "10", "zehn"],
+        ["4", "vier", "11", "elf"],
+        ["5", "fünf", "12", "zwölf"],
+        ["6", "sechs", "", ""]
+      ],
+      "note": "TIP: Master these first! Everything else is built from these blocks."
+    },
+    {
+      "title": "Days of the Week",
+      "headers": ["English", "German", "Short"],
+      "rows": [
+        ["Monday", "Montag", "Mo"],
+        ["Tuesday", "Dienstag", "Di"],
+        ["Wednesday", "Mittwoch", "Mi"],
+        ["Thursday", "Donnerstag", "Do"],
+        ["Friday", "Freitag", "Fr"],
+        ["Saturday", "Samstag", "Sa"],
+        ["Sunday", "Sonntag", "So"]
+      ],
+      "note": "Wednesday is 'Mittwoch'—literally meaning 'Mid-week'!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Germans count on their fingers differently. They start with the THUMB for number one! If you hold up your index finger for one coffee, they might accidentally think you want two (thumb + index)!"
+    }
+  ],
+  "examples": [
+    { "german": "Eins, zwei, drei...", "english": "One, two, three..." },
+    { "german": "Heute ist Montag.", "english": "Today is Monday." },
+    { "german": "Ich habe zwei Brüder.", "english": "I have two brothers." },
+    { "german": "Am Freitag gehen wir ins Kino.", "english": "On Friday we are going to the cinema." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was ist die Zahl 'vier'?",
+      "options": ["3", "4", "5", "6"],
+      "correctAnswer": "4",
+      "hint": "Count: eins, zwei, drei...",
+      "explanation": "Correct! vier = 4."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Montag, Dienstag, ____, Donnerstag.",
+      "options": ["Mittwoch", "Freitag", "Samstag", "Eins"],
+      "correctAnswer": "Mittwoch",
+      "hint": "Mid-week day.",
+      "explanation": "Mittwoch follows Dienstag!"
+    },
+    {
+      "type": "write",
+      "question": "Eine Woche hat so viele Tage (Montag bis Sonntag). Schreibe die Zahl als Wort:",
+      "correctAnswer": "sieben",
+      "hint": "Starts with 's'. After 6.",
+      "explanation": "7 Tage = sieben!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Tag kommt nach Freitag?",
+      "options": ["Sonntag", "Samstag", "Mittwoch", "Dienstag"],
+      "correctAnswer": "Samstag",
+      "hint": "What follows Friday? It starts with 'S'.",
+      "explanation": "Nach Freitag kommt Samstag!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bringe die Zahlen in die richtige Reihenfolge:",
+      "words": ["eins", "zwei", "drei", "vier"],
+      "correctAnswer": "eins zwei drei vier",
+      "hint": "1, 2, 3, 4",
+      "explanation": "Great counting!"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_01",
+  "order": 1,
+  "title": "The German Alphabet",
+  "description": "Master the 26 standard letters and 4 special characters (ä, ö, ü, ß) of the German language.",
+  "explanation": "**HOOK**\nGerman looks a lot like English, but don't let that fool you! While the letters are mostly the same, the sounds they make can be wildly different. Knowing the alphabet is your foundational 'key' to spelling, pronunciation, and using any German dictionary.\n\n**CONCEPT**\nGerman uses the same 26 letters as English plus 4 special characters: **ä, ö, ü, and ß**. \n\n**RULE**\nMost letters sound different from English. Focus on the 'rebels' that switch sounds completely, like **W**, **V**, and **Z**!",
+  "tables": [
+    {
+      "title": "A - Z + Specials",
+      "headers": ["Letter", "German Name", "Common Word"],
+      "rows": [
+        ["A", "Ah", "Apfel (Apple)"],
+        ["B", "Beh", "Ball (Ball)"],
+        ["C", "Tseh", "Computer"],
+        ["D", "Deh", "Danke (Thanks)"],
+        ["E", "Eh", "Elefant"],
+        ["F", "Eff", "Fisch (Fish)"],
+        ["G", "Geh", "Garten (Garden)"],
+        ["H", "Hah", "Haus (House)"],
+        ["I", "Ee", "Igel (Hedgehog)"],
+        ["J", "Yot", "Ja (Yes)"],
+        ["K", "Kah", "Kaffee (Coffee)"],
+        ["L", "Ell", "Lampe (Lamp)"],
+        ["M", "Emm", "Mutter (Mother)"],
+        ["N", "Enn", "Nein (No)"],
+        ["O", "Oh", "Opa (Grandpa)"],
+        ["P", "Peh", "Park"],
+        ["Q", "Koo", "Quelle (Source)"],
+        ["R", "Err", "Radio"],
+        ["S", "Ess", "Sonne (Sun)"],
+        ["T", "Teh", "Tee (Tea)"],
+        ["U", "Oo", "Uhr (Clock)"],
+        ["V", "Fau", "Vater (Father)"],
+        ["W", "Veh", "Wasser (Water)"],
+        ["X", "Iks", "Xylophon"],
+        ["Y", "Ypsilon", "Yoga"],
+        ["Z", "Tset", "Zoo"],
+        ["Ä", "Äh", "Äpfel (Apples)"],
+        ["Ö", "Öh", "Öl (Oil)"],
+        ["Ü", "Üh", "Über (Over)"],
+        ["ẞ", "Eszett", "Straße (Street)"]
+      ],
+      "note": "TIP: Tap the speaker buttons to hear each letter name!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "THE REBELS",
+      "text": "1. **W** sounds like English **V** (Wasser -> 'Vasser').\n2. **V** sounds like English **F** (Vater -> 'Fater').\n3. **Z** is always **'ts'** (Zoo -> 'Tsoo').\n4. **J** is always **'y'** (Ja -> 'Ya').\n5. **R** is guttural, made in the back of the throat."
+    }
+  ],
+  "examples": [
+    { "german": "A, B, C, D, E, F, G...", "english": "The base alphabet." },
+    { "german": "Ja", "english": "Yes (Sounds like 'Ya')" },
+    { "german": "Wasser", "english": "Water (Sounds like 'Vasser')" },
+    { "german": "Zoo", "english": "Zoo (Sounds like 'Tsoo')" }
+  ],
+  "exercises": [
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which letter was spoken?",
+      "audio_text": "Z",
+      "options": ["S", "C", "Z", "T"],
+      "correctAnswer": "Z",
+      "hint": "Tset!",
+      "explanation": "Z is pronounced 'Tset' in German."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the first letter of the word spoken:",
+      "audio_text": "Vater",
+      "options": ["V", "F", "W", "B"],
+      "correctAnswer": "V",
+      "hint": "V in German sounds like F.",
+      "explanation": "V (Fau) is the first letter of Vater."
+    },
+    {
+      "type": "match",
+      "question": "Match the letter to its German sound name:",
+      "pairs": [
+        { "left": "W", "right": "Veh" },
+        { "left": "V", "right": "Fau" },
+        { "left": "J", "right": "Yot" }
+      ],
+      "hint": "Think about the rebels!",
+      "explanation": "Excellent! W=Veh, V=Fau, J=Yot."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "How is the letter 'W' pronounced in German words?",
+      "options": ["Like English W", "Like English V", "Like English F", "It is silent"],
+      "correctAnswer": "Like English V",
+      "hint": "Wasser sounds like 'Vasser'.",
+      "explanation": "W in German sounds like English V!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen to the alphabet sequence. Which letter is missing at the end: A, B, C...",
+      "audio_text": "A B C D",
+      "options": ["E", "D", "F", "G"],
+      "correctAnswer": "D",
+      "hint": "Deh.",
+      "explanation": "The sequence ends with D (Deh)!"
+    }
+  ]
+}

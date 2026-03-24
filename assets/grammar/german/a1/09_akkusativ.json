@@ -114,9 +114,9 @@
     },
     {
       "type": "write",
-      "question": "Schreibe 'ein Sohn' (der Sohn) im Akkusativ:",
+      "question": "Der Vater liebt sein Kind. Der Vater hat ____ ____.",
       "correctAnswer": "einen Sohn",
-      "hint": "Der maskuline Artikel 'ein' braucht eine '-en' Endung.",
+      "hint": "It means 'a son'. Der maskuline Artikel 'ein' braucht eine '-en' Endung.",
       "explanation": "Since Sohn is masculine (der), 'ein' becomes 'einen' in the object position!"
     },
     {

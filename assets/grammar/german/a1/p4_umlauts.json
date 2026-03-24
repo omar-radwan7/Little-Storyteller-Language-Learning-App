@@ -1,0 +1,79 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_04",
+  "order": 4,
+  "title": "German Umlauts (ä, ö, ü)",
+  "description": "Master the 3 vowels with dots—and learn how their sounds change everything.",
+  "explanation": "**HOOK**\nUmlauts are those double dots on vowels (**ä, ö, ü**) that look like little eyes watching you! But they aren't just for decoration—they signal a core sound change that can completely change the meaning of a word.\n\n**CONCEPT**\nWe are covering the three Umlauts and how they change vowels. \n\n**RULE**\nUmlauts reflect sound shifts that help categorize plurals and verb conjugations. Master **ö** and **ü** with the 'lips shift' trick!",
+  "tables": [
+    {
+      "title": "The 3 Dots",
+      "headers": ["Vowel", "Sound Description", "English Approximation", "Common Examples"],
+      "rows": [
+        ["ä", "sounds like 'e' in bed", "like 'bed'", "Mädchen, Bär, schläft, Käse"],
+        ["ö", "round lips like 'o', tongue like 'e'", "No English equivalent", "schön, hören, möchten, öffnen"],
+        ["ü", "round lips like 'oo', tongue like 'ee'", "No English equivalent", "über, müde, grün, fühlen"]
+      ],
+      "note": "TIP: If you don't have an umlaut keyboard, type 'ae', 'oe', or 'ue' instead!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "THE MEANING SHIFT",
+      "text": "Umlauts often signal **plurals**! For example, **Mutter** (one mother) becomes **Mütter** (many mothers). Skipping the dots can lead to serious confusion."
+    }
+  ],
+  "examples": [
+    { "german": "Das Mädchen schläft.", "english": "The girl is sleeping. (ä sounds like 'e')" },
+    { "german": "Ich möchte ein Eis.", "english": "I would like an ice cream. (ö round lips sound)" },
+    { "german": "Du bist müde.", "english": "You are tired. (ü round lips sound)" },
+    { "german": "Bären essen Honig.", "english": "Bears eat honey. (ä for plural bears)" }
+  ],
+  "exercises": [
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen to the word. Does it contain a normal O or an Ö?",
+      "audio_text": "schön",
+      "options": ["O", "Ö", "U", "Ä"],
+      "correctAnswer": "Ö",
+      "hint": "Round lips, tongue like 'e'.",
+      "explanation": "Schön (beautiful) contains an Ö!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen and select the word you hear:",
+      "audio_text": "Mütter",
+      "options": ["Mutter", "Mütter", "Motta", "Mette"],
+      "correctAnswer": "Mütter",
+      "hint": "Plural!",
+      "explanation": "Mütter is plural (Many mothers)."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which sound do you hear: Ä or Normal A?",
+      "audio_text": "Bär",
+      "options": ["A", "Ä", "E", "O"],
+      "correctAnswer": "Ä",
+      "hint": "Sounds like 'bed' vowel.",
+      "explanation": "Bär (Bear) contains an Ä!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the word containing a Ü from this sentence:",
+      "audio_text": "Ich bin heute sehr müde.",
+      "options": ["heute", "sehr", "müde", "bin"],
+      "correctAnswer": "müde",
+      "hint": "Tired. Think about the dots.",
+      "explanation": "Müde (tired) contains a Ü!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "What is the secondary option for typing ä if you don't have an umlaut keyboard?",
+      "options": ["a", "ae", "aa", "ar"],
+      "correctAnswer": "ae",
+      "hint": "Letter + E.",
+      "explanation": "ä=ae, ö=oe, ü=ue is the standard fallback!"
+    }
+  ]
+}

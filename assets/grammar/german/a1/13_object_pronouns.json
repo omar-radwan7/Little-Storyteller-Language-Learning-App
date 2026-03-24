@@ -113,7 +113,7 @@
     },
     {
       "type": "write",
-      "question": "Schreibe das Dativ-Pronomen für 'du' (to you):",
+      "question": "Das Geschenk ist nicht für mich. Ich gebe das Geschenk ____ (to you).",
       "correctAnswer": "dir",
       "hint": "Rhymes with mir. mich -> mir, dich -> ?",
       "explanation": "du -> dir (Dativ)"

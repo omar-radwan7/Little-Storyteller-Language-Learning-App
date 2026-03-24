@@ -1,0 +1,77 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_questions",
+  "order": 19,
+  "title": "Question Formation",
+  "description": "Stop just talking and start asking! Learn how to ask W-questions and Yes/No questions.",
+  "explanation": "**HOOK**\nAsking questions in German is like flipping a coin. For 'Yes/No' questions, the Verb just flips places with the subject to move all the way to the front! For big questions (W-questions), you just stick a question word at the very start.\n\n**CONCEPT**\nWe are mastering 'W-Fragen' (Who? What? Why?) and 'Ja/Nein-Fragen' (Are you...? Do you...?).\n\n**RULE**\nFor Ja/Nein questions: Verb goes to Position 1! For W-Fragen: Question word stays in Pos 1, Verb stays in Pos 2.",
+  "tables": [
+    {
+      "title": "The W-Question Words",
+      "headers": ["German", "English", "Example"],
+      "rows": [
+        ["Wer?", "Who?", "Wer bist du?"],
+        ["Was?", "What?", "Was machst du?"],
+        ["Wo?", "Where?", "Wo wohnst du?"],
+        ["Wann?", "When?", "Wann kommst du?"],
+        ["Wie?", "How?", "Wie geht es dir?"],
+        ["Warum?", "Why?", "Warum lernst du?"]
+      ],
+      "note": "TIP: All the main ones start with W!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "In Yes/No questions, the Verb is the King of the Hill (Position 1). 'Drink you water?' (Trinkst du Wasser?). It feels weird at first because in English we need the word 'Do', but German doesn't need 'Do' at all!"
+    }
+  ],
+  "examples": [
+    { "german": "Woher kommst du?", "english": "Where are you from?" },
+    { "german": "Kommst du aus Berlin?", "english": "Are you from Berlin? (Ja/Nein)" },
+    { "german": "Wie alt bist du?", "english": "How old are you?" },
+    { "german": "Lernst du Deutsch?", "english": "Are you learning German?" }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Du fragst nach einer Person: '____ ist das?'",
+      "options": ["Was", "Wer", "Wo", "Wann"],
+      "correctAnswer": "Wer",
+      "hint": "You are asking about a person (Who).",
+      "explanation": "Wer ist das? = Who is that?"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____ wohnst du?",
+      "options": ["Was", "Wie", "Wo", "Wer"],
+      "correctAnswer": "Wo",
+      "hint": "Asking for a place (where).",
+      "explanation": "Wo = Where."
+    },
+    {
+       "type": "reorder",
+       "question": "Frag 'Are you coming?':",
+       "words": ["Kommst", "du?"],
+       "correctAnswer": "Kommst du?",
+       "hint": "Verb goes first for Yes/No.",
+       "explanation": "Verb in Pos 1 makes it a question!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Du fragst nach dem Befinden: '____ geht es dir?'",
+      "options": ["Wie", "Wo", "Was", "Warum"],
+      "correctAnswer": "Wie",
+      "hint": "How are you?",
+      "explanation": "Wie = How. Use it to ask how someone is doing!"
+    },
+    {
+      "type": "write",
+      "question": "Frag nach einer Sache (What): '____ ist das?'",
+      "correctAnswer": "was",
+      "hint": "Starts with 'w'.",
+      "explanation": "Was ist das? = What is that?"
+    }
+  ]
+}

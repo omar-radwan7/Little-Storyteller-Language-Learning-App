@@ -1,0 +1,77 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_adjectives",
+  "order": 25,
+  "title": "Basic Adjectives",
+  "description": "Color your world! Learn how to describe things as beautiful, big, or fast.",
+  "explanation": "**HOOK**\nWithout adjectives, life would be black and white. You don't just have a 'house'; you have a 'beautiful, big house'. In German, adjectives are very polite—when they are by themselves (like 'The house is big'), they don't change at all. It's only when they get cozy and cuddle up in front of a noun that they start wearing endings!\n\n**CONCEPT**\nWe are learning 'Predicative Adjectives' (is ... big) and basic 'Attributive' pieces (the big house). In A1, the most important part is learning the descriptive words themselves! \n\n**RULE**\nIf the adjective comes AFTER the verb 'sein' (is), you don't add any endings! \nExample: Das Haus ist SCHÖN. (Simply schön!)",
+  "tables": [
+    {
+      "title": "Common Adjective Opposites",
+      "headers": ["Type", "German", "English", "Opposite (German)"],
+      "rows": [
+        ["Quality", "gut", "good", "schlecht (bad)"],
+        ["Look", "schön", "beautiful", "hässlich (ugly)"],
+        ["Size", "groß", "big", "klein (small)"],
+        ["Speed", "schnell", "fast", "langsam (slow)"],
+        ["Age", "jung", "young", "alt (old)"],
+        ["Price", "teuer", "expensive", "billig (cheap)"]
+      ],
+      "note": "TIP: Learning them in pairs makes your brain remember them twice as fast!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Only add endings if the adjective is directly in front of the noun! 'Das rote Auto' (The red car) vs 'Das Auto ist rot' (The car is red). For A1, focus on the second version—it's much easier!"
+    }
+  ],
+  "examples": [
+    { "german": "Der Mann ist groß.", "english": "The man is big." },
+    { "german": "Das Wetter ist heute schön.", "english": "The weather is beautiful today." },
+    { "german": "Mein Auto ist sehr schnell.", "english": "My car is very fast." },
+    { "german": "Das Buch ist billig und gut.", "english": "The book is cheap and good." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was ist das Gegenteil (Opposite) von 'groß'?",
+      "options": ["schön", "langsam", "klein", "alt"],
+      "correctAnswer": "klein",
+      "hint": "Not big, but...",
+      "explanation": "groß (big) <-> klein (small)!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Das Auto ist sehr ____ (fast).",
+      "options": ["langsam", "schön", "schnell", "groß"],
+      "correctAnswer": "schnell",
+      "hint": "Speedy!",
+      "explanation": "schnell = fast."
+    },
+    {
+       "type": "reorder",
+       "question": "Sag 'The weather is good':",
+       "words": ["Das", "Wetter", "ist", "gut."],
+       "correctAnswer": "Das Wetter ist gut.",
+       "hint": "Subject + Verb(ist) + Adjective.",
+       "explanation": "Perfectly structured."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Ein Auto kostet 100.000 Euro. Das Auto ist ____.",
+      "options": ["billig", "teuer", "klein", "alt"],
+      "correctAnswer": "teuer",
+      "hint": "It costs a lot of money! Think about 'expensive'.",
+      "explanation": "100.000 Euro ist viel Geld, also ist das Auto teuer!"
+    },
+    {
+      "type": "write",
+      "question": "Der Opa ist 90 Jahre alt. Aber das kleine Baby ist sehr ____.",
+      "correctAnswer": "jung",
+      "hint": "Think about the opposite of 'alt' (old).",
+      "explanation": "jung = young!"
+    }
+  ]
+}

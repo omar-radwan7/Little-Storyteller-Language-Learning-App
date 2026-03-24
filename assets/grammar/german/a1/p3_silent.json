@@ -1,0 +1,85 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_03",
+  "order": 3,
+  "title": "Silent Letters & Special Rules",
+  "description": "Learn the 5 golden rules of silent letters and sound switches at the end of words.",
+  "explanation": "**HOOK**\nGerman pronunciation seems difficult at first because of those long words, but it's actually incredibly consistent! Unlike English, where 'knight' has a silent K and GH just because, German has a logical rule for every silent or changing letter.\n\n**CONCEPT**\nWe are covering 5 major rules that change how letters sound at the ends of words.\n\n**RULE**\nNever drop the final **-e**! In English, it's silent (like 'cake'), but in German, it's a soft, vital 'uh' sound.",
+  "tables": [
+    {
+      "title": "The 5 Golden Rules",
+      "headers": ["Rule", "When", "Sound Change", "Examples"],
+      "rows": [
+        ["Final -e", "End of word", "Soft 'uh' not silent", "Straße, Liebe, bitte"],
+        ["H after vowel", "Middle of word", "Silent, stretches vowel", "sehr, fahren, sehen"],
+        ["H at start", "Start of word", "Always pronounced", "Haus, haben, Herr"],
+        ["Final -ig", "End of word", "Sounds like -ich", "richtig, lustig, fertig"],
+        ["Final -er", "End of word", "Weak 'ah', soft R", "Wasser, Mutter, aber"],
+        ["Final B", "End of word", "Sounds like P", "Dieb, halb"],
+        ["Final D", "End of word", "Sounds like T", "Hund, Wald, Kind"],
+        ["Final G", "End of word", "Sounds like K", "Tag, Weg, Berg"]
+      ],
+      "note": "TIP: The final B->P, D->T, G->K rule will become automatic with practice!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "1. **The final -e rule**: English speakers always drop the final -e. Don't! Liebe sounds like 'Lee-buh', not 'Leeb'.\n2. **The -ig rule**: To a beginner, 'fertig' (ready) sounds exactly like 'fertich'. That's normal!"
+    }
+  ],
+  "examples": [
+    { "german": "Das Wasser ist warm.", "english": "The water is warm. (-er sounds like 'ah')" },
+    { "german": "Wir fahren nach Hause.", "english": "We are driving home. (Silent H, final -e 'uh')" },
+    { "german": "Ist das richtig?", "english": "Is that correct? (-ig sounds like 'ich')" },
+    { "german": "Ich habe einen Hund.", "english": "I have a dog. (Final D sounds like T)" }
+  ],
+  "exercises": [
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen to the word. Is the final letter silent like English, or a soft 'uh'?",
+      "audio_text": "Liebe",
+      "options": ["Silent", "Soft 'uh' sound", "Stretches vowel", "Soft 'ah'"],
+      "correctAnswer": "Soft 'uh' sound",
+      "hint": "Lee-buh.",
+      "explanation": "Final -e is NEVER silent in German!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which consonant do you hear at the end of this word: 'Hund'?",
+      "audio_text": "Hund",
+      "options": ["D", "T", "G", "S"],
+      "correctAnswer": "T",
+      "hint": "It sounds unvoiced (Hoon-T).",
+      "explanation": "Final D in German sounds like T!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen to 'sehen'. How is the 'h' used?",
+      "audio_text": "sehen",
+      "options": ["Pronounced strongly", "Stretches the vowel", "Sounds like 'ch'", "Completely silent"],
+      "correctAnswer": "Stretches the vowel",
+      "hint": "Zay-en.",
+      "explanation": "H after a vowel is silent but elongates the vowel sound."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the sound of the final -ig in 'fertig':",
+      "audio_text": "fertig",
+      "options": ["-ig", "-ik", "-ich", "-ing"],
+      "correctAnswer": "-ich",
+      "hint": "Soft 'kh' sound.",
+      "explanation": "Final -ig sounds exactly like -ich!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which pronunciation was correct German for 'Wasser'?",
+      "audio_text": "Wasser",
+      "options": ["Wass-er (Hard R)", "Wass-ah (Soft ah)", "Wass-uh", "Wass-ee"],
+      "correctAnswer": "Wass-ah (Soft ah)",
+      "hint": "R is barely heard.",
+      "explanation": "Final -er sounds like a weak 'ah'!"
+    }
+  ]
+}

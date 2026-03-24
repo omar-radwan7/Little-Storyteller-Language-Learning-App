@@ -1,0 +1,80 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_28",
+  "order": 28,
+  "title": "Everyday Phrases",
+  "description": "Speak like a native from day one with these essential survival phrases for any situation.",
+  "explanation": "**HOOK**\nYou now have the bricks and mortar—the words and grammar! But to truly 'live' in a language, you need those pre-made phrases that Germans use every single day. These will help you buy groceries, ask for help, and be polite in style.\n\n**CONCEPT**\nWe are covering high-frequency phrases for survival and social interaction. \n\n**RULE**\nBe polite but direct! Germans value clarity. These phrases are mostly static—you can learn them by heart without worrying about every grammar rule inside them.",
+  "tables": [
+    {
+      "title": "Social & Survival Phrases",
+      "headers": ["Type", "German", "English", "Literal"],
+      "rows": [
+        ["Politeness", "Vielen Dank!", "Thank you very much!", "Many thanks"],
+        ["Politeness", "Gern geschehen!", "You are welcome!", "Happened gladly"],
+        ["Survival", "Wo ist...", "Where is...", "Where is"],
+        ["Survival", "Wie bitte?", "Pardon?", "How please?"],
+        ["Survival", "Entschuldigung!", "Excuse me / Sorry!", "Excuse me"],
+        ["Social", "Mir geht es gut.", "I'm doing well.", "To me it goes good"],
+        ["Social", "Wie geht es dir?", "How are you?", "How goes it to you?"]
+      ],
+      "note": "TIP: 'Wie bitte?' is very common if you didn't understand something!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "THE POLITE TOUCH",
+      "text": "Using 'Bitte' and 'Danke' is essential. If you don't know the exact word, start with 'Entschuldigung' and point—people will always try to help!"
+    }
+  ],
+  "examples": [
+    { "german": "Entschuldigung, wo ist der Bahnhof?", "english": "Excuse me, where is the train station?" },
+    { "german": "Wie bitte? Ich verstehe nicht.", "english": "Pardon? I don't understand." },
+    { "german": "Vielen Dank für Ihre Hilfe!", "english": "Thank you very much for your help!" },
+    { "german": "Gern geschehen. Schönen Tag!", "english": "You're welcome. Have a nice day!" }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was sagst du, wenn jemand 'Danke' sagt?",
+      "options": ["Vielen Dank!", "Gern geschehen!", "Entschuldigung!", "Wie bitte?"],
+      "correctAnswer": "Gern geschehen!",
+      "hint": "You are welcome.",
+      "explanation": "Gern geschehen is the polite response to Danke!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "____, wo ist das Klo?",
+      "options": ["Danke", "Entschuldigung", "Gern", "Bitte"],
+      "correctAnswer": "Entschuldigung",
+      "hint": "Excuse me.",
+      "explanation": "Entschuldigung should always start your question for help!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen and select the polite phrase you hear:",
+      "audio_text": "Wie geht es dir?",
+      "options": ["Wie heißt du?", "Wo wohnst du?", "Wie geht es dir?", "Wie alt bist du?"],
+      "correctAnswer": "Wie geht es dir?",
+      "hint": "How are you?",
+      "explanation": "Perfect! You heard the most common greeting."
+    },
+    {
+       "type": "reorder",
+       "question": "Bilde den Satz: 'I don't understand':",
+       "words": ["Ich", "verstehe", "nicht."],
+       "correctAnswer": "Ich verstehe nicht.",
+       "hint": "Subject + Verb + Negation.",
+       "explanation": "Essential phrase for every learner!"
+    },
+    {
+       "type": "multiple_choice",
+       "question": "Wie sagst du 'Pardon?' in einer höflichen Form?",
+       "options": ["Wie bitte?", "Was?", "Wieso?", "Hör mir zu!"],
+       "correctAnswer": "Wie bitte?",
+       "hint": "How please?",
+       "explanation": "'Wie bitte?' is the polite way to ask someone to repeat themselves."
+    }
+  ]
+}

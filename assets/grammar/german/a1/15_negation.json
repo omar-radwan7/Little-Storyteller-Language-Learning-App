@@ -1,0 +1,75 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_negation",
+  "order": 18,
+  "title": "Negation",
+  "description": "Don't say 'No' to this lesson! Learn how to use 'nicht' and 'kein' to say 'not' and 'no'.",
+  "explanation": "**HOOK**\nIn English, you just say 'No' or 'Not'. German, being German, has two different ways depending on what exactly you are saying No to. It's like having a special 'No' for things you own and a general 'No' for everything else!\n\n**CONCEPT**\nWe use 'kein' when we are talking about NO things (like 'I have no car'). We use 'nicht' for everything else, like verbs or adjectives (like 'I'm NOT happy').\n\n**RULE**\nUse 'kein' for nouns with indefinite articles (ein/eine). Use 'nicht' for verbs, adjectives, and nouns with definite articles (der/die/das).",
+  "tables": [
+    {
+      "title": "Kein vs Nicht",
+      "headers": ["Situation", "Use", "Example"],
+      "rows": [
+        ["Countable Nouns", "kein / keine", "Ich habe KEIN Geld."],
+        ["Verbs (Not doing)", "nicht", "Ich laufe NICHT."],
+        ["Adjectives (Not quality)", "nicht", "Es ist NICHT warm."],
+        ["Definite Nouns", "nicht", "Ich kenne den Mann NICHT."]
+      ],
+      "note": "TIP: 'Kein' behaves exactly like 'ein'. 'Keine Frau', 'Kein Mann'. Simple!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The position of 'nicht' can be tricky. Usually, 'nicht' stays at the end of simple sentences (Ich komme nicht), but it comes BEFORE the part you are specifically negating (Ich bin nicht müde)."
+    }
+  ],
+  "examples": [
+    { "german": "Ich habe keine Zeit.", "english": "I have no time." },
+    { "german": "Das ist nicht gut.", "english": "That is not good." },
+    { "german": "Ich verstehe nicht.", "english": "I don't understand." },
+    { "german": "Wir haben kein Auto.", "english": "We have no car." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wann benutzt man 'kein'?",
+      "options": ["Bei Verben", "Bei Adjektiven", "Bei Nomen (Nouns)", "Bei Zeiten"],
+      "correctAnswer": "Bei Nomen (Nouns)",
+      "hint": "No car, no book, no apple...",
+      "explanation": "Correct! 'kein' is for stuff (nouns) you can count or have."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich bin ____ müde.",
+      "options": ["kein", "keine", "nicht", "nein"],
+      "correctAnswer": "nicht",
+      "hint": "Tired (müde) is an adjective, not a thing.",
+      "explanation": "We negate adjectives with 'nicht'."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welcher Satz ist richtig?",
+      "options": ["Ich habe nicht Hund.", "Ich habe keine Hund.", "Ich habe kein Hund.", "Ich habe keinen Hund."],
+      "correctAnswer": "Ich habe keinen Hund.",
+      "hint": "Hund is masculine, and the object is Akkusativ. ein -> einen, kein -> ?",
+      "explanation": "kein takes the same endings as ein! (keinen Hund)"
+    },
+    {
+      "type": "reorder",
+      "question": "Sag 'I don't come':",
+      "words": ["Ich", "komme", "nicht."],
+      "correctAnswer": "Ich komme nicht.",
+      "hint": "Subject + Verb + Negation.",
+      "explanation": "Simple and clear: Ich komme nicht."
+    },
+    {
+      "type": "write",
+      "question": "Das Auto ist sehr schnell. Aber das Fahrrad ist ____ schnell (not).",
+      "correctAnswer": "nicht",
+      "hint": "Starts with 'n' and ends with 't'. Describes an adjective.",
+      "explanation": "nicht = not (used for adjectives)!"
+    }
+  ]
+}

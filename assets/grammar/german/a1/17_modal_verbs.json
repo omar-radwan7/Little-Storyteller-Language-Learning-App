@@ -1,0 +1,110 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_modal_verbs",
+  "order": 20,
+  "title": "Modal Verbs",
+  "description": "Learn how to say 'I can', 'I must', and 'I want'. These verbs are small but super powerful!",
+  "explanation": "**HOOK**\nNormal verbs are just actions (run, play, eat). But Modal Verbs are like seasonings—they change the 'flavor' of the whole sentence! They tell us if you are ABLE to do something, if you are FORCED to, or if you simply WANT to.\n\n**CONCEPT**\nWe are learning: können (can), müssen (must), and wollen (want). When you use these, they always shove the second action verb all the way to the end of the sentence.\n\n**RULE**\nModal Verb stays in Position 2 (the King). The Main Verb (what you are doing) stays untouched at the very end of the sentence.",
+  "tables": [
+    {
+      "title": "The Power 3 (Singular forms)",
+      "headers": ["Person", "können (can)", "müssen (must)", "wollen (want)"],
+      "rows": [
+        ["ich", "kann", "muss", "will"],
+        ["du", "kannst", "musst", "willst"],
+        ["er / sie / es", "kann", "muss", "will"]
+      ],
+      "note": "TIP: In modal verbs, 'ich' and 'er/sie/es' are ALWAYS identical! No endings needed."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "Satzklammer (Sentence Bracket)",
+      "text": "Think of the sentence as a bracket. The Modal Verb is the left side, and the Infinitive verb at the end is the right side. Everything else is caught in the middle! \nExample: Ich KANN morgen um acht Uhr KOMMEN. (I CAN COME tomorrow at 8)."
+    }
+  ],
+  "examples": [
+    { "german": "Ich kann Deutsch sprechen.", "english": "I can speak German. (Speak at the end!)" },
+    { "german": "Wir müssen jetzt gehen.", "english": "We must go now." },
+    { "german": "Willst du eine Pizza essen?", "english": "Do you want to eat a pizza?" },
+    { "german": "Er kann heute nicht kommen.", "english": "He cannot come today." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wo steht das zweite Verb bei einem Modalverb?",
+      "options": ["Auf Position 2", "Direkt nach dem Modalverb", "Am Ende des Satzes", "Ganz vorne"],
+      "correctAnswer": "Am Ende des Satzes",
+      "hint": "Sentience Bracket!",
+      "explanation": "The second verb always stays at the very end of the sentence in its base form."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ (can) heute Fußball spielen.",
+      "options": ["können", "kannst", "kann", "muss"],
+      "correctAnswer": "kann",
+      "hint": "können (ich-form).",
+      "explanation": "ich kann!"
+    },
+    {
+       "type": "reorder",
+       "question": "Sag 'I want to drink water':",
+       "words": ["Ich", "will", "Wasser", "trinken."],
+       "correctAnswer": "Ich will Wasser trinken.",
+       "hint": "Subject + Modal + Object + Drink-verb at end.",
+       "explanation": "Ich will (Modal) ... trinken (END)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Ein Gesetz (law) sagt: Du ____ hier nicht parken.",
+      "options": ["kannst", "willst", "musst", "sollst"],
+      "correctAnswer": "musst",
+      "hint": "It's a law! You ARE FORCED not to park here. (must)",
+      "explanation": "müssen (muss/musst) conveys obligation or necessity."
+    },
+    {
+      "type": "write",
+      "question": "Ich will essen. Er ____ auch essen.",
+      "correctAnswer": "will",
+      "hint": "Remember, er/sie/es matches the ich-form (will).",
+      "explanation": "er/sie/es will!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify which modal verb was used in the sentence:",
+      "audio_text": "Ich kann heute nicht kommen.",
+      "options": ["muss", "kann", "will", "soll"],
+      "correctAnswer": "kann",
+      "hint": "Can (ability).",
+      "explanation": "You heard 'kann' (from können)."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "What is the meaning of the sentence you hear?",
+      "audio_text": "Wir müssen jetzt gehen.",
+      "options": ["We want to go", "We can go", "We must go", "We are going"],
+      "correctAnswer": "We must go",
+      "hint": "Obligation.",
+      "explanation": "müssen = must!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the modal verb heard here:",
+      "audio_text": "Willst du eine Pizza essen?",
+      "options": ["Willst", "Musst", "Kannst", "Sollst"],
+      "correctAnswer": "Willst",
+      "hint": "Do you want...?",
+      "explanation": "wollen (willst) is for wishing or wanting."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which action verb is at the end of the sentence?",
+      "audio_text": "Du kannst hier warten.",
+      "options": ["kannst", "hier", "warten", "parken"],
+      "correctAnswer": "warten",
+      "hint": "The last word spoken.",
+      "explanation": "Correct! 'warten' (to wait) is at the very end."
+    }
+  ]
+}

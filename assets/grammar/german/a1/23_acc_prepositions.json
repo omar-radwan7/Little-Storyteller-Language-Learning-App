@@ -1,0 +1,76 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_acc_prepositions",
+  "order": 23,
+  "title": "Accusative Prepositions",
+  "description": "Learn words like 'for', 'through', and 'without'—and how they force the Accusative case!",
+  "explanation": "**HOOK**\nIn English, prepositions are just little words like 'for' or 'with'. In German, these words are like invisible hands that reach out and pull the very next word into a specific Case! They are so bossy that the sentence doesn't even get to decide—the preposition does it for you.\n\n**CONCEPT**\nWe are learning 'Akkusativ-Prepositions'. These words are special because they ALWAYS trigger the Akkusativ case, no matter what the verb is doing.\n\n**RULE**\nJust remember the 5 Bosses: durch (through), für (for), gegen (against), ohne (without), um (around). If you see these, use 'den', 'einen', or 'mich/dich' immediately after!",
+  "tables": [
+    {
+      "title": "The Bosses (5 Master Prepositions)",
+      "headers": ["German", "English", "Example"],
+      "rows": [
+        ["für", "for", "Das ist FÜR DICH."],
+        ["ohne", "without", "OHNE DICH ist es doof."],
+        ["durch", "through", "Wir gehen DURCH DEN Park."],
+        ["gegen", "against", "Er spielt GEGEN DEN Freund."],
+        ["um", "around", "Ich laufe UM DEN See."]
+      ],
+      "note": "TIP: All of these force the word after them into Akkusativ."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Remember: In Akkusativ, only the MASCULINE changes. So if it's 'für die Frau' or 'für das Kind', it stays exactly the same as Nominativ! But for men, it's 'für den Mann'."
+    }
+  ],
+  "examples": [
+    { "german": "Das Geschenk ist für dich.", "english": "The gift is for you. (Akkusativ!)" },
+    { "german": "Ich trinke Kaffee ohne Milch.", "english": "I drink coffee without milk." },
+    { "german": "Wir gehen durch den Wald.", "english": "We walk through the forest." },
+    { "german": "Er spielt gegen mich.", "english": "He is playing against me." }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Du spielst Tennis und dein Freund ist dein Rivale. Du spielst ____ den Freund.",
+      "options": ["für", "ohne", "gegen", "um"],
+      "correctAnswer": "gegen",
+      "hint": "You are rivals. You play 'against' him.",
+      "explanation": "gegen = against."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Der Mann (er) hat Geburtstag. Das ist für ____.",
+      "options": ["er", "ihn", "ihm", "seinen"],
+      "correctAnswer": "ihn",
+      "hint": "It belongs to the man (er). 'für' forces Akkusativ.",
+      "explanation": "er -> ihn (Akkusativ) nach 'für'!"
+    },
+    {
+       "type": "reorder",
+       "question": "Jemand ist dir sehr wichtig und du gehst nirgendwo hin, wenn er nicht dabei ist:",
+       "words": ["Ohne", "dich."],
+       "correctAnswer": "Ohne dich.",
+       "hint": "'Without you'.",
+       "explanation": "ohne + Akkusativ me."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was passiert bei 'durch den Park'?",
+      "options": ["Nominativ", "Akkusativ", "Dativ", "Genitiv"],
+      "correctAnswer": "Akkusativ",
+      "hint": "Look at 'den'.",
+      "explanation": "durch is an Akkusativ-only preposition."
+    },
+    {
+      "type": "write",
+      "question": "Ein Geschenk ist oft ____ eine spezielle Person gemacht.",
+      "correctAnswer": "für",
+      "hint": "To dedicate something to someone (for).",
+      "explanation": "für erzwingt immer den Akkusativ!"
+    }
+  ]
+}

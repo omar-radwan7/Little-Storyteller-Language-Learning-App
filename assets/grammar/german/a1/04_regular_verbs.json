@@ -110,7 +110,7 @@
     },
     {
       "type": "write",
-      "question": "Schreibe die 'ich'-Form von 'kommen'.",
+      "question": "Jemand fragt: Wer kommt heute? Deine Antwort für dich selbst: '____ ____ heute.'",
       "correctAnswer": "ich komme",
       "hint": "Drop the -en, add an -e.",
       "explanation": "ich + komm + e = ich komme!"

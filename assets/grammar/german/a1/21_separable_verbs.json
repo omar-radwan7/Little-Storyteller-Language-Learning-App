@@ -1,0 +1,111 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_separable_verbs",
+  "order": 21,
+  "title": "Separable Verbs",
+  "description": "Learn verbs that physically split apart! Start saying 'I pick you up' like a pro.",
+  "explanation": "**HOOK**\nImagine if the English verb 'pick up' physically split across the whole sentence, and the 'up' had to jump all the way to the very end. In German, this happens all the time! German verbs are like little transformers that break apart when they enter a sentence.\n\n**CONCEPT**\nWe are learning verbs with 'prefixes' that split off. The most common ones are: anfangen (begin), anrufen (call), and aufstehen (stand up).\n\n**RULE**\nVerb King sits on Position 2 (the stem). The Prefix (the little word like 'auf' or 'an') gets catapulted all the way to the absolute end of the sentence.",
+  "tables": [
+    {
+      "title": "Common Splitters",
+      "headers": ["Infinitive", "Stem (Pos 2)", "Prefix (End)", "Meaning"],
+      "rows": [
+        ["aufstehen", "stehe", "auf", "to get up"],
+        ["anrufen", "rufe", "an", "to call"],
+        ["einkaufen", "kaufe", "ein", "to shop"],
+        ["fernsehen", "sehe", "fern", "to watch TV"]
+      ],
+      "note": "TIP: Only the stem part conjugates! 'Ich kaufe... ein', 'Du kaufst... ein'."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "When you use a Modal Verb (can, must, want), the separable verb DOES NOT split! It stays together at the end. \nIch MUSS morgen AUFSTEHEN. (I must get up tomorrow)."
+    }
+  ],
+  "examples": [
+    { "german": "Ich stehe um sechs Uhr auf.", "english": "I get up at 6 o'clock. (Split!)" },
+    { "german": "Er ruft seine Mutter an.", "english": "He calls his mother." },
+    { "german": "Wir kaufen heute im Supermarkt ein.", "english": "We shop at the supermarket today." },
+    { "german": "Wann fängt der Film an?", "english": "When does the film begin?" }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wann teilt sich ein trennbares Verb?",
+      "options": ["Immer", "Nie", "In einem normalen Hauptsatz", "Mit Modalverben"],
+      "correctAnswer": "In einem normalen Hauptsatz",
+      "hint": "Split when main action.",
+      "explanation": "In a standard sentence, the prefix splits off and jumps to the end."
+    },
+    {
+      "type": "fill_blank",
+      "text": "Ich ____ um acht Uhr auf.",
+      "options": ["stehe", "aufstehe", "bin", "komme"],
+      "correctAnswer": "stehe",
+      "hint": "Main stem of aufstehen (to get up).",
+      "explanation": "auf/stehen -> Ich stehe ... auf!"
+    },
+    {
+       "type": "reorder",
+       "question": "Sag 'He calls her':",
+       "words": ["Er", "ruft", "sie", "an."],
+       "correctAnswer": "Er ruft sie an.",
+       "hint": "Stem second, prefix at the end.",
+       "explanation": "Er ruft (Stem) + sie (her) + an (Prefix at the end)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was passiert mit 'einkaufen' mit einem Modalverb?",
+      "options": ["Ich will ein kaufe.", "Ich will kaufe ein.", "Ich will einkaufen.", "Ich ein kaufe will."],
+      "correctAnswer": "Ich will einkaufen.",
+      "hint": "Modal verbs KEEP the verb together at the end.",
+      "explanation": "With a modal verb, they stay combined at the end!"
+    },
+    {
+      "type": "write",
+      "question": "Viele Leute sitzen jeden Abend auf der Couch und gucken TV. Sie sehen ____.",
+      "correctAnswer": "fern",
+      "hint": "TV-prefix. Drops to the end of the sentence.",
+      "explanation": "fernsehen -> sehen ... fern!"
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "Identify which separable verb was used:",
+       "audio_text": "Ich mache das Licht aus.",
+       "options": ["ausmachen", "anrufen", "einkaufen", "aufstehen"],
+       "correctAnswer": "ausmachen",
+       "hint": "Turning off the light (aus).",
+       "explanation": "ausmachen = to turn off."
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "Where is the prefix in the sentence you hear?",
+       "audio_text": "Wir rufen unsere Freunde an.",
+       "options": ["At the start", "At Position 2", "In the middle", "At the absolute end"],
+       "correctAnswer": "At the absolute end",
+       "hint": "The word 'an'.",
+       "explanation": "The prefix (an) jumps to the very end!"
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "Identify the main verb (stem) you hear in Position 2:",
+       "audio_text": "Er kauft heute im Supermarkt ein.",
+       "options": ["ein", "kauft", "Supermarkt", "heute"],
+       "correctAnswer": "kauft",
+       "hint": "From 'kaufen'.",
+       "explanation": "kauft stays at Position 2."
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "Which action is being described?",
+       "audio_text": "Ich stehe um sechs Uhr auf.",
+       "options": ["Sleeping", "Getting up", "Eating", "Running"],
+       "correctAnswer": "Getting up",
+       "hint": "aufstehen.",
+       "explanation": "aufstehen = to get up."
+    }
+  ]
+}

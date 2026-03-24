@@ -6,6 +6,7 @@ import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colo
 import { GrammarLessonType, GrammarExercise } from '../types';
 import { getLessonById } from '../data/grammarRegistry';
 import { useAuth } from '../hooks/useAuth';
+import SpeakerButton from '../components/SpeakerButton';
 
 const { width } = Dimensions.get('window');
 
@@ -33,7 +34,9 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
   const [view, setView] = useState<'learn' | 'practice'>('learn');
   const [exIndex, setExIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [skippedCount, setSkippedCount] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
+  const [currentExWasSkipped, setCurrentExWasSkipped] = useState(false);
   const { updateProfile, userProfile } = useAuth();
   
   // Exercise State
@@ -85,6 +88,7 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
         setShowFeedback(false);
         setIsCorrect(false);
         setSelectedLeft(null);
+        setCurrentExWasSkipped(false);
       } else {
         setShowSummary(true);
       }
@@ -129,10 +133,33 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
           }
         }
         break;
+        
+      case 'listen_and_answer':
+        correct = typeof userAnswer === 'string' &&
+                 userAnswer === (currentEx.correctAnswer as string);
+        break;
     }
 
     setIsCorrect(correct);
     if (correct) setCorrectCount(prev => prev + 1);
+    setShowFeedback(true);
+  };
+
+  const handleSkip = () => {
+    if (showFeedback) return;
+    
+    // Set the correct answer into the UI so the user can see it
+    if (currentEx.type === 'write') {
+      setUserAnswer(currentEx.correctAnswer);
+    } else if (currentEx.type === 'table_fill') {
+      setUserAnswer(currentEx.correctAnswers);
+    } else if (currentEx.type === 'reorder') {
+       setUserAnswer((currentEx.correctAnswer as string || '').split(' '));
+    }
+    
+    setIsCorrect(false);
+    setSkippedCount(prev => prev + 1);
+    setCurrentExWasSkipped(true);
     setShowFeedback(true);
   };
 
@@ -172,8 +199,34 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
 
   const renderLearnView = () => (
     <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-      <Text style={styles.lessonTitle}>{lessonData.title}</Text>
+      <View style={styles.titleWithAudio}>
+        <Text style={styles.lessonTitle}>{lessonData.title}</Text>
+        <SpeakerButton text={lessonData.title} size={32} />
+      </View>
       <Text style={styles.lessonDesc}>{lessonData.description}</Text>
+      
+      {/* Pronunciation controls for lesson 1-4 */}
+      {(lessonId.includes('01') || lessonId.includes('02') || lessonId.includes('03') || lessonId.includes('04')) && (
+        <View style={styles.pronunciationControls}>
+          <Text style={styles.controlLabel}>Master Pronunciation:</Text>
+          <View style={styles.controlRow}>
+            <View style={styles.controlBtnGroup}>
+               <SpeakerButton text={lessonId.includes('01') ? "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Ä, Ö, Ü, ẞ" : lessonData.title} rate={0.3} size={28} />
+               <Text style={styles.controlBtnLabel}>Slowly</Text>
+            </View>
+            <View style={styles.controlBtnGroup}>
+               <SpeakerButton text={lessonId.includes('01') ? "A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Ä, Ö, Ü, ẞ" : lessonData.title} rate={0.5} size={28} />
+               <Text style={styles.controlBtnLabel}>Normal</Text>
+            </View>
+            {lessonId.includes('01') && (
+              <View style={styles.controlBtnGroup}>
+                 <SpeakerButton text="A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Ä, Ö, Ü, ẞ" size={34} color={Colors.accent} />
+                 <Text style={[styles.controlBtnLabel, { color: Colors.accent }]}>Recite All</Text>
+              </View>
+            )}
+          </View>
+        </View>
+      )}
       
       <View style={styles.divider} />
       
@@ -201,7 +254,14 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
               {table.rows.map((row, rIdx) => (
                 <View key={rIdx} style={[styles.tableRow, rIdx % 2 !== 0 && styles.tableRowAlt]}>
                   {row.map((cell, cIdx) => (
-                    <Text key={cIdx} style={[styles.tableCell, cIdx < row.length - 1 && styles.tableCellBorder, cIdx === 0 && styles.tableCellBold]}>{cell}</Text>
+                    <View key={cIdx} style={[styles.tableCell, cIdx < row.length - 1 && styles.tableCellBorder, cIdx === 0 && styles.tableCellBold, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }]}>
+                      <Text style={{ flexShrink: 1 }}>{cell}</Text>
+                      {cell.length > 0 && !cell.includes('(') && (
+                        <View style={{ marginLeft: 4 }}>
+                          <SpeakerButton text={cell} size={16} />
+                        </View>
+                      )}
+                    </View>
                   ))}
                 </View>
               ))}
@@ -239,8 +299,13 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
         <Text style={styles.sectionHeader}>Examples</Text>
         {lessonData.examples.map((ex, eIdx) => (
            <View key={eIdx} style={styles.exampleRow}>
-             <Text style={styles.exampleGerman}>{ex.german}</Text>
-             <Text style={styles.exampleEnglish}>{ex.english}</Text>
+             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+               <View style={{ flex: 1 }}>
+                 <Text style={styles.exampleGerman}>{ex.german}</Text>
+                 <Text style={styles.exampleEnglish}>{ex.english}</Text>
+               </View>
+               <SpeakerButton text={ex.german} />
+             </View>
              {ex.explanation && (
                <Text style={styles.exampleExplanation}>{ex.explanation}</Text>
              )}
@@ -297,14 +362,21 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
     }
     else if (currentEx.type === 'write') {
       exerciseContent = (
-        <TextInput 
-          style={styles.writeInput}
-          placeholder="Type your answer here..."
-          value={userAnswer || ''}
-          onChangeText={(txt) => !showFeedback && setUserAnswer(txt)}
-          autoCapitalize="none"
-          editable={!showFeedback}
-        />
+        <View>
+          <TextInput 
+            style={styles.writeInput}
+            placeholder="Type your answer here..."
+            value={userAnswer || ''}
+            onChangeText={(txt) => !showFeedback && setUserAnswer(txt)}
+            autoCapitalize="none"
+            editable={!showFeedback}
+          />
+          {!showFeedback && (
+            <TouchableOpacity style={styles.skipLink} onPress={handleSkip}>
+              <Text style={styles.skipLinkText}>Ich weiß die Antwort nicht</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       );
     }
     else if (currentEx.type === 'reorder') {
@@ -315,30 +387,37 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
       });
 
       exerciseContent = (
-        <View style={styles.reorderContainer}>
-          <View style={styles.reorderTarget}>
-            {activeAns.length === 0 && <Text style={styles.reorderPlaceholder}>Tap words to form the sentence</Text>}
-            {activeAns.map((w, i) => (
-              <TouchableOpacity key={i} style={styles.wordChip} onPress={() => {
-                if(showFeedback) return;
-                const newAns = [...activeAns];
-                newAns.splice(i, 1);
-                setUserAnswer(newAns);
-              }}>
-                <Text style={styles.wordChipText}>{w}</Text>
-              </TouchableOpacity>
-            ))}
+        <View>
+          <View style={styles.reorderContainer}>
+            <View style={styles.reorderTarget}>
+              {activeAns.length === 0 && <Text style={styles.reorderPlaceholder}>Tap words to form the sentence</Text>}
+              {activeAns.map((w, i) => (
+                <TouchableOpacity key={i} style={styles.wordChip} onPress={() => {
+                  if(showFeedback) return;
+                  const newAns = [...activeAns];
+                  newAns.splice(i, 1);
+                  setUserAnswer(newAns);
+                }}>
+                  <Text style={styles.wordChipText}>{w}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <View style={styles.reorderSource}>
+              {remaining.map((w, i) => (
+                <TouchableOpacity key={i} style={styles.wordChipSource} onPress={() => {
+                  if(showFeedback) return;
+                  setUserAnswer([...activeAns, w]);
+                }}>
+                  <Text style={styles.wordChipSourceText}>{w}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
-          <View style={styles.reorderSource}>
-            {remaining.map((w, i) => (
-              <TouchableOpacity key={i} style={styles.wordChipSource} onPress={() => {
-                if(showFeedback) return;
-                setUserAnswer([...activeAns, w]);
-              }}>
-                <Text style={styles.wordChipSourceText}>{w}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          {!showFeedback && (
+            <TouchableOpacity style={styles.skipLink} onPress={handleSkip}>
+              <Text style={styles.skipLinkText}>Ich weiß die Antwort nicht</Text>
+            </TouchableOpacity>
+          )}
         </View>
       );
     }
@@ -392,34 +471,63 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
       let currentBlank = 0;
       
       exerciseContent = (
-        <View style={styles.tableBox}>
-          <View style={[styles.tableRow, styles.tableHeaderRow]}>
-            {currentEx.headers?.map((h, i) => (
-              <Text key={i} style={[styles.tableCell, styles.tableHeaderCell]}>{h}</Text>
+        <View>
+          <View style={styles.tableBox}>
+            <View style={[styles.tableRow, styles.tableHeaderRow]}>
+              {currentEx.headers?.map((h, i) => (
+                <Text key={i} style={[styles.tableCell, styles.tableHeaderCell]}>{h}</Text>
+              ))}
+            </View>
+            {currentEx.rows?.map((row, rIdx) => (
+              <View key={rIdx} style={[styles.tableRow, rIdx % 2 !== 0 && styles.tableRowAlt]}>
+                {row.map((cell, cIdx) => {
+                  if (cell.includes('{') || cell.includes('[')) {
+                    // It's a blank
+                    const thisBlank = currentBlank++;
+                    return (
+                      <View key={cIdx} style={styles.tableCell}>
+                        <TextInput 
+                          style={styles.tableInput}
+                          value={fillAns[thisBlank] || ''}
+                          onChangeText={(t) => handleCellText(t, thisBlank)}
+                          editable={!showFeedback}
+                          placeholder="?"
+                        />
+                      </View>
+                    );
+                  }
+                  return <Text key={cIdx} style={styles.tableCell}>{cell}</Text>
+                })}
+              </View>
             ))}
           </View>
-          {currentEx.rows?.map((row, rIdx) => (
-            <View key={rIdx} style={[styles.tableRow, rIdx % 2 !== 0 && styles.tableRowAlt]}>
-              {row.map((cell, cIdx) => {
-                if (cell.includes('{') || cell.includes('[')) {
-                  // It's a blank
-                  const thisBlank = currentBlank++;
-                  return (
-                    <View key={cIdx} style={styles.tableCell}>
-                      <TextInput 
-                        style={styles.tableInput}
-                        value={fillAns[thisBlank] || ''}
-                        onChangeText={(t) => handleCellText(t, thisBlank)}
-                        editable={!showFeedback}
-                        placeholder="?"
-                      />
-                    </View>
-                  );
-                }
-                return <Text key={cIdx} style={styles.tableCell}>{cell}</Text>
-              })}
-            </View>
-          ))}
+          {!showFeedback && (
+            <TouchableOpacity style={styles.skipLink} onPress={handleSkip}>
+              <Text style={styles.skipLinkText}>Ich weiß die Antwort nicht</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      );
+    }
+    else if (currentEx.type === 'listen_and_answer') {
+      exerciseContent = (
+        <View style={styles.listenContainer}>
+          <View style={styles.listenHero}>
+            <SpeakerButton text={currentEx.audio_text || ''} size={64} color={Colors.primary} />
+            <Text style={styles.listenPrompt}>Tap to listen</Text>
+          </View>
+          
+          <View style={styles.optionsGrid}>
+            {currentEx.options?.map((opt, i) => (
+              <TouchableOpacity 
+                key={i} 
+                style={[styles.mcOption, userAnswer === opt && styles.mcOptionSelected]}
+                onPress={() => !showFeedback && setUserAnswer(opt)}
+              >
+                <Text style={[styles.mcOptionText, userAnswer === opt && styles.mcOptionSelectedText]}>{opt}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       );
     }
@@ -442,7 +550,14 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
 
         <ScrollView contentContainerStyle={styles.practiceScroll} showsVerticalScrollIndicator={false}>
           <Text style={styles.exTypeLabel}>{currentEx.type.replace('_', ' ').toUpperCase()}</Text>
-          <Text style={styles.exQuestionLabel}>{currentEx.question}</Text>
+          <View style={styles.row}>
+            <Text style={styles.exQuestionLabel}>{currentEx.question}</Text>
+            {currentEx.question && (
+              <View style={{ marginLeft: 16, marginTop: -4 }}>
+                <SpeakerButton text={currentEx.question} />
+              </View>
+            )}
+          </View>
           
           <View style={styles.exContentWrap}>
              {exerciseContent}
@@ -460,7 +575,7 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
           {showFeedback && (
             <View style={[styles.feedbackBox, isCorrect ? styles.feedbackCorrect : styles.feedbackWrong]}>
               <Text style={[styles.feedbackTitle, isCorrect ? styles.fcText : styles.fwText]}>
-                {isCorrect ? 'Correct!' : 'Review your answer:'}
+                {isCorrect ? 'Correct!' : (currentExWasSkipped ? 'Answer Revealed:' : 'Review your answer:')}
               </Text>
               
               {!isCorrect && currentEx.type === 'match' ? (
@@ -471,10 +586,15 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
                   ))}
                 </View>
               ) : !isCorrect ? (
-                <Text style={styles.feedbackAnswerText}>
-                  {Array.isArray(currentEx.correctAnswer) ? currentEx.correctAnswer.join(' ') : currentEx.correctAnswer}
-                  {currentEx.type === 'table_fill' && currentEx.correctAnswers?.join(', ')}
-                </Text>
+                <>
+                  <Text style={styles.feedbackAnswerText}>
+                    {Array.isArray(currentEx.correctAnswer) ? currentEx.correctAnswer.join(' ') : currentEx.correctAnswer}
+                    {currentEx.type === 'table_fill' && currentEx.correctAnswers?.join(', ')}
+                  </Text>
+                  <View style={{ marginTop: 8 }}>
+                    <SpeakerButton text={Array.isArray(currentEx.correctAnswer) ? currentEx.correctAnswer.join(' ') : (currentEx.correctAnswer as string)} color={Colors.primary} size={20} />
+                  </View>
+                </>
               ) : null}
 
               {currentEx.explanation && !currentEx.explanation.toLowerCase().includes('matching') && (
@@ -530,6 +650,12 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
               <Text style={styles.scoreValue}>{percent}%</Text>
               <Text style={styles.scoreLabel}>Accuracy</Text>
             </View>
+            {skippedCount > 0 && (
+              <View style={styles.scoreBox}>
+                <Text style={[styles.scoreValue, { color: Colors.warning }]}>{skippedCount}</Text>
+                <Text style={styles.scoreLabel}>Skipped</Text>
+              </View>
+            )}
           </View>
 
           <View style={styles.miniProgressRail}>
@@ -698,6 +824,20 @@ const styles = StyleSheet.create({
   miniProgressFill: { height: '100%', borderRadius: 6 },
   finishBtn: { backgroundColor: Colors.accent, width: '100%', height: 56, borderRadius: BorderRadius.md, alignItems: 'center', justifyContent: 'center', ...Shadows.soft },
   finishBtnText: { color: '#FFF', fontSize: 18, fontWeight: '700' },
+  skipLink: { marginTop: 12, alignSelf: 'center', padding: 10 },
+  skipLinkText: { fontSize: 14, color: Colors.textMuted, fontWeight: '600', textDecorationLine: 'underline' },
+
+  titleWithAudio: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 },
+  pronunciationControls: { backgroundColor: '#F0F9FF', padding: 16, borderRadius: 16, marginBottom: 24, borderWidth: 1, borderColor: '#BAE6FD' },
+  controlLabel: { fontSize: 14, fontWeight: '800', color: '#0369A1', marginBottom: 16, textTransform: 'uppercase' },
+  controlRow: { flexDirection: 'row', justifyContent: 'space-around' },
+  controlBtnGroup: { alignItems: 'center' },
+  controlBtnLabel: { fontSize: 12, color: '#0369A1', marginTop: 4, fontWeight: '700' },
+  
+  listenContainer: { alignItems: 'center', width: '100%' },
+  listenHero: { alignItems: 'center', marginBottom: 40, backgroundColor: 'rgba(58, 175, 169, 0.05)', width: '100%', paddingVertical: 40, borderRadius: 24 },
+  listenPrompt: { marginTop: 12, fontSize: 16, color: Colors.primary, fontWeight: '800' },
+  row: { flexDirection: 'row', alignItems: 'flex-start' },
 });
 
 export default GrammarLessonScreen;

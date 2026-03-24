@@ -1,0 +1,79 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_26",
+  "order": 26,
+  "title": "Numbers & Time",
+  "description": "Master clock times and larger numbers to organize your life and shopping.",
+  "explanation": "**HOOK**\nYou already know the basic numbers from earlier. Now we're going to use them in the 'real world'! Whether you are reading a train schedule or checking the bill, time and numbers are your constant companions in Germany.\n\n**CONCEPT**\nWe are covering the 24-hour clock and advanced numbers. \n\n**RULE**\nFor clock times, use the word **Uhr** (clock). \nExample: 08:00 = acht Uhr.",
+  "tables": [
+    {
+      "title": "Clock Times (Official vs. Every Day)",
+      "headers": ["Clock", "Official", "Every Day Meaning"],
+      "rows": [
+        ["08:00", "acht Uhr", "Eight o'clock"],
+        ["08:15", "acht Uhr fünfzehn", "Viertel nach acht"],
+        ["08:30", "acht Uhr dreißig", "Halb neun (Half to nine!)"],
+        ["08:45", "acht Uhr fünfundvierzig", "Viertel vor neun"]
+      ],
+      "note": "TIP: Be careful with 'halb'! 'Halb neun' means 8:30—it's half *to* the next hour."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Germany often uses the 24-hour clock in schedules. 15:00 is three o'clock (fünfzehn Uhr). Don't let the high numbers scare you!"
+    }
+  ],
+  "examples": [
+    { "german": "Wie viel Uhr ist es?", "english": "What time is it?" },
+    { "german": "Es ist halb zehn.", "english": "It is half past nine (9:30)." },
+    { "german": "Der Zug kommt um vier Uhr.", "english": "The train arrives at four o'clock." },
+    { "german": "Das kostet siebenundzwanzig Euro.", "english": "That costs twenty-seven euros." }
+  ],
+  "exercises": [
+    {
+       "type": "listen_and_answer",
+       "instruction": "Listen to the number. Select the digits you hear:",
+       "audio_text": "siebenundzwanzig",
+       "options": ["27", "72", "37", "17"],
+       "correctAnswer": "27",
+       "hint": "Small number + BIG number.",
+       "explanation": "sieben (7) + zwanzig (20) = 27!"
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "Listen to the clock time. What time is it?",
+       "audio_text": "Es ist halb neun.",
+       "options": ["08:30", "09:30", "08:15", "09:45"],
+       "correctAnswer": "08:30",
+       "hint": "Half to nine.",
+       "explanation": "Halb neun is 8:30 in German!"
+    },
+    {
+       "type": "listen_and_answer",
+       "instruction": "What time do you hear for the train departure?",
+       "audio_text": "Der Zug fährt um vierzehn Uhr ab.",
+       "options": ["02:00 PM", "04:00 PM", "12:00 PM", "06:00 PM"],
+       "correctAnswer": "02:00 PM",
+       "hint": "14:00.",
+       "explanation": "fourteen o'clock is 2 PM!"
+    },
+    {
+       "type": "reorder",
+       "question": "Arrange these numbers in the correct sequence:",
+       "words": ["eins", "zwei", "drei", "vier"],
+       "correctAnswer": "eins zwei drei vier",
+       "hint": "1, 2, 3, 4",
+       "explanation": "Counting up!"
+    },
+    {
+       "type": "multiple_choice",
+       "question": "Was ist die Zahl 'hundert'?",
+       "options": ["10", "100", "1000", "1"],
+       "correctAnswer": "100",
+       "hint": "Century.",
+       "explanation": "hundert = 100!"
+    }
+  ]
+}

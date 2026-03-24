@@ -1,0 +1,121 @@
+{
+  "language": "german",
+  "level": "A1.1",
+  "id": "de_a1_greetings",
+  "order": 1,
+  "title": "Greetings & Introductions",
+  "description": "Learn how to say hello, ask 'how are you?', and introduce yourself like a local!",
+  "explanation": "**HOOK**\nImagine you just landed in Berlin. You want to buy a pretzel, but first, you need to say hello! In English, we have 'Hi' and 'Hello'—German has a few more versions depending on the time of day.\n\n**CONCEPT**\nWe are learning the basic 'social glue' of the language. These are the words that open doors and make people smile before you even start a real conversation.\n\n**RULE**\nKeep it simple: Use 'Guten Tag' during the day and 'Guten Abend' after 6 PM. If you are in the south (like Munich), you'll hear 'Servus' or 'Grüß Gott' instead!",
+  "tables": [
+    {
+      "title": "Basic Hello & Goodbye",
+      "headers": ["Situation", "German", "English"],
+      "rows": [
+        ["General Hello", "Hallo", "Hello"],
+        ["Morning", "Guten Morgen", "Good Morning"],
+        ["Daytime", "Guten Tag", "Good Day"],
+        ["Evening", "Guten Abend", "Good Evening"],
+        ["Goodbye", "Auf Wiedersehen", "Goodbye (Formal)"],
+        ["Bye", "Tschüss", "Bye (Informal)"]
+      ],
+      "note": "TIP: 'Tschüss' is what everyone actually uses with friends. It's short and friendly!"
+    },
+    {
+      "title": "Introducing Yourself",
+      "headers": ["Question", "Answer (German)", "Meaning"],
+      "rows": [
+        ["Name?", "Ich heiße...", "My name is..."],
+        ["Who are you?", "Wer bist du?", "Who are you?"],
+        ["How are you?", "Wie geht es dir?", "How are you? (Informal)"],
+        ["Fine, thanks!", "Gut, danke!", "Good, thanks!"],
+        ["And you?", "Und dir?", "And you?"]
+      ],
+      "note": "Germans usually answer 'Wie geht es dir?' with just one or two words. They aren't looking for a life story, just a friendly check-in!"
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "The phrase 'Wie geht's?' is a very short version of 'Wie geht es dir?'. Use it only with friends or people your age. If you are talking to a boss or a stranger, stick to the formal 'Wie geht es Ihnen?'"
+    }
+  ],
+  "examples": [
+    { "german": "Hallo, ich heiße Thomas.", "english": "Hello, my name is Thomas." },
+    { "german": "Guten Morgen! Wie geht es dir?", "english": "Good morning! How are you?" },
+    { "german": "Mir geht es gut, danke.", "english": "I am doing well, thanks." },
+    { "german": "Tschüss! Bis bald!", "english": "Bye! See you soon!" }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Was sagt man am Morgen?",
+      "options": ["Guten Abend", "Guten Tag", "Guten Morgen", "Gute Nacht"],
+      "correctAnswer": "Guten Morgen",
+      "hint": "Morning starts with M...",
+      "explanation": "Perfect! 'Guten Morgen' is used until about 11 AM."
+    },
+    {
+       "type": "fill_blank",
+       "text": "Hallo, ich ____ Thomas.",
+       "options": ["bin", "heiße", "ist", "bist"],
+       "correctAnswer": "heiße",
+       "hint": "To 'be called' or 'named'...",
+       "explanation": "You can say 'Ich bin Thomas' or 'Ich heiße Thomas'. Both are great!"
+    },
+    {
+      "type": "match",
+      "question": "Ordne die Begrüßungen zur Uhrzeit zu:",
+      "pairs": [
+        { "left": "Guten Morgen", "right": "08:00" },
+        { "left": "Guten Tag", "right": "13:00" },
+        { "left": "Guten Abend", "right": "20:00" },
+        { "left": "Gute Nacht", "right": "23:00" }
+      ],
+      "hint": "Wann sagt man was? Denke an die Uhrzeit.",
+      "explanation": "Guten Morgen (am Morgen), Guten Tag (am Tag), Guten Abend (am Abend)!"
+    },
+    {
+      "type": "reorder",
+      "question": "Wie fragst du 'How are you?':",
+      "words": ["Wie", "geht", "es", "dir?"],
+      "correctAnswer": "Wie geht es dir?",
+      "hint": "Starts with 'How' (Wie).",
+      "explanation": "This is the classic way to ask friends how they are."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was sagt man informell zum Abschied?",
+      "options": ["Auf Wiedersehen", "Guten Abend", "Tschüss", "Hallo"],
+      "correctAnswer": "Tschüss",
+      "hint": "It sounds like 'Chooss'.",
+      "explanation": "Informal bye is 'Tschüss'!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Identify the greeting you hear:",
+      "audio_text": "Guten Morgen!",
+      "options": ["Guten Tag", "Guten Morgen", "Gute Nacht", "Guten Abend"],
+      "correctAnswer": "Guten Morgen",
+      "hint": "Morning greeting.",
+      "explanation": "Morgen = Morning!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen and select the correct response to 'Wie geht es dir?'",
+      "audio_text": "Mir geht es gut, danke.",
+      "options": ["Mir geht es gut, danke.", "Ich bin müde.", "Hallo!", "Tschüss!"],
+      "correctAnswer": "Mir geht es gut, danke.",
+      "hint": "I am fine, thanks.",
+      "explanation": "The speaker says they are doing well."
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Which farewell phrase do you hear?",
+      "audio_text": "Auf Wiedersehen!",
+      "options": ["Hallo", "Tschüss", "Auf Wiedersehen", "Bis bald"],
+      "correctAnswer": "Auf Wiedersehen",
+      "hint": "Formal goodbye.",
+      "explanation": "Formal: Auf Wiedersehen!"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "language": "german",
+  "level": "A1.2",
+  "id": "de_a1_23",
+  "order": 23,
+  "title": "Adjective Endings",
+  "description": "Learn the basic endings for adjectives when they are in front of nouns.",
+  "explanation": "**HOOK**\nIn German, adjectives like to change their 'clothes' (endings) depending on what noun they are with. It's like an adjective matching its outfit to the Gender and Case of the noun! For A1, we only focus on the most common endings.\n\n**CONCEPT**\nWhen an adjective is placed DIRECTLY before a noun (e.g. 'the green car'), it must take an ending. \n\n**RULE**\nIf there is a definite article (der/die/das) in Nominativ, the ending is almost always **-e** for singular! \nExample: **Das neuE Auto.**",
+  "tables": [
+    {
+      "title": "Nominative Adjective Endings (with der/die/das)",
+      "headers": ["Article", "Adjective", "Noun", "Meaning"],
+      "rows": [
+        ["der", "gut-E", "Mann", "the good man"],
+        ["die", "schön-E", "Frau", "the beautiful woman"],
+        ["das", "klein-E", "Kind", "the small child"],
+        ["die (Plural)", "nett-EN", "Leute", "the nice people"]
+      ],
+      "note": "TIP: Plural always takes -en! Singular takes -e with 'the' in Nominativ."
+    }
+  ],
+  "deep_notes": [
+    {
+      "title": "WATCH OUT",
+      "text": "Adjective endings change in Akkusativ and Dativ, but for A1, master the Nominativ '-e' first. It covers 70% of basic descriptions!"
+    }
+  ],
+  "examples": [
+    { "german": "Das ist der gute Saft.", "english": "That is the good juice. (Nominativ)" },
+    { "german": "Die nette Frau hilft mir.", "english": "The nice woman helps me." },
+    { "german": "Wir haben das schnelle Auto.", "english": "We have the fast car." },
+    { "german": "Das sind die alten Bücher.", "english": "Those are the old books. (Plural -en)" }
+  ],
+  "exercises": [
+    {
+      "type": "fill_blank",
+      "text": "Das ist das ____ (schön) Haus.",
+      "options": ["schön", "schöne", "schönen", "schöner"],
+      "correctAnswer": "schöne",
+      "hint": "Neutrum (das) in Nominativ needs -e.",
+      "explanation": "Das schöne Haus!"
+    },
+    {
+      "type": "fill_blank",
+      "text": "Die ____ (alt) Frau geht spazieren.",
+      "options": ["alt", "alte", "alten", "alter"],
+      "correctAnswer": "alte",
+      "hint": "Feminine (die) in Nominativ needs -e.",
+      "explanation": "Die alte Frau!"
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Welche Endung bekommt ein Adjektiv im Plural mit 'die'?",
+      "options": ["-e", "-en", "-er", "-es"],
+      "correctAnswer": "-en",
+      "hint": "Think about 'die netten Leute'.",
+      "explanation": "Plural adjectives always take -en with articles!"
+    },
+    {
+      "type": "listen_and_answer",
+      "instruction": "Listen and select the correct ending you hear:",
+      "audio_text": "Das ist ein guter Kaffee.",
+      "options": ["-e", "-en", "-er", "-es"],
+      "correctAnswer": "-er",
+      "hint": "Gu-ter.",
+      "explanation": "After 'ein' (masculine), the adjective takes the -er ending: guter!"
+    },
+    {
+      "type": "reorder",
+      "question": "Bilde den Satz: 'The fast car':",
+      "words": ["Das", "schnelle", "Auto."],
+      "correctAnswer": "Das schnelle Auto.",
+      "hint": "Article + Adj + Noun.",
+      "explanation": "Perfectly matched!"
+    }
+  ]
+}

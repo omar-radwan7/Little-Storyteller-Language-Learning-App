@@ -121,10 +121,10 @@
     },
     {
       "type": "write",
-      "question": "Schreibe: 'das Wasser'",
+      "question": "Es ist nass und wir trinken es jeden Tag. ____ ____ ist sehr kalt.",
       "correctAnswer": "das Wasser",
-      "hint": "Just write the base Nominativ form for (das) water.",
-      "explanation": "Base Nominative form!"
+      "hint": "Water (neutral). Need the article + noun.",
+      "explanation": "das Wasser (Nominativ Subject)!"
     }
   ]
 }

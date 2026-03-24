@@ -63,11 +63,11 @@
   "exercises": [
     {
       "type": "multiple_choice",
-      "question": "Was bedeutet 'mein' auf Englisch?",
-      "options": ["your", "his", "her", "my"],
-      "correctAnswer": "my",
-      "hint": "It belongs to 'ich' (I).",
-      "explanation": "mein = my!"
+      "question": "Ich (I) habe einen Hund. Das ist ____ Hund.",
+      "options": ["dein", "ihr", "unser", "mein"],
+      "correctAnswer": "mein",
+      "hint": "It belongs to 'ich' (I). Choose the right 'my'.",
+      "explanation": "ich -> mein. Good job!"
     },
     {
       "type": "fill_blank",
@@ -79,11 +79,11 @@
     },
     {
       "type": "multiple_choice",
-      "question": "Welches Wort bedeutet 'seine'?",
-      "options": ["her", "his", "my", "your"],
-      "correctAnswer": "his",
-      "hint": "er -> sein.",
-      "explanation": "'sein' means his or its!"
+      "question": "Er (He) hat ein Buch. Das ist ____ Buch.",
+      "options": ["ihr", "sein", "mein", "unser"],
+      "correctAnswer": "sein",
+      "hint": "er -> sein. Choose the right 'his'.",
+      "explanation": "er -> sein (his)!"
     },
     {
       "type": "match",
@@ -123,10 +123,10 @@
     },
     {
       "type": "write",
-      "question": "Schreibe das englische Wort für 'ihr' (she/her):",
-      "correctAnswer": "her",
-      "hint": "When 'sie' owns it...",
-      "explanation": "ihr = her (or their)."
+      "question": "Welches Wort nutzt man für 'she' (Nom) als Besitzer?",
+      "correctAnswer": "ihr",
+      "hint": "Start with 'i'...",
+      "explanation": "Correct! sie (she) -> ihr (her)."
     },
     {
       "type": "fill_blank",
