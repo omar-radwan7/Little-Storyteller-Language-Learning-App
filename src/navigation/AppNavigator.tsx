@@ -27,6 +27,8 @@ import StoryReaderScreen from '../screens/StoryReaderScreen';
 import PreferencePickerScreen from '../screens/PreferencePickerScreen';
 import GrammarLessonScreen from '../screens/GrammarLessonScreen';
 import GrammarMapScreen from '../screens/GrammarMapScreen';
+import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
+import TermsScreen from '../screens/TermsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -185,6 +187,14 @@ const AppNavigator = () => {
               name="GrammarMap"
               component={GrammarMapScreen as any}
               options={{ animation: 'slide_from_bottom' }}
+            />
+            <Stack.Screen
+              name="PrivacyPolicy"
+              component={PrivacyPolicyScreen as any}
+            />
+            <Stack.Screen
+              name="Terms"
+              component={TermsScreen as any}
             />
           </>
         )}

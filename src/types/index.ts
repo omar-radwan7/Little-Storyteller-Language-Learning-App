@@ -136,9 +136,11 @@ export type RootStackParamList = {
   MainTabs: undefined;
   StoryReader: { storyId: string };
   GrammarLesson: { lessonId: string };
-  GrammarMap: undefined;
-  PreferencePicker: { type: 'language' | 'level' };
+  GrammarMap: { justCompleted?: string };
+  PreferencePicker: { type: 'language' | 'level' | 'dailyGoal' };
   Flashcards: undefined;
+  PrivacyPolicy: undefined;
+  Terms: undefined;
 };
 
 export type MainTabParamList = {

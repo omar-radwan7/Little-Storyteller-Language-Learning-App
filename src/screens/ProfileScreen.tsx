@@ -54,6 +54,14 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     navigation.navigate('PreferencePicker', { type: 'dailyGoal' });
   };
 
+  const handlePrivacyPolicy = () => {
+    navigation.navigate('PrivacyPolicy');
+  };
+
+  const handleTerms = () => {
+    navigation.navigate('Terms');
+  };
+
   const handleSignOut = () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
       { text: 'Cancel', style: 'cancel' },
@@ -92,6 +100,23 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       value: `${goalObj?.count || 1} ${goalObj?.count === 1 ? 'story' : 'stories'}/day`,
       color: Colors.accent,
       onPress: handleUpdateDailyGoal,
+    },
+  ];
+
+  const legalRows = [
+    {
+      icon: 'shield-checkmark-outline' as const,
+      label: 'Privacy Policy',
+      value: 'Read more',
+      color: Colors.textSecondary,
+      onPress: handlePrivacyPolicy,
+    },
+    {
+      icon: 'document-text-outline' as const,
+      label: 'Terms & Conditions',
+      value: 'Read more',
+      color: Colors.textSecondary,
+      onPress: handleTerms,
     },
   ];
 
@@ -145,6 +170,22 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
               <View>
                 <Text style={styles.settingLabel}>{row.label}</Text>
                 <Text style={styles.settingValue}>{row.value}</Text>
+              </View>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
+          </TouchableOpacity>
+        ))}
+
+        <Text style={styles.sectionTitle}>Legal</Text>
+        {legalRows.map((row, i) => (
+          <TouchableOpacity key={i} style={styles.settingRow} activeOpacity={0.7} onPress={row.onPress}>
+            <View style={styles.settingLeft}>
+              <View style={[styles.settingIcon, { backgroundColor: row.color + '12' }]}>
+                <Ionicons name={row.icon} size={18} color={row.color} />
+              </View>
+              <View>
+                <Text style={styles.settingLabel}>{row.label}</Text>
+                <Text style={[styles.settingValue, { color: Colors.textSecondary, fontSize: 13 }]}>{row.value}</Text>
               </View>
             </View>
             <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />

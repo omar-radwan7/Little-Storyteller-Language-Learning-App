@@ -1,0 +1,37 @@
+{
+  "id": "de_b1_09",
+  "order": 9,
+  "level": "B1.1",
+  "title": "Two-way prepositions with movement vs location",
+  "description": "Learn about Two-way prepositions with movement vs location in German.",
+  "explanation": "Certain prepositions require a specific case (Akkusativ, Dativ, Genitiv). Two-way prepositions take Akkusativ for movement (wohin?) and Dativ for location (wo?).",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich gehe in das Haus (ins Haus).",
+      "english": "I go into the house (movement).",
+      "explanation": ""
+    },
+    {
+      "german": "Ich bin in dem Haus (im Haus).",
+      "english": "I am in the house (location).",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Ich lege das Buch auf ___ Tisch.",
+      "options": [
+        "den",
+        "dem",
+        "der",
+        "das"
+      ],
+      "correctAnswer": "den",
+      "explanation": "Legen implies movement (wohin?), requiring Akkusativ."
+    }
+  ]
+}

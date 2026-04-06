@@ -1,0 +1,44 @@
+{
+  "id": "de_b1_10",
+  "order": 10,
+  "level": "B1.1",
+  "title": "Genitive case — full declension and usage",
+  "description": "Learn about Genitive case — full declension and usage in German.",
+  "explanation": "Default explanation for Genitive case — full declension and usage Master this structure to speak fluently!",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Das ist ein wichtiges Thema.",
+      "english": "This is an important topic.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wähle das richtige Wort: Er ___ schnell.",
+      "options": [
+        "läuft",
+        "laufen",
+        "laufe",
+        "läufst"
+      ],
+      "correctAnswer": "läuft",
+      "explanation": "Third person singular correct conjugation."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wir ___ heute glücklich.",
+      "options": [
+        "sind",
+        "ist",
+        "bin",
+        "seid"
+      ],
+      "correctAnswer": "sind",
+      "explanation": "Wir requires sind (are)."
+    }
+  ]
+}

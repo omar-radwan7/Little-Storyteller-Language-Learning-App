@@ -16,6 +16,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { LANGUAGES } from '../data/constants';
 import * as Haptics from 'expo-haptics';
+import { useAuth } from '../hooks/useAuth';
+import { saveWord, getSavedWords, deleteSavedWord } from '../services/firestore';
 
 const { width } = Dimensions.get('window');
 
@@ -47,10 +49,20 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [fromLang, setFromLang] = useState({ name: 'English', code: 'en', flag: '🇺🇸' });
   const [toLang, setToLang] = useState({ name: 'Spanish', code: 'es', flag: '🇪🇸' });
   
+  const { firebaseUser } = useAuth();
+  
   const [savedWords, setSavedWords] = useState<any[]>([]);
   
   const [isPickerVisible, setIsPickerVisible] = useState(false);
   const [pickerType, setPickerType] = useState<'from' | 'to'>('from');
+
+  React.useEffect(() => {
+    if (firebaseUser) {
+      getSavedWords(firebaseUser.uid).then(words => {
+        setSavedWords(words);
+      });
+    }
+  }, [firebaseUser]);
 
   const switchMode = (newMode: 'translator' | 'list') => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -79,9 +91,10 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     }
   };
 
-  const handleSaveWord = () => {
+  const handleSaveWord = async () => {
     if (!lastInputText || !translatedText) return;
     if (savedWords.some(w => w.word === lastInputText)) return;
+    
     const newWord = {
       id: Date.now().toString(),
       word: lastInputText,
@@ -89,12 +102,25 @@ const VocabularyScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       from: fromLang.name,
       to: toLang.name,
     };
+    
+    // Optimistic UI update
     setSavedWords([newWord, ...savedWords]);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+    // Save to Firestore
+    if (firebaseUser) {
+      await saveWord(firebaseUser.uid, newWord as any);
+    }
   };
 
-  const deleteWord = (id: string) => {
+  const deleteWord = async (id: string) => {
+    // Optimistic UI update
     setSavedWords(savedWords.filter(w => w.id !== id));
+    
+    // Delete from Firestore
+    if (firebaseUser) {
+      await deleteSavedWord(firebaseUser.uid, id);
+    }
   };
 
   return (

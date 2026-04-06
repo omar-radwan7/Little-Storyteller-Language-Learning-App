@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colors';
 import { GrammarLessonType, GrammarExercise } from '../types';
-import { getLessonById } from '../data/grammarRegistry';
+import { getLessonById, getLessonsForLanguage } from '../data/grammarRegistry';
 import { useAuth } from '../hooks/useAuth';
 import SpeakerButton from '../components/SpeakerButton';
 
@@ -168,9 +168,11 @@ const GrammarLessonScreen = ({ navigation, route }: any) => {
       const currentCompleted = userProfile.grammarProgress?.completedLessons || [];
       const isNewCompletion = !currentCompleted.includes(lessonId);
       
-      const allDeA1 = Array.from({length: 25}, (_, i) => `de_a1_${String(i+1).padStart(2, '0')}`);
-      const currentIdx = allDeA1.indexOf(lessonId);
-      const nextLessonId = allDeA1[currentIdx + 1] || lessonId;
+      const targetLang = userProfile.targetLanguage || 'German';
+      const lessonsForLang = getLessonsForLanguage(targetLang);
+      const allLessonIds = lessonsForLang.map(l => l.id);
+      const currentIdx = allLessonIds.indexOf(lessonId);
+      const nextLessonId = allLessonIds[currentIdx + 1] || lessonId;
       
       // Update if it's the first time OR if they are caught up to the currentLesson
       if (isNewCompletion || userProfile.grammarProgress?.currentLesson === lessonId) {

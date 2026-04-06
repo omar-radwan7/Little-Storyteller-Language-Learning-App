@@ -11,39 +11,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const { width } = Dimensions.get('window');
 
-const LESSONS = [
-  // A1.1 - The Foundation
-  { id: 'de_a1_01', level: 'A1.1', title: 'The German Alphabet', isMock: false },
-  { id: 'de_a1_02', level: 'A1.1', title: 'Vowel Sounds', isMock: false },
-  { id: 'de_a1_03', level: 'A1.1', title: 'Silent Letters', isMock: false },
-  { id: 'de_a1_04', level: 'A1.1', title: 'German Umlauts', isMock: false },
-  { id: 'de_a1_05', level: 'A1.1', title: 'Personal Pronouns', isMock: false },
-  { id: 'de_a1_06', level: 'A1.1', title: 'The verb sein', isMock: false },
-  { id: 'de_a1_07', level: 'A1.1', title: 'The verb haben', isMock: false },
-  { id: 'de_a1_08', level: 'A1.1', title: 'Regular verb conjugation', isMock: false },
-  { id: 'de_a1_09', level: 'A1.1', title: 'Definite articles', isMock: false },
-  { id: 'de_a1_10', level: 'A1.1', title: 'Indefinite articles', isMock: false },
-  { id: 'de_a1_11', level: 'A1.1', title: 'Plural forms', isMock: false },
-  { id: 'de_a1_12', level: 'A1.1', title: 'Nominativ case', isMock: false },
-  { id: 'de_a1_13', level: 'A1.1', title: 'Akkusativ case', isMock: false },
-  { id: 'de_a1_14', level: 'A1.1', title: 'Dativ case', isMock: false },
-
-  // A1.2 - Intermediate Basics
-  { id: 'de_a1_15', level: 'A1.2', title: 'Cases Comparison', isMock: false },
-  { id: 'de_a1_16', level: 'A1.2', title: 'Sentence Structure', isMock: false },
-  { id: 'de_a1_17', level: 'A1.2', title: 'Negation', isMock: false },
-  { id: 'de_a1_18', level: 'A1.2', title: 'Question formation', isMock: false },
-  { id: 'de_a1_19', level: 'A1.2', title: 'Modal verbs', isMock: false },
-  { id: 'de_a1_20', level: 'A1.2', title: 'Separable verbs', isMock: false },
-  { id: 'de_a1_21', level: 'A1.2', title: 'Irregular verbs', isMock: false },
-  { id: 'de_a1_22', level: 'A1.2', title: 'Basic adjectives', isMock: false },
-  { id: 'de_a1_23', level: 'A1.2', title: 'Adjective endings', isMock: false },
-  { id: 'de_a1_24', level: 'A1.2', title: 'Accusative prepositions', isMock: false },
-  { id: 'de_a1_25', level: 'A1.2', title: 'Dative prepositions', isMock: false },
-  { id: 'de_a1_26', level: 'A1.2', title: 'Numbers and time', isMock: false },
-  { id: 'de_a1_27', level: 'A1.2', title: 'Greetings and basics', isMock: false },
-  { id: 'de_a1_28', level: 'A1.2', title: 'Everyday phrases', isMock: false },
-];
+import { getLessonsForLanguage } from '../data/grammarRegistry';
 
 const HILLS = [
   { id: 'h1', width: 800, height: 600, top: -50, left: -200, color: '#AEE896' },
@@ -57,8 +25,11 @@ const GrammarMapScreen = () => {
   const navigation = useNavigation<any>();
   const { userProfile } = useAuth();
   
-  const reversedLessons = useMemo(() => [...LESSONS].reverse(), []);
-  const totalLessonsCount = LESSONS.length;
+  const language = userProfile?.targetLanguage || 'German';
+  const dynamicLessons = useMemo(() => getLessonsForLanguage(language), [language]);
+  
+  const reversedLessons = useMemo(() => [...dynamicLessons].reverse(), [dynamicLessons]);
+  const totalLessonsCount = dynamicLessons.length;
 
   const progress = useMemo(() => userProfile?.grammarProgress || {
     currentLesson: 'de_a1_01',
@@ -69,7 +40,7 @@ const GrammarMapScreen = () => {
   }, [userProfile]);
 
   const justCompleted = route.params?.justCompleted;
-  const currentLessonIndex = LESSONS.findIndex(l => l.id === progress.currentLesson) || 0;
+  const currentLessonIndex = dynamicLessons.findIndex(l => l.id === progress.currentLesson) || 0;
   const [isDemoMode, setIsDemoMode] = useState(false);
   
   const pulseAnim = useRef(new Animated.Value(1)).current;
@@ -78,7 +49,7 @@ const GrammarMapScreen = () => {
   const barAnim = useRef(new Animated.Value(0)).current;
   const scrollRef = useRef<ScrollView>(null);
 
-  const totalA1 = LESSONS.filter(l => l.level === 'A1').length;
+  const totalA1 = dynamicLessons.filter(l => l.level.includes('A1')).length || 1;
   const completedA1 = progress.completedLessons.length;
   const targetProgress = (completedA1 / totalA1);
 
@@ -120,9 +91,9 @@ const GrammarMapScreen = () => {
   };
 
   const handleBannerPress = () => {
-    const current = LESSONS.find(l => l.id === progress.currentLesson);
+    const current = dynamicLessons.find(l => l.id === progress.currentLesson);
     if (!current?.isMock) {
-      navigation.navigate('GrammarLesson', { lessonId: progress.currentLesson });
+      navigation.navigate('GrammarLesson', { lessonId: progress.currentLesson || dynamicLessons[0].id });
     }
   };
 
@@ -148,12 +119,12 @@ const GrammarMapScreen = () => {
         <TouchableOpacity style={styles.bannerCard} activeOpacity={0.9} onPress={handleBannerPress}>
            <View style={styles.bannerInfo}>
              <View style={styles.bannerLabelRow}>
-               <Text style={styles.bannerLevelText}>{LESSONS[currentLessonIndex]?.level || 'A1'}</Text>
+               <Text style={styles.bannerLevelText}>{dynamicLessons[currentLessonIndex]?.level || 'A1'}</Text>
                <Animated.Text style={styles.bannerProgressText}>
-                 {Math.round(completedA1 / totalA1 * 100)}% COMPLETE
+                 {Math.round((completedA1 / totalA1) * 100)}% COMPLETE
                </Animated.Text>
              </View>
-             <Text style={styles.bannerLessonText}>Lesson {currentLessonIndex + 1} — {LESSONS[currentLessonIndex]?.title}</Text>
+             <Text style={styles.bannerLessonText}>Lesson {currentLessonIndex + 1} — {dynamicLessons[currentLessonIndex]?.title || 'Start Here'}</Text>
              
              <View style={styles.overallProgressRail}>
                <Animated.View style={[styles.overallProgressFill, { 

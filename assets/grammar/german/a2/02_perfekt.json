@@ -1,0 +1,44 @@
+{
+  "id": "de_a2_02",
+  "order": 2,
+  "level": "A2.1",
+  "title": "Perfekt (past tense with sein)",
+  "description": "Learn about Perfekt (past tense with sein) in German.",
+  "explanation": "The Perfekt tense is used for spoken past in German. It is formed with a helping verb (haben/sein) and the Partizip II at the end of the sentence.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich bin nach Berlin gefahren.",
+      "english": "I drove to Berlin.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Er ___ gestern ins Kino gegangen.",
+      "options": [
+        "hat",
+        "ist",
+        "bist",
+        "habe"
+      ],
+      "correctAnswer": "ist",
+      "explanation": "Movement verbs like gehen use sein."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wir ___ im Park gelaufen.",
+      "options": [
+        "haben",
+        "sind",
+        "seid",
+        "hat"
+      ],
+      "correctAnswer": "sind",
+      "explanation": "Laufen indicates movement, requiring sein."
+    }
+  ]
+}

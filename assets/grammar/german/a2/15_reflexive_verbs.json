@@ -1,0 +1,32 @@
+{
+  "id": "de_a2_15",
+  "order": 15,
+  "level": "A2.2",
+  "title": "Reflexive verbs (sich waschen, sich freuen, sich erinnern)",
+  "description": "Learn about Reflexive verbs (sich waschen, sich freuen, sich erinnern) in German.",
+  "explanation": "Reflexive verbs show that the subject performs the action on itself.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich wasche mich.",
+      "english": "I wash myself.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wir freuen ___ auf den Urlaub.",
+      "options": [
+        "uns",
+        "euch",
+        "sich",
+        "mich"
+      ],
+      "correctAnswer": "uns",
+      "explanation": "The reflexive pronoun for wir is uns."
+    }
+  ]
+}

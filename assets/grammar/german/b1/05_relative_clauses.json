@@ -1,0 +1,32 @@
+{
+  "id": "de_b1_05",
+  "order": 5,
+  "level": "B1.1",
+  "title": "Relative clauses — Nominativ and Akkusativ",
+  "description": "Learn about Relative clauses — Nominativ and Akkusativ in German.",
+  "explanation": "Relative clauses give more information about a noun. The relative pronoun normally matches the gender and number of the noun, but the case depends on its function in the subclause.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Der Mann, der dort steht, ist mein Onkel.",
+      "english": "The man who is standing there is my uncle.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Die Frau, ___ ich das Buch gebe, ist nett.",
+      "options": [
+        "der",
+        "die",
+        "das",
+        "den"
+      ],
+      "correctAnswer": "der",
+      "explanation": "Dativ feminine relative pronoun is der (because of gebe)."
+    }
+  ]
+}

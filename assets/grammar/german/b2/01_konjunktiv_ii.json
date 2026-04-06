@@ -1,0 +1,78 @@
+{
+  "id": "de_b2_01",
+  "order": 1,
+  "level": "B2.1",
+  "title": "Konjunktiv II — advanced usage and politeness",
+  "description": "Learn about Konjunktiv II — advanced usage and politeness in German.",
+  "explanation": "Konjunktiv II is used to express wishes, polite requests, and hypothetical situations (would, could, should).",
+  "language": "german",
+  "tables": [
+    {
+      "headers": [
+        "Pronoun",
+        "wäre",
+        "hätte",
+        "würde"
+      ],
+      "rows": [
+        [
+          "ich",
+          "wäre",
+          "hätte",
+          "würde"
+        ],
+        [
+          "du",
+          "wärest",
+          "hättest",
+          "würdest"
+        ],
+        [
+          "er/sie/es",
+          "wäre",
+          "hätte",
+          "würde"
+        ]
+      ]
+    }
+  ],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich hätte gern einen Kaffee.",
+      "english": "I would like to have a coffee.",
+      "explanation": ""
+    },
+    {
+      "german": "Wenn ich reich wäre, würde ich ein Haus kaufen.",
+      "english": "If I were rich, I would buy a house.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Ich ___ gern ein Glas Wasser.",
+      "options": [
+        "habe",
+        "hätte",
+        "wäre",
+        "würde"
+      ],
+      "correctAnswer": "hätte",
+      "explanation": "Hätte is used for polite requests (would have)."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Wenn ich Zeit ___, käme ich mit.",
+      "options": [
+        "habe",
+        "hätte",
+        "wäre",
+        "würde"
+      ],
+      "correctAnswer": "hätte",
+      "explanation": "Hypothetical condition requiring hätte."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "de_b2_05",
+  "order": 5,
+  "level": "B2.1",
+  "title": "Statal passive (sein + Partizip II)",
+  "description": "Learn about Statal passive (sein + Partizip II) in German.",
+  "explanation": "The passive voice shifts focus to the action rather than who performs it. Formed with werden + Partizip II.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Das Auto wird repariert.",
+      "english": "The car is being repaired.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Das Haus ___ nächstes Jahr gebaut.",
+      "options": [
+        "wird",
+        "wurde",
+        "worden",
+        "werden"
+      ],
+      "correctAnswer": "wird",
+      "explanation": "Wird + built (gebaut) forms the present passive."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Der Brief ___ von ihm geschrieben.",
+      "options": [
+        "wird",
+        "wurde",
+        "worden",
+        "werden"
+      ],
+      "correctAnswer": "wird",
+      "explanation": "Present passive takes wird."
+    }
+  ]
+}

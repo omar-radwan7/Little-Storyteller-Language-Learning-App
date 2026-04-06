@@ -1,0 +1,32 @@
+{
+  "id": "de_a2_14",
+  "order": 14,
+  "level": "A2.2",
+  "title": "Word order with subordinating conjunctions",
+  "description": "Learn about Word order with subordinating conjunctions in German.",
+  "explanation": "Subordinating conjunctions (weil, dass, obwohl) push the conjugated verb to the very end of the clause.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich bleibe zu Hause, weil ich krank bin.",
+      "english": "I am staying at home because I am sick.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Ich weiß, dass er heute ___.",
+      "options": [
+        "kommt",
+        "kommen",
+        "gekommen",
+        "kommst"
+      ],
+      "correctAnswer": "kommt",
+      "explanation": "Dass sends the conjugated verb comes to the end."
+    }
+  ]
+}

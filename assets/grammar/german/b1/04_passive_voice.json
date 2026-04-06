@@ -1,0 +1,49 @@
+{
+  "id": "de_b1_04",
+  "order": 4,
+  "level": "B1.1",
+  "title": "Passive voice — Präteritum (wurde gemacht)",
+  "description": "Learn about Passive voice — Präteritum (wurde gemacht) in German.",
+  "explanation": "The Präteritum is the written past tense, primarily used in literature and news, but auch commonly for sein, haben, and modal verbs in speech.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich war gestern müde.",
+      "english": "I was tired yesterday.",
+      "explanation": ""
+    },
+    {
+      "german": "Er hatte keine Zeit.",
+      "english": "He had no time.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wir ___ am Wochenende in Paris.",
+      "options": [
+        "waren",
+        "wart",
+        "hatten",
+        "sind"
+      ],
+      "correctAnswer": "waren",
+      "explanation": "Waren is the Präteritum of sein for wir."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Ich ___ gestern arbeiten.",
+      "options": [
+        "muss",
+        "musste",
+        "müsste",
+        "habe"
+      ],
+      "correctAnswer": "musste",
+      "explanation": "Musste is the Präteritum of müssen."
+    }
+  ]
+}

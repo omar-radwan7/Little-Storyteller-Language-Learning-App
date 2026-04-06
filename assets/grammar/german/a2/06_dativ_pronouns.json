@@ -1,0 +1,57 @@
+{
+  "id": "de_a2_06",
+  "order": 6,
+  "level": "A2.1",
+  "title": "Dativ pronouns (mir, dir, ihm, ihr, uns, euch, ihnen)",
+  "description": "Learn about Dativ pronouns (mir, dir, ihm, ihr, uns, euch, ihnen) in German.",
+  "explanation": "Dativ pronouns replace the indirect object and answer wem? (to whom?).",
+  "language": "german",
+  "tables": [
+    {
+      "headers": [
+        "Nominativ",
+        "Dativ"
+      ],
+      "rows": [
+        [
+          "ich",
+          "mir"
+        ],
+        [
+          "du",
+          "dir"
+        ],
+        [
+          "er",
+          "ihm"
+        ],
+        [
+          "sie",
+          "ihr"
+        ]
+      ]
+    }
+  ],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich gebe ihr das Buch.",
+      "english": "I give her the book.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wie geht es ___?",
+      "options": [
+        "du",
+        "dich",
+        "dir",
+        "dein"
+      ],
+      "correctAnswer": "dir",
+      "explanation": "Wie geht es requires Dativ."
+    }
+  ]
+}

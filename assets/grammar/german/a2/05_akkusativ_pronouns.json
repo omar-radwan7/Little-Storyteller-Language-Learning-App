@@ -1,0 +1,57 @@
+{
+  "id": "de_a2_05",
+  "order": 5,
+  "level": "A2.1",
+  "title": "Akkusativ pronouns (mich, dich, ihn, sie, es, uns, euch, sie)",
+  "description": "Learn about Akkusativ pronouns (mich, dich, ihn, sie, es, uns, euch, sie) in German.",
+  "explanation": "Akkusativ pronouns replace the direct object in a sentence.",
+  "language": "german",
+  "tables": [
+    {
+      "headers": [
+        "Nominativ",
+        "Akkusativ"
+      ],
+      "rows": [
+        [
+          "ich",
+          "mich"
+        ],
+        [
+          "du",
+          "dich"
+        ],
+        [
+          "er",
+          "ihn"
+        ],
+        [
+          "sie",
+          "sie"
+        ]
+      ]
+    }
+  ],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich sehe ihn.",
+      "english": "I see him.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Liebst du ___?",
+      "options": [
+        "mir",
+        "ich",
+        "mich",
+        "mein"
+      ],
+      "correctAnswer": "mich",
+      "explanation": "Lieben takes the Akkusativ object."
+    }
+  ]
+}

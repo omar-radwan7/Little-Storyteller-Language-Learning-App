@@ -1,0 +1,44 @@
+{
+  "id": "de_b2_03",
+  "order": 3,
+  "level": "B2.1",
+  "title": "Passive voice — all tenses (Perfekt, Futur)",
+  "description": "Learn about Passive voice — all tenses (Perfekt, Futur) in German.",
+  "explanation": "The Perfekt tense is used for spoken past in German. It is formed with a helping verb (haben/sein) and the Partizip II at the end of the sentence.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Ich habe einen Apfel gegessen.",
+      "english": "I ate an apple.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Wir ___ ein neues Auto gekauft.",
+      "options": [
+        "haben",
+        "sind",
+        "hat",
+        "ist"
+      ],
+      "correctAnswer": "haben",
+      "explanation": "Kaufen uses haben."
+    },
+    {
+      "type": "multiple_choice",
+      "question": "Was ___ du gestern gemacht?",
+      "options": [
+        "hat",
+        "hast",
+        "bist",
+        "ist"
+      ],
+      "correctAnswer": "hast",
+      "explanation": "Mach uses haben, conjugated for du."
+    }
+  ]
+}

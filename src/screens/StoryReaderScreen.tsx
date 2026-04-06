@@ -1,6 +1,7 @@
 // ==========================================
 // Story Reader Screen — Tappable word interaction
 // Inline expansion (no bottom sheet) for word defs
+// Word-level TTS: tap a highlighted word to hear it
 // ==========================================
 
 import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
@@ -23,7 +24,8 @@ import { Colors, FontSizes, Spacing, BorderRadius, Shadows } from '../theme/colo
 import { LEVELS, SAMPLE_STORIES } from '../data/constants';
 import { useAuth } from '../hooks/useAuth';
 import { WordDetail, Story } from '../types';
-import { getStoryById } from '../services/firestore';
+import { getStoryById, markStoryComplete } from '../services/firestore';
+import { speak, stopSpeaking, isSpeaking } from '../services/tts';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -38,6 +40,7 @@ interface TappableWordProps {
   onTap: () => void;
   savedWords: Set<string>;
   onSave: (word: WordDetail) => void;
+  language: string;
 }
 
 const TappableWord: React.FC<TappableWordProps> = ({
@@ -47,8 +50,28 @@ const TappableWord: React.FC<TappableWordProps> = ({
   onTap,
   savedWords,
   onSave,
+  language,
 }) => {
   const isSaved = wordData ? savedWords.has(wordData.word) : false;
+  const [speaking, setSpeaking] = useState(false);
+
+  const handleSpeak = async () => {
+    if (speaking) {
+      await stopSpeaking();
+      setSpeaking(false);
+      return;
+    }
+    setSpeaking(true);
+    await speak(wordData!.word, language);
+    setSpeaking(false);
+  };
+
+  const handleSpeakExample = async () => {
+    if (!wordData?.example) return;
+    setSpeaking(true);
+    await speak(wordData.example, language);
+    setSpeaking(false);
+  };
 
   return (
     <View style={styles.wordWrapper}>
@@ -78,8 +101,22 @@ const TappableWord: React.FC<TappableWordProps> = ({
           <View style={styles.expansionArrow} />
           <View style={styles.expansionContent}>
             <View style={styles.expansionHeader}>
-              <View>
-                <Text style={styles.expansionWord}>{wordData.word}</Text>
+              <View style={{ flex: 1 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <Text style={styles.expansionWord}>{wordData.word}</Text>
+                  {/* 🔊 Hear the word */}
+                  <TouchableOpacity
+                    onPress={handleSpeak}
+                    style={[styles.speakWordBtn, speaking && styles.speakWordBtnActive]}
+                    activeOpacity={0.7}
+                  >
+                    <Ionicons
+                      name={speaking ? 'stop-circle' : 'volume-medium'}
+                      size={18}
+                      color={speaking ? Colors.warning : Colors.primary}
+                    />
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.expansionPos}>{wordData.partOfSpeech}</Text>
               </View>
               <TouchableOpacity
@@ -101,7 +138,14 @@ const TappableWord: React.FC<TappableWordProps> = ({
             <Text style={styles.expansionDefinition}>{wordData.definition}</Text>
             {wordData.example && (
               <View style={styles.exampleBox}>
-                <Text style={styles.exampleLabel}>EXAMPLE</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                  <Text style={styles.exampleLabel}>EXAMPLE</Text>
+                  {/* 🔊 Hear the example sentence */}
+                  <TouchableOpacity onPress={handleSpeakExample} style={styles.speakExampleBtn}>
+                    <Ionicons name="volume-low" size={14} color={Colors.teal} />
+                    <Text style={styles.speakExampleText}>Hear</Text>
+                  </TouchableOpacity>
+                </View>
                 <Text style={styles.exampleText}>"{wordData.example}"</Text>
               </View>
             )}
@@ -117,13 +161,41 @@ const StoryReaderScreen: React.FC<{ navigation: any; route: any }> = ({
   route,
 }) => {
   const { storyId } = route.params;
-  const { userProfile } = useAuth();
+  const { userProfile, firebaseUser } = useAuth();
   const [story, setStory] = useState<Story | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeWord, setActiveWord] = useState<string | null>(null);
   const [savedWords, setSavedWords] = useState<Set<string>>(new Set());
   const [readProgress, setReadProgress] = useState(0);
+  const [isReadingAloud, setIsReadingAloud] = useState(false);
   const scrollRef = useRef<ScrollView>(null);
+
+  // Derive language name from story or user profile
+  const storyLanguage = useMemo(() => {
+    if (!story) return userProfile?.targetLanguage || 'german';
+    const langMap: Record<string, string> = {
+      de: 'german', fr: 'french', es: 'spanish',
+      it: 'italian', pt: 'portuguese', en: 'english',
+    };
+    return langMap[story.language] || story.language || 'german';
+  }, [story, userProfile?.targetLanguage]);
+
+  const handleReadAloud = async () => {
+    if (isReadingAloud) {
+      await stopSpeaking();
+      setIsReadingAloud(false);
+      return;
+    }
+    if (!story?.content) return;
+    setIsReadingAloud(true);
+    await speak(story.content, storyLanguage, 0.45);
+    setIsReadingAloud(false);
+  };
+
+  // Stop reading when leaving the screen
+  useEffect(() => {
+    return () => { stopSpeaking(); };
+  }, []);
 
   useEffect(() => {
     const fetchStory = async () => {
@@ -174,7 +246,11 @@ const StoryReaderScreen: React.FC<{ navigation: any; route: any }> = ({
     }
   };
 
-  const handleMarkComplete = () => {
+  const handleMarkComplete = async () => {
+    if (firebaseUser) {
+      await markStoryComplete(firebaseUser.uid, storyId);
+    }
+    
     Alert.alert(
       'Story Complete',
       `You finished "${story?.title}" and saved ${savedWords.size} words.`,
@@ -221,14 +297,23 @@ const StoryReaderScreen: React.FC<{ navigation: any; route: any }> = ({
 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerBtn}>
+        <TouchableOpacity onPress={() => { stopSpeaking(); navigation.goBack(); }} style={styles.headerBtn}>
           <Ionicons name="arrow-back" size={22} color={Colors.textSecondary} />
         </TouchableOpacity>
         <View style={styles.headerCenter}>
           <Text style={styles.headerProgress}>{readProgress}%</Text>
         </View>
-        <TouchableOpacity style={styles.headerBtn}>
-          <Ionicons name="ellipsis-horizontal" size={22} color={Colors.textSecondary} />
+        {/* 🔊 Read Aloud button */}
+        <TouchableOpacity
+          onPress={handleReadAloud}
+          style={[styles.headerBtn, isReadingAloud && styles.headerBtnActive]}
+          activeOpacity={0.7}
+        >
+          <Ionicons
+            name={isReadingAloud ? 'stop-circle' : 'headset'}
+            size={22}
+            color={isReadingAloud ? Colors.warning : Colors.textSecondary}
+          />
         </TouchableOpacity>
       </View>
 
@@ -289,6 +374,7 @@ const StoryReaderScreen: React.FC<{ navigation: any; route: any }> = ({
                   onTap={() => handleWordTap(token)}
                   savedWords={savedWords}
                   onSave={handleSaveWord}
+                  language={storyLanguage}
                 />
               );
             })}
@@ -343,6 +429,11 @@ const styles = StyleSheet.create({
   headerBtn: {
     width: 40, height: 40, alignItems: 'center', justifyContent: 'center',
     borderRadius: BorderRadius.sm, backgroundColor: Colors.surface,
+  },
+  headerBtnActive: {
+    backgroundColor: '#FFF3E0',
+    borderWidth: 1,
+    borderColor: Colors.warning,
   },
   headerCenter: { alignItems: 'center' },
   headerProgress: { fontSize: FontSizes.sm, color: Colors.textMuted, fontWeight: '600' },
@@ -454,6 +545,23 @@ const styles = StyleSheet.create({
   },
   saveBtnSaved: { borderColor: Colors.primary + '40', backgroundColor: Colors.primaryMuted },
   saveBtnText: { fontSize: FontSizes.xs, fontWeight: '600', color: Colors.textMuted },
+  // TTS speak buttons
+  speakWordBtn: {
+    width: 30, height: 30, borderRadius: 15,
+    backgroundColor: Colors.primaryMuted,
+    alignItems: 'center', justifyContent: 'center',
+  },
+  speakWordBtnActive: {
+    backgroundColor: '#FFF3E0',
+  },
+  speakExampleBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 3,
+    paddingHorizontal: 8, paddingVertical: 3,
+    borderRadius: 10, backgroundColor: Colors.teal + '20',
+  },
+  speakExampleText: {
+    fontSize: 10, fontWeight: '700', color: Colors.teal,
+  },
   expansionDivider: {
     height: 1, backgroundColor: Colors.border, marginVertical: Spacing.sm + 2,
   },

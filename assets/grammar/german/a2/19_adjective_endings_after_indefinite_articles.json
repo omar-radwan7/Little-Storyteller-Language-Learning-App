@@ -1,0 +1,32 @@
+{
+  "id": "de_a2_19",
+  "order": 19,
+  "level": "A2.2",
+  "title": "Adjective endings after indefinite articles",
+  "description": "Learn about Adjective endings after indefinite articles in German.",
+  "explanation": "Adjectives change their endings based on gender, number, and case, as well as whether they follow a definite, indefinite, or zero article.",
+  "language": "german",
+  "tables": [],
+  "deep_notes": [],
+  "examples": [
+    {
+      "german": "Das ist ein schönes Auto.",
+      "english": "That is a beautiful car.",
+      "explanation": ""
+    }
+  ],
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Er kauft einen ___ Pullover.",
+      "options": [
+        "neu",
+        "neuer",
+        "neuen",
+        "neues"
+      ],
+      "correctAnswer": "neuen",
+      "explanation": "Akkusativ masculine with indefinite article takes -en."
+    }
+  ]
+}
